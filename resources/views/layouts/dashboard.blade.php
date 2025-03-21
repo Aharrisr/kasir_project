@@ -42,9 +42,10 @@
     <script src="{{ asset('tabler/dist/js/demo-theme.min.js?1674944402') }}"></script>
     <div class="page">
         <!-- Sidebar -->
-        @if (!Route::is('transaksi'))
+        @if (!Route::is('transaksi') && !Route::is('editform'))
             @include('layouts.sidebar')
         @endif
+
         <!-- Navbar -->
         @include('layouts.header')
         <div class="page-wrapper">

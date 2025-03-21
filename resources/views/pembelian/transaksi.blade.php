@@ -108,8 +108,11 @@
                                                 @foreach ($pembelian_detail as $s)
                                                     @if ($s->kode_transaksi == $kode_transaksi)
                                                         <tr>
+                                                            @php
+                                                                $no = 0;
+                                                            @endphp
                                                             <td class="text-center">
-                                                                {{ $loop->iteration + $produk->firstItem() - 1 }}
+
                                                             </td>
                                                             <td class="text-center">
                                                                 <span class="badge bg-success">{{ $s->kode_produk }}</span>
@@ -142,6 +145,12 @@
                                                             <td hidden>
                                                                 <input type="text" value="{{ $supplier->kode_splr }}"
                                                                     id="kode_splr" name="kode_splr">
+                                                            </td>
+                                                            <td hidden>
+                                                                <input type="text" value="{{ $s->stok }}"
+                                                                    id="stok" name="stok">
+                                                                <input type="text" value="{{ $s->id_produk }}"
+                                                                    id="id_produk" name="id_produk">
                                                             </td>
                                                             <td class="text-center">
                                                                 <button type="button"
@@ -210,7 +219,7 @@
                                     </button>
                                 </div>
                             </form>
-                            <form action="/transaksi/{{ $kode_transaksi }}/delete" method="POST"
+                            <form action="/transaksi/{{ $kode_transaksi }}/cancel" method="POST"
                                 style="margin-left:5px ">
                                 @csrf
                                 <div class="form-group mt-2" style="text-align: right;">
@@ -372,41 +381,52 @@
 @endsection
 @push('myscript')
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            updateRowNumbers();
+        });
+
+        function updateRowNumbers() {
+            let tableRows = document.querySelectorAll("table tbody tr");
+            tableRows.forEach((row, index) => {
+                let firstCell = row.querySelector("td:first-child");
+                if (firstCell) {
+                    firstCell.textContent = index + 1; // Menambahkan nomor urut mulai dari 1
+                }
+            });
+        }
+
         $("#btn-tambah").click(function() {
             $("#modal-input").modal("show");
         });
 
         $(document).on("click", ".delete-btn", function() {
-            let id_pembelian_detail = $(this).data("id"); // Ambil ID yang benar
-            let row = $("#row-" + id_pembelian_detail); // Pilih baris yang akan dihapus
+            let id_pembelian_detail = $(this).data("id");
+            let row = $("#row-" + id_pembelian_detail);
 
             $.ajax({
                 url: "/transaksi/" + id_pembelian_detail,
-                type: "POST", // Pastikan metode sesuai dengan route
+                type: "POST",
                 data: {
-                    _method: "DELETE", // Gunakan spoofing untuk DELETE
+                    _method: "DELETE",
                     _token: "{{ csrf_token() }}"
                 },
                 success: function(response) {
-                    // Hapus baris dengan efek fadeOut
                     row.fadeOut(300, function() {
                         $(this).remove();
                     });
 
-                    // Tampilkan modal success
                     $("#successModal").modal("show");
                     $("#successMessage").text(response.message || "Data berhasil dihapus.");
 
-                    // Tambahkan event listener untuk redirect atau reload halaman
                     $("#btnRedirect").click(function() {
                         location.reload();
                     });
                 },
-                error: function(xhr) {
-                    // Tampilkan modal error jika terjadi kesalahan
+                error: function(xhr, status, error) {
+                    console.error("Terjadi Kesalahan:", error);
                     $("#errorModal").modal("show");
                     $("#errorMessage").text(xhr.responseJSON?.message ||
-                        "Terjadi kesalahan yang tidak diketahui.");
+                        "Terjadi kesalahan." + error);
                 }
             });
         });
@@ -444,15 +464,12 @@
                     totalJumlah += jumlah;
                 });
 
-                // Update tampilan total harga dan jumlah barang
                 document.getElementById("total-harga").textContent = "Rp. " + totalHarga.toLocaleString("id-ID");
 
-                // Simpan nilai dalam input hidden agar bisa dikirim ke server
                 document.getElementById("total_harga").value = totalHarga;
                 document.getElementById("total_jumlah").value = totalJumlah;
             }
 
-            // Jalankan hitungTotal() saat halaman dimuat
             hitungTotal();
         });
 
@@ -546,7 +563,6 @@
             @endif
         });
 
-        //validasi nominal bayar
         $(document).ready(function() {
             $("#bayar_display").on("input", function() {
                 let bayarInput = $(this).val().replace(/\D/g, "");

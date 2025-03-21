@@ -30,7 +30,7 @@
         <div class="container-xl">
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
+                    <div class="card shadow-lg p-3 mb-5 rounded">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12">
@@ -126,93 +126,97 @@
                             </div>
                             <div class="row mt-2">
                                 <div class="col-12">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center" width="1%">No</th>
-                                                <th class="text-center" width="5%">
-                                                    Kode Produk
-                                                </th>
-                                                <th width="20%">Nama Barang</th>
-                                                <th width="15%">Merk</th>
-                                                <th class="text-center" width="8%">
-                                                    Harga Jual
-                                                </th>
-                                                <th class="text-center" width="3%">
-                                                    Discount
-                                                </th>
-                                                <th class="text-center" width="3%">
-                                                    Stok
-                                                </th>
-                                                <th class="text-center" width="5%">
-                                                    Barang masuk
-                                                </th>
-                                                <th width="10%">Aksi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="hasil-pencarian">
-                                            @foreach ($produk as $s)
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead class="table-primary">
                                                 <tr>
-                                                    <td class="text-center">
-                                                        {{ $loop->iteration + $produk->firstItem() - 1 }}
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <span class="badge bg-success">{{ $s->kode_produk }}</span>
-                                                    </td>
-                                                    <td>{{ $s->nama_produk }}</td>
-                                                    <td>{{ $s->nama_splr }}</td>
-                                                    <td class="text-center">{{ number_format($s->harga, 0, ',', '.') }}
-                                                    </td>
-                                                    <td class="text-center">{{ $s->discount }}%</td>
-                                                    <td class="text-center">{{ $s->stok }}</td>
-                                                    <td class="text-center">
-                                                        {{ date('d-m-Y H-i-s', strtotime($s->tanggal)) }}
-                                                    </td>
-                                                    <td>
-                                                        <div class="text-center">
-                                                            <div class="btn-group">
-                                                                <a href="#" class="edit btn btn-info btn-sm"
-                                                                    kode_produk="{{ $s->kode_produk }}">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
-                                                                        <path stroke="none" d="M0 0h24v24H0z"
-                                                                            fill="none" />
-                                                                        <path
-                                                                            d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
-                                                                        <path
-                                                                            d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
-                                                                        <path d="M16 5l3 3" />
-                                                                    </svg>
-                                                                    Edit
-                                                                </a>
-                                                                <form action="/produk/{{ $s->kode_produk }}/delete"
-                                                                    method="POST" style="margin-left:5px ">
-                                                                    @csrf
-                                                                    <button class="btn btn-danger btn-sm delete-confirm">
+                                                    <th class="text-center" width="1%">No</th>
+                                                    <th class="text-center" width="5%">
+                                                        Kode Produk
+                                                    </th>
+                                                    <th width="20%">Nama Barang</th>
+                                                    <th width="15%">Merk</th>
+                                                    <th class="text-center" width="8%">
+                                                        Harga Jual
+                                                    </th>
+                                                    <th class="text-center" width="3%">
+                                                        Discount
+                                                    </th>
+                                                    <th class="text-center" width="3%">
+                                                        Stok
+                                                    </th>
+                                                    <th class="text-center" width="5%">
+                                                        Barang masuk
+                                                    </th>
+                                                    <th width="10%">Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="hasil-pencarian">
+                                                @foreach ($produk as $s)
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            {{ $loop->iteration + $produk->firstItem() - 1 }}
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <span class="badge bg-success">{{ $s->kode_produk }}</span>
+                                                        </td>
+                                                        <td>{{ $s->nama_produk }}</td>
+                                                        <td>{{ $s->nama_splr }}</td>
+                                                        <td class="text-center">{{ number_format($s->harga, 0, ',', '.') }}
+                                                        </td>
+                                                        <td class="text-center">{{ $s->discount }}%</td>
+                                                        <td class="text-center">{{ $s->stok }}</td>
+                                                        <td class="text-center">
+                                                            {{ date('d-m-Y H-i-s', strtotime($s->tanggal)) }}
+                                                        </td>
+                                                        <td>
+                                                            <div class="text-center">
+                                                                <div class="btn-group">
+                                                                    <a href="#" class="edit btn btn-info btn-sm"
+                                                                        kode_produk="{{ $s->kode_produk }}">
                                                                         <svg xmlns="http://www.w3.org/2000/svg"
                                                                             width="24" height="24"
-                                                                            viewBox="0 0 24 24" fill="currentColor"
-                                                                            class="icon icon-tabler icons-tabler-filled icon-tabler-trash">
+                                                                            viewBox="0 0 24 24" fill="none"
+                                                                            stroke="currentColor" stroke-width="2"
+                                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
                                                                             <path stroke="none" d="M0 0h24v24H0z"
                                                                                 fill="none" />
                                                                             <path
-                                                                                d="M20 6a1 1 0 0 1 .117 1.993l-.117 .007h-.081l-.919 11a3 3 0 0 1 -2.824 2.995l-.176 .005h-8c-1.598 0 -2.904 -1.249 -2.992 -2.75l-.005 -.167l-.923 -11.083h-.08a1 1 0 0 1 -.117 -1.993l.117 -.007h16z" />
+                                                                                d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
                                                                             <path
-                                                                                d="M14 2a2 2 0 0 1 2 2a1 1 0 0 1 -1.993 .117l-.007 -.117h-4l-.007 .117a1 1 0 0 1 -1.993 -.117a2 2 0 0 1 1.85 -1.995l.15 -.005h4z" />
+                                                                                d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                                                                            <path d="M16 5l3 3" />
                                                                         </svg>
-                                                                        Delete
-                                                                    </button>
-                                                                </form>
+                                                                        Edit
+                                                                    </a>
+                                                                    <form action="/produk/{{ $s->kode_produk }}/delete"
+                                                                        method="POST" style="margin-left:5px ">
+                                                                        @csrf
+                                                                        <button
+                                                                            class="btn btn-danger btn-sm delete-confirm">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                width="24" height="24"
+                                                                                viewBox="0 0 24 24" fill="currentColor"
+                                                                                class="icon icon-tabler icons-tabler-filled icon-tabler-trash">
+                                                                                <path stroke="none" d="M0 0h24v24H0z"
+                                                                                    fill="none" />
+                                                                                <path
+                                                                                    d="M20 6a1 1 0 0 1 .117 1.993l-.117 .007h-.081l-.919 11a3 3 0 0 1 -2.824 2.995l-.176 .005h-8c-1.598 0 -2.904 -1.249 -2.992 -2.75l-.005 -.167l-.923 -11.083h-.08a1 1 0 0 1 -.117 -1.993l.117 -.007h16z" />
+                                                                                <path
+                                                                                    d="M14 2a2 2 0 0 1 2 2a1 1 0 0 1 -1.993 .117l-.007 -.117h-4l-.007 .117a1 1 0 0 1 -1.993 -.117a2 2 0 0 1 1.85 -1.995l.15 -.005h4z" />
+                                                                            </svg>
+                                                                            Delete
+                                                                        </button>
+                                                                    </form>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                     {{ $produk->links('vendor.pagination.bootstrap-5') }}
                                 </div>
                             </div>

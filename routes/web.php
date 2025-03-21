@@ -62,12 +62,16 @@ Route::middleware(['auth:user'])->group(function () {
     Route::get('/supplier', [SupplierController::class, 'index']);
 
     //Data Pembelian
-    Route::get('/pembelian', [PembelianController::class, 'index']);
-    Route::post('pembelian/{id_pembelian}/delete', [PembelianController::class, 'deletepembelian']);
+    Route::get('/pembelian', [PembelianController::class, 'index'])->name('pembelian');
+    Route::get('/pembelian/{kode_transaksi}/editform', [PembelianController::class, 'editform'])->name('editform');
+    Route::post('/transaksi/{kode_transaksi}/edit', [PembelianController::class, 'edit']);
+    Route::Post('/pembelian/detail', [PembelianController::class, 'detail']);
+    Route::post('/pembelian/{kode_transaksi}/delete', [PembelianController::class, 'deletepembelian']);
+
+    //transaksi pembelian
     Route::get('/pembelian/{kode_splr}/transaksi', [PembelianController::class, 'transaksi'])->name('transaksi');
     Route::post('/transaksi/{kode_produk}/tambah', [PembelianController::class, 'tambah']);
     Route::post('/transaksi/{kode_transaksi}/update', [PembelianController::class, 'updatedata']);
     Route::delete('/transaksi/{id_pembelian_detail}', [PembelianController::class, 'deletedata']);
-    Route::post('/transaksi/{kode_transaksi}/delete', [PembelianController::class, 'cancel']);
-    Route::Post('/pembelian/detail', [PembelianController::class, 'detail']);
+    Route::post('/transaksi/{kode_transaksi}/cancel', [PembelianController::class, 'cancel']);
 });
