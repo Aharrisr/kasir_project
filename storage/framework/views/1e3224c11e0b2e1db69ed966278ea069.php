@@ -26,26 +26,26 @@
             color: #000000;
         }
     </style>
-    <div class="page-header d-print-none">
-        <div class="container-xl">
-            <div class="row g-2 align-items-center">
-                <div class="col">
-                    <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        Overview
-                    </div>
-                    <h2 class="page-title">
-                        Transaksi
-                    </h2>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="page-body">
         <div class="container-xl">
-            <div class="row">
+            <div class="row mt-3">
                 <div class="col-12">
                     <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Data Pembelian</h3>
+                            <div class="card-actions">
+                                <a href="#" class="btn btn-primary" id="btn-tambah">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    </svg>
+                                    tambah
+                                </a>
+                            </div>
+                        </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12">
@@ -67,118 +67,113 @@
                             <div class="row"><label for="">No Hp : <?php echo e($supplier->no_hp); ?></label></div>
                             <div class="row"><label for="">Alamat : <?php echo e($supplier->alamat); ?></label></div>
                             <div class="row"><label for="">Kode Transaksi : <?php echo e($kode_transaksi); ?></label></div>
-                            <div class="row mt-2">
-                                <div class="form-group">
-                                    <button class="btn btn-primary" id="btn-tambah">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <line x1="12" y1="5" x2="12" y2="19" />
-                                            <line x1="5" y1="12" x2="19" y2="12" />
-                                        </svg>
-                                        Tambah
-                                    </button>
-                                </div>
-                            </div>
                             <form action="/transaksi/<?php echo e($kode_transaksi); ?>/update" method="POST" id="frmpembelian"
                                 onkeydown="return event.key !== 'Enter';">
                                 <?php echo csrf_field(); ?>
-                                <div class="row mt-2">
+                                <div class="row mt-3">
                                     <div class="col-12">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center" width="1%">No</th>
-                                                    <th class="text-center" width="5%">
-                                                        Kode Produk
-                                                    </th>
-                                                    <th width="20%">Nama Barang</th>
-                                                    <th class="text-center" width="10%">
-                                                        Harga beli
-                                                    </th>
-                                                    <th class="text-center" width="5%">
-                                                        Jumlah
-                                                    </th>
-                                                    <th width="10%">Subtotal</th>
-                                                    <th width="5%">Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php $__currentLoopData = $pembelian_detail; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <?php if($s->kode_transaksi == $kode_transaksi): ?>
+                                        <div class="card">
+                                            <div class="table-responsive">
+                                                <table class="table table-vcenter card-table table-striped">
+                                                    <thead>
                                                         <tr>
-                                                            <?php
-                                                                $no = 0;
-                                                            ?>
-                                                            <td class="text-center">
-
-                                                            </td>
-                                                            <td class="text-center">
-                                                                <span class="badge bg-success"><?php echo e($s->kode_produk); ?></span>
-                                                            </td>
-                                                            <td><?php echo e($s->nama_produk); ?></td>
-                                                            <td class="text-center">
-                                                                Rp. <?php echo e(number_format($s->harga_beli, 0, ',', '.')); ?>
-
-                                                            </td>
-                                                            <td>
-                                                                <input type="number" name="jumlah"
-                                                                    class="jumlah-input form-control"
-                                                                    data-harga="<?php echo e($s->harga_beli); ?>"
-                                                                    value="<?php echo e($s->jumlah); ?>" min="1">
-                                                            </td>
-                                                            <td>
-                                                                <span class="subtotal-text">
-                                                                    <input type="text" name="subtotal" id="subtotal"
-                                                                        value="<?php echo e($s->harga_beli * $s->jumlah); ?>" hidden>
-                                                                    <span>Rp.
-                                                                        <?php echo e(number_format($s->harga_beli * $s->jumlah, 0, ',', '.')); ?></span>
-                                                                </span>
-                                                            </td>
-                                                            <td hidden><input type="text" value="<?php echo e($kode_transaksi); ?>"
-                                                                    id="kode_transaksi" name="kode_transaksi">
-                                                            </td>
-                                                            <td hidden>
-                                                                <input type="text" value="<?php echo e($s->id_pembelian_detail); ?>"
-                                                                    id="id_pembelian_detail" name="id_pembelian_detail">
-                                                            </td>
-                                                            <td hidden>
-                                                                <input type="text" value="<?php echo e($supplier->kode_splr); ?>"
-                                                                    id="kode_splr" name="kode_splr">
-                                                            </td>
-                                                            <td hidden>
-                                                                <input type="text" value="<?php echo e($s->stok); ?>"
-                                                                    id="stok" name="stok">
-                                                                <input type="text" value="<?php echo e($s->id_produk); ?>"
-                                                                    id="id_produk" name="id_produk">
-                                                            </td>
-                                                            <td class="text-center">
-                                                                <button type="button"
-                                                                    class="btn btn-danger btn-sm delete-btn"
-                                                                    data-id="<?php echo e($s->id_pembelian_detail); ?>">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                        height="16" viewBox="0 0 24 24"
-                                                                        fill="currentColor">
-                                                                        <path
-                                                                            d="M20 6a1 1 0 0 1 .117 1.993l-.117 .007h-.081l-.919 11a3 3 0 0 1 -2.824 2.995l-.176 .005h-8c-1.598 0 -2.904 -1.249 -2.992 -2.75l-.005 -.167l-.923 -11.083h-.08a1 1 0 0 1 -.117 -1.993l.117 -.007h16z" />
-                                                                        <path
-                                                                            d="M14 2a2 2 0 0 1 2 2a1 1 0 0 1 -1.993 .117l-.007 -.117h-4l-.007 .117a1 1 0 0 1 -1.993 -.117a2 2 0 0 1 1.85 -1.995l.15 -.005h4z" />
-                                                                    </svg>
-                                                                    Hapus
-                                                                </button>
-                                                            </td>
+                                                            <th class="text-center" width="1%">No</th>
+                                                            <th class="text-center" width="5%">
+                                                                Kode Produk
+                                                            </th>
+                                                            <th width="20%">Nama Barang</th>
+                                                            <th class="text-center" width="10%">
+                                                                Harga beli
+                                                            </th>
+                                                            <th class="text-center" width="5%">
+                                                                Jumlah
+                                                            </th>
+                                                            <th width="10%">Subtotal</th>
+                                                            <th width="5%"></th>
                                                         </tr>
-                                                    <?php endif; ?>
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                            </tbody>
-                                        </table>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php $__currentLoopData = $pembelian_detail; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <?php if($s->kode_transaksi == $kode_transaksi): ?>
+                                                                <tr>
+                                                                    <?php
+                                                                        $no = 0;
+                                                                    ?>
+                                                                    <td class="text-center">
+                                                                    </td>
+                                                                    <td class="text-center">
+                                                                        <span
+                                                                            class="badge bg-success"><?php echo e($s->kode_produk); ?></span>
+                                                                    </td>
+                                                                    <td><?php echo e($s->nama_produk); ?></td>
+                                                                    <td class="text-center">
+                                                                        Rp. <?php echo e(number_format($s->harga_beli, 0, ',', '.')); ?>
+
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" name="jumlah"
+                                                                            class="jumlah-input form-control"
+                                                                            data-harga="<?php echo e($s->harga_beli); ?>"
+                                                                            value="<?php echo e($s->jumlah); ?>" min="1">
+                                                                    </td>
+                                                                    <td>
+                                                                        <span class="subtotal-text">
+                                                                            <input type="text" name="subtotal"
+                                                                                id="subtotal"
+                                                                                value="<?php echo e($s->harga_beli * $s->jumlah); ?>"
+                                                                                hidden>
+                                                                            <span>Rp.
+                                                                                <?php echo e(number_format($s->harga_beli * $s->jumlah, 0, ',', '.')); ?></span>
+                                                                        </span>
+                                                                    </td>
+                                                                    <td hidden><input type="text"
+                                                                            value="<?php echo e($kode_transaksi); ?>"
+                                                                            id="kode_transaksi" name="kode_transaksi">
+                                                                    </td>
+                                                                    <td hidden>
+                                                                        <input type="text"
+                                                                            value="<?php echo e($s->id_pembelian_detail); ?>"
+                                                                            id="id_pembelian_detail"
+                                                                            name="id_pembelian_detail">
+                                                                    </td>
+                                                                    <td hidden>
+                                                                        <input type="text"
+                                                                            value="<?php echo e($supplier->kode_splr); ?>"
+                                                                            id="kode_splr" name="kode_splr">
+                                                                    </td>
+                                                                    <td hidden>
+                                                                        <input type="text" value="<?php echo e($s->stok); ?>"
+                                                                            id="stok" name="stok">
+                                                                        <input type="text" value="<?php echo e($s->id_produk); ?>"
+                                                                            id="id_produk" name="id_produk">
+                                                                    </td>
+                                                                    <td class="text-center">
+                                                                        <button type="button"
+                                                                            class="btn btn-danger btn-sm delete-btn"
+                                                                            data-id="<?php echo e($s->id_pembelian_detail); ?>">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                width="16" height="16"
+                                                                                viewBox="0 0 24 24" fill="currentColor">
+                                                                                <path
+                                                                                    d="M20 6a1 1 0 0 1 .117 1.993l-.117 .007h-.081l-.919 11a3 3 0 0 1 -2.824 2.995l-.176 .005h-8c-1.598 0 -2.904 -1.249 -2.992 -2.75l-.005 -.167l-.923 -11.083h-.08a1 1 0 0 1 -.117 -1.993l.117 -.007h16z" />
+                                                                                <path
+                                                                                    d="M14 2a2 2 0 0 1 2 2a1 1 0 0 1 -1.993 .117l-.007 -.117h-4l-.007 .117a1 1 0 0 1 -1.993 -.117a2 2 0 0 1 1.85 -1.995l.15 -.005h4z" />
+                                                                            </svg>
+                                                                            Hapus
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php endif; ?>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                         <?php echo e($produk->links('vendor.pagination.bootstrap-5')); ?>
 
                                     </div>
                                 </div>
-                                <div class="row mt-2">
+                                <div class="row mt-3">
                                     <div class="col-12">
                                         <div class="row">
                                             <div class="col-8">
@@ -222,7 +217,7 @@
                                     </button>
                                 </div>
                             </form>
-                            <form action="/transaksi/<?php echo e($kode_transaksi); ?>/delete" method="POST"
+                            <form action="/transaksi/<?php echo e($kode_transaksi); ?>/cancel" method="POST"
                                 style="margin-left:5px ">
                                 <?php echo csrf_field(); ?>
                                 <div class="form-group mt-2" style="text-align: right;">
@@ -253,74 +248,88 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th class="text-center" width="1%">No</th>
-                                <th class="text-center" width="5%">
-                                    Kode Produk
-                                </th>
-                                <th width="30%">Nama Barang</th>
-                                <th class="text-center" width="8%">
-                                    Harga
-                                </th>
-                                <th width="5%">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $__currentLoopData = $produk; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <form action="/transaksi/<?php echo e($s->kode_produk); ?>/tambah" method="POST">
-                                    <?php echo csrf_field(); ?>
-                                    <tr>
-                                        <?php if($s->kode_splr == $supplier->kode_splr): ?>
-                                            <td class="text-center">
-                                                <?php echo e($loop->iteration + $produk->firstItem() - 1); ?>
+                    <div class="row justify-content-center">
+                        <div class="col-md-10">
+                            <div class="card">
+                                <div class="table-responsive">
+                                    <table class="table table-vcenter card-table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center" width="1%">No</th>
+                                                <th class="text-center" width="5%">
+                                                    Kode Produk
+                                                </th>
+                                                <th width="15%">Nama Barang</th>
+                                                <th class="text-center" width="8%">
+                                                    Harga
+                                                </th>
+                                                <th width="5%"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php $__currentLoopData = $produk; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <form action="/transaksi/<?php echo e($s->kode_produk); ?>/tambah" method="POST">
+                                                    <?php echo csrf_field(); ?>
+                                                    <tr>
+                                                        <?php if($s->kode_splr == $supplier->kode_splr): ?>
+                                                            <td class="text-center">
+                                                                <?php echo e($loop->iteration + $produk->firstItem() - 1); ?>
 
-                                            </td>
-                                            <td hidden> <input type="text" name="kode_transaksi"
-                                                    value="<?php echo e($kode_transaksi); ?>"></td>
-                                            <td class="text-center" id="kode_produk">
-                                                <span class="badge bg-success"><input type="text" hidden
-                                                        name="kode_produk"
-                                                        value="<?php echo e($s->kode_produk); ?>"><?php echo e($s->kode_produk); ?></span>
-                                            </td>
-                                            <td id="nama_produk"><input type="text" hidden name="nama_produk"
-                                                    value="<?php echo e($s->nama_produk); ?>"><?php echo e($s->nama_produk); ?></td>
-                                            <td class="text-center" id="harga"><input type="text" hidden
-                                                    name="harga_beli" value="<?php echo e($s->harga); ?>">
-                                                <?php echo e(number_format($s->harga, 0, ',', '.')); ?>
+                                                            </td>
+                                                            <td hidden> <input type="text" name="kode_transaksi"
+                                                                    value="<?php echo e($kode_transaksi); ?>"></td>
+                                                            <td class="text-center" id="kode_produk">
+                                                                <span class="badge bg-success"><input type="text"
+                                                                        hidden name="kode_produk"
+                                                                        value="<?php echo e($s->kode_produk); ?>"><?php echo e($s->kode_produk); ?></span>
+                                                            </td>
+                                                            <td id="nama_produk"><input type="text" hidden
+                                                                    name="nama_produk"
+                                                                    value="<?php echo e($s->nama_produk); ?>"><?php echo e($s->nama_produk); ?>
 
-                                            </td>
-                                            <td hidden id="stok"><input type="text" hidden name="jumlah"
-                                                    value="1"></td>
-                                            <td hidden id="subtotal"><input type="text" hidden name="subtotal"
-                                                    value="<?php echo e($s->harga); ?>"><?php echo e(number_format($s->harga, 0, ',', '.')); ?>
+                                                            </td>
+                                                            <td class="text-center" id="harga"><input type="text"
+                                                                    hidden name="harga_beli" value="<?php echo e($s->harga); ?>">
+                                                                <?php echo e(number_format($s->harga, 0, ',', '.')); ?>
 
-                                            </td>
-                                            <td class="text-center">
-                                                <div class="btn-group">
-                                                    <button class="btn btn-primary btn-sm">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                            <line x1="12" y1="5" x2="12"
-                                                                y2="19" />
-                                                            <line x1="5" y1="12" x2="19"
-                                                                y2="12" />
-                                                        </svg>
-                                                        tambah
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        <?php endif; ?>
-                                    </tr>
-                                </form>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        </tbody>
-                    </table>
+                                                            </td>
+                                                            <td hidden id="stok"><input type="text" hidden
+                                                                    name="jumlah" value="1"></td>
+                                                            <td hidden id="subtotal"><input type="text" hidden
+                                                                    name="subtotal"
+                                                                    value="<?php echo e($s->harga); ?>"><?php echo e(number_format($s->harga, 0, ',', '.')); ?>
+
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <div class="btn-group">
+                                                                    <button class="btn btn-primary btn-sm">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                            width="24" height="24"
+                                                                            viewBox="0 0 24 24" fill="none"
+                                                                            stroke="currentColor" stroke-width="2"
+                                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
+                                                                            <path stroke="none" d="M0 0h24v24H0z"
+                                                                                fill="none" />
+                                                                            <line x1="12" y1="5"
+                                                                                x2="12" y2="19" />
+                                                                            <line x1="5" y1="12"
+                                                                                x2="19" y2="12" />
+                                                                        </svg>
+                                                                        tambah
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        <?php endif; ?>
+                                                    </tr>
+                                                </form>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <?php echo e($produk->links('vendor.pagination.bootstrap-5')); ?>
 
                 </div>

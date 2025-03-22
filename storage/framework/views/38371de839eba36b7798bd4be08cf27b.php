@@ -1,8 +1,8 @@
 <aside class="navbar navbar-vertical navbar-expand-lg navbar-dark">
     <div class="container-fluid">
         <h1 class="navbar-brand navbar-brand-autodark">
-            <a href="#">
-                <img src="<?php echo e(asset('tabler/static/logo-white.svg')); ?>" width="110" height="32" alt="Dashboard"
+            <a href=".">
+                <img src="<?php echo e(asset('img/logo-white.png')); ?>" width="110" height="32" alt="Dashboard"
                     class="navbar-brand-image">
             </a>
         </h1>

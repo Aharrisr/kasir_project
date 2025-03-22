@@ -1,34 +1,19 @@
 @extends('layouts.dashboard')
 @section('content')
-    <div class="page-header d-print-none">
-        <div class="container-xl">
-            <div class="row g-2 align-items-center">
-                <div class="col">
-                    <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        Overview
-                    </div>
-                    <h2 class="page-title">
-                        Dashboard
-                    </h2>
-                    <div class="row mt-2">
-                        <div class="col-12">
-                            @if (Session::get('success'))
-                                <div class="alert alert-success">
-                                    {{ Session::get('success') }}
-                                </div>
-                            @endif
-                        </div>
-                    </div>
+    <div class="row">
+        <div class="col-12">
+            @if (Session::get('success'))
+                <div class="alert alert-success">
+                    {{ Session::get('success') }}
                 </div>
-            </div>
+            @endif
         </div>
     </div>
     <div class="page-body">
         <div class="container-xl">
-            <div class="row">
+            <div class="row mt-3">
                 <div class="col-md-6 col-xl-3">
-                    <div class="card card-sm">
+                    <div class="card card-sm shadow-lg rounded">
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-auto">
@@ -57,7 +42,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-xl-3">
-                    <div class="card card-sm">
+                    <div class="card card-sm shadow-lg rounded">
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-auto">
@@ -88,7 +73,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-xl-3">
-                    <div class="card card-sm">
+                    <div class="card card-sm shadow-lg rounded">
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-auto">
@@ -119,7 +104,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-xl-3">
-                    <div class="card card-sm">
+                    <div class="card card-sm shadow-lg rounded">
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-auto">
@@ -151,8 +136,129 @@
                         </div>
                     </div>
                 </div>
-
+            </div>
+            <div class="row mt-3">
+                <div class="col-6">
+                    <div class="card shadow-lg p-3 rounded">
+                        <div class="card-header">
+                            <h3 class="card-title">Pengeluaran</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart-pengeluaran"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card shadow-lg p-3 rounded">
+                        <div class="card-header">
+                            <h3 class="card-title">Penjualan</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart-penjualan"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 @endsection
+@push('myscript')
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let chartContainer = document.getElementById("chart-pengeluaran");
+
+            if (!chartContainer) {
+                console.error("Element #chart-pengeluaran tidak ditemukan!");
+                return;
+            }
+
+            fetch('/api/get-chart-pengeluaran')
+                .then(response => response.json())
+                .then(data => {
+                    if (!data || !data.series || !data.categories) {
+                        console.error("Format data salah:", data);
+                        return;
+                    }
+
+                    // Konversi nilai data ke angka (karena number_format di PHP mengubah ke string)
+                    let formattedSeries = data.series.map(series => ({
+                        ...series,
+                        data: series.data.map(value => parseFloat(value.replace(/\./g, '')))
+                    }));
+
+                    let chart = new ApexCharts(chartContainer, {
+                        chart: {
+                            type: "bar",
+                            fontFamily: 'inherit',
+                            height: 320,
+                            parentHeightOffset: 0,
+                            toolbar: {
+                                show: false
+                            },
+                            animations: {
+                                enabled: false
+                            },
+                        },
+                        plotOptions: {
+                            bar: {
+                                columnWidth: '50%'
+                            }
+                        },
+                        dataLabels: {
+                            enabled: false
+                        },
+                        fill: {
+                            opacity: 1
+                        },
+                        series: formattedSeries,
+                        tooltip: {
+                            theme: 'dark',
+                            y: {
+                                formatter: function(value) {
+                                    return "Rp " + value.toLocaleString(
+                                        "id-ID"); // Format IDR di tooltip
+                                }
+                            }
+                        },
+                        grid: {
+                            padding: {
+                                top: -20,
+                                right: 0,
+                                left: -4,
+                                bottom: -4
+                            },
+                            strokeDashArray: 4,
+                        },
+                        xaxis: {
+                            labels: {
+                                padding: 0
+                            },
+                            tooltip: {
+                                enabled: false
+                            },
+                            axisBorder: {
+                                show: false
+                            },
+                            categories: data.categories,
+                        },
+                        yaxis: {
+                            labels: {
+                                padding: 4,
+                                formatter: function(value) {
+                                    return "Rp " + value.toLocaleString(
+                                        "id-ID"); // Format di sumbu Y
+                                }
+                            }
+                        },
+                        colors: [tabler.getColor("primary")],
+                        legend: {
+                            show: false
+                        },
+                    });
+
+                    chart.render();
+                })
+                .catch(error => console.error("Gagal mengambil data:", error));
+        });
+    </script>
+@endpush

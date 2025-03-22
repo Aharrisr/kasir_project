@@ -3,13 +3,12 @@
         <div class="row text-center align-items-center flex-row-reverse">
             <div class="col-lg-auto ms-lg-auto">
                 <ul class="list-inline list-inline-dots mb-0">
-                    <li class="list-inline-item"><a href="./docs/" class="link-secondary">Documentation</a></li>
                     <li class="list-inline-item"><a href="{{ asset('tabler/license.html') }}"
                             class="link-secondary">License</a></li>
-                    <li class="list-inline-item"><a href="https://github.com/Aharrisr/project_kasir.git" target="_blank"
+                    <li class="list-inline-item"><a href="https://github.com/Aharrisr/kasir_project" target="_blank"
                             class="link-secondary" rel="noopener">Source code</a></li>
                     <li class="list-inline-item">
-                        <a href="#" target="_blank" class="link-secondary" rel="noopener">
+                        <a href="#" class="link-secondary" rel="noopener">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon text-pink icon-filled icon-inline"
                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                                 fill="none" stroke-linecap="round" stroke-linejoin="round">

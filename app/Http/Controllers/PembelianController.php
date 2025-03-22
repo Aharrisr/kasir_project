@@ -24,7 +24,7 @@ class PembelianController extends Controller
         $db = Pembelian::query();
         $db->select('pembelian.*', 'id_pembelian', 'nama_splr', 'tanggal', 'total_item', 'total_harga', 'diskon', 'bayar');
         $db->join('supplier', 'pembelian.kode_splr', '=', 'supplier.kode_splr');
-        $db->orderBy('tanggal');
+        $db->orderBy('kode_transaksi');
         if (!empty($request->kode_splr)) {
             $db->where('kode_splr', 'like', '%' . $request->kode_splr . '%');
         }
@@ -160,6 +160,7 @@ class PembelianController extends Controller
         $kode_transaksi = $request->kode_transaksi;
         $harga_beli = $request->harga_beli;
         $subtotal = $request->subtotal;
+        $tanggal = date("y-m-d");
 
         try {
             $produkAda = DB::table('produk')->where('kode_produk', $kode_produk)->exists();
@@ -188,6 +189,7 @@ class PembelianController extends Controller
                     'jumlah' => 1,
                     'kode_produk' => $kode_produk,
                     'subtotal' => $subtotal,
+                    'tanggal' => $tanggal
                 ]);
             }
 

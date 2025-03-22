@@ -3,6 +3,7 @@
 use App\Http\Controllers\{
     AuthControler,
     DashboardController,
+    ChartController,
     UserController,
     memberController,
     ProdukController,
@@ -13,6 +14,7 @@ use App\Http\Controllers\{
 use App\Models\Pembelian;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::middleware(['guest:user'])->group(function () {
     Route::get('/', function () {
@@ -40,31 +42,36 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth:user'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/proseslogout', [AuthControler::class, 'proseslogout']);
 
+    Route::get('/api/get-chart-pengeluaran', [ChartController::class, 'pengeluaran']);
+    Route::get('/chart', function () {
+        return view('chart'); // Menampilkan halaman chart
+    });
+
     //Produk
-    Route::get('/produk', [ProdukController::class, 'index']);
+    Route::get('/produk', [ProdukController::class, 'index'])->name('produk');
     Route::post('/produk/tambah', [ProdukController::class, 'tambah']);
     Route::Post('/produk/edit', [ProdukController::class, 'edit']);
     Route::Post('/produk/{kode_produk}/update', [ProdukController::class, 'update']);
     Route::post('produk/{kode_produk}/delete', [ProdukController::class, 'deleteproduk']);
 
     //Data User
-    Route::get('/user', [UserController::class, 'index']);
+    Route::get('/user', [UserController::class, 'index'])->name('user');
     Route::post('/user/tambahuser', [UserController::class, 'tambahuser']);
     Route::post('user/{id}/delete', [UserController::class, 'deleteuser']);
 
     //Data Member
-    Route::get('/member', [memberController::class, 'index']);
+    Route::get('/member', [memberController::class, 'index'])->name('member');
 
     //Data Supplier
-    Route::get('/supplier', [SupplierController::class, 'index']);
+    Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier');
 
     //Data Pembelian
     Route::get('/pembelian', [PembelianController::class, 'index'])->name('pembelian');
     Route::get('/pembelian/{kode_transaksi}/editform', [PembelianController::class, 'editform'])->name('editform');
-    Route::post('/transaksi/{kode_transaksi}/edit', [PembelianController::class, 'edit']);
+    Route::post('/transaksi/{kode_transaksi}/edit', [PembelianController::class, 'edit'])->name('edit_pembelian');
     Route::Post('/pembelian/detail', [PembelianController::class, 'detail']);
     Route::post('/pembelian/{kode_transaksi}/delete', [PembelianController::class, 'deletepembelian']);
 

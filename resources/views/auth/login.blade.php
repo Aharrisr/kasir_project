@@ -22,13 +22,13 @@
     </style>
 </head>
 
-<body class=" border-top-wide border-primary d-flex flex-column">
+<body class="border-top-wide border-primary d-flex flex-column">
     <script src="{{ asset('tabler/dist/js/demo-theme.min.js?1668287865') }}"></script>
     <div class="page page-center">
         <div class="container container-tight py-4">
             <div class="text-center mb-4">
                 <a href="." class="navbar-brand navbar-brand-autodark"><img
-                        src="{{ asset('tabler/static/logo.svg') }}" height="36" alt=""></a>
+                        src="{{ asset('img/logo.png') }}" height="40" alt=""></a>
             </div>
             <div class="card card-md">
                 <div class="card-body">

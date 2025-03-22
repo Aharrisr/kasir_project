@@ -1,24 +1,24 @@
 <?php $__env->startSection('content'); ?>
-    <div class="page-header d-print-none">
-        <div class="container-xl">
-            <div class="row g-2 align-items-center">
-                <div class="col">
-                    <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        Overview
-                    </div>
-                    <h2 class="page-title">
-                        Data User
-                    </h2>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="page-body">
         <div class="container-xl">
-            <div class="row">
+            <div class="row mt-3">
                 <div class="col-12">
-                    <div class="card">
+                    <div class="card shadow-lg p-3 mb-5 rounded">
+                        <div class="card-header">
+                            <h3 class="card-title">Data Supplier</h3>
+                            <div class="card-actions">
+                                <a href="#" class="btn btn-primary" id="btn-tambah">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    </svg>
+                                    tambah
+                                </a>
+                            </div>
+                        </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12">
@@ -37,21 +37,6 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-12">
-                                    <a href="#" class="btn btn-primary" id="btn-tambah">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <line x1="12" y1="5" x2="12" y2="19" />
-                                            <line x1="5" y1="12" x2="19" y2="12" />
-                                        </svg>
-                                        Tambah Data
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
                                 <div class="col-12">
                                     <form action="/user" method="get">
                                         <div class="row">
@@ -129,94 +114,124 @@
                                     </form>
                                 </div>
                             </div>
-                            <div class="row mt-2">
+                            <div class="row mt-3">
                                 <div class="col-12">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Nama User</th>
-                                                <th>email</th>
-                                                <th>Nomer Hp</th>
-                                                <th>Role</th>
-                                                <th>Aksi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <tr>
-                                                    <td width="1%"><?php echo e($loop->iteration + $users->firstItem() - 1); ?>
+                                    <div class="card">
+                                        <div class="table-responsive">
+                                            <table class="table table-vcenter card-table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center" width="1%">No</th>
+                                                        <th width="20%">Nama User</th>
+                                                        <th width="25%">email</th>
+                                                        <th width="15%">Nomer Hp</th>
+                                                        <th class="text-center" width="5%">Status</th>
+                                                        <th width="5%"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <tr>
+                                                            <td class="text-center">
+                                                                <?php echo e($loop->iteration + $users->firstItem() - 1); ?>
 
-                                                    </td>
-                                                    <td><?php echo e($s->nama_user); ?></td>
-                                                    <td><?php echo e($s->email); ?></td>
-                                                    <td><?php echo e($s->no_hp); ?></td>
-                                                    <td width="8%">
-                                                        <div class="text-center">
-                                                            <?php if($s->id_level == 1): ?>
-                                                                <span class="badge bg-success">Admin</span>
-                                                            <?php elseif($s->id_level == 2): ?>
-                                                                <span class="badge bg-warning">kasir</span>
-                                                            <?php endif; ?>
-                                                        </div>
-                                                    </td>
-                                                    <?php if($s->id != $id): ?>
-                                                        <td width="13%">
-                                                            <div class="text-center">
-                                                                <div class="btn-group">
-                                                                    <a href="#" class="edit btn btn-info btn-sm"
-                                                                        id="<?php echo e($s->id); ?>">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                            width="24" height="24"
-                                                                            viewBox="0 0 24 24" fill="none"
-                                                                            stroke="currentColor" stroke-width="2"
-                                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
-                                                                            <path stroke="none" d="M0 0h24v24H0z"
-                                                                                fill="none" />
-                                                                            <path
-                                                                                d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
-                                                                            <path
-                                                                                d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
-                                                                            <path d="M16 5l3 3" />
-                                                                        </svg>
-                                                                        Edit
-                                                                    </a>
-                                                                    <form action="/user/<?php echo e($s->id); ?>/delete"
-                                                                        method="POST" style="margin-left:5px ">
-                                                                        <?php echo csrf_field(); ?>
-                                                                        <button
-                                                                            class="btn btn-danger btn-sm delete-confirm">
+                                                            </td>
+                                                            <td><?php echo e($s->nama_user); ?></td>
+                                                            <td><?php echo e($s->email); ?></td>
+                                                            <td><?php echo e($s->no_hp); ?></td>
+                                                            <td>
+                                                                <div class="text-center">
+                                                                    <?php if($s->id_level == 1): ?>
+                                                                        <span class="badge bg-success">Admin</span>
+                                                                    <?php elseif($s->id_level == 2): ?>
+                                                                        <span class="badge bg-warning">kasir</span>
+                                                                    <?php endif; ?>
+                                                                </div>
+                                                            </td>
+                                                            <?php if($s->id != $id): ?>
+                                                                <td>
+                                                                    <div class="text-center">
+                                                                        <div class="btn-group">
+                                                                            <a href="#"
+                                                                                class="edit btn btn-info btn-sm"
+                                                                                id="<?php echo e($s->id); ?>">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                    width="24" height="24"
+                                                                                    viewBox="0 0 24 24" fill="none"
+                                                                                    stroke="currentColor" stroke-width="2"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
+                                                                                    <path stroke="none" d="M0 0h24v24H0z"
+                                                                                        fill="none" />
+                                                                                    <path
+                                                                                        d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+                                                                                    <path
+                                                                                        d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                                                                                    <path d="M16 5l3 3" />
+                                                                                </svg>
+                                                                                Edit
+                                                                            </a>
+                                                                            <form
+                                                                                action="/user/<?php echo e($s->id); ?>/delete"
+                                                                                method="POST" style="margin-left:5px ">
+                                                                                <?php echo csrf_field(); ?>
+                                                                                <button
+                                                                                    class="btn btn-danger btn-sm delete-confirm">
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                        width="24" height="24"
+                                                                                        viewBox="0 0 24 24"
+                                                                                        fill="currentColor"
+                                                                                        class="icon icon-tabler icons-tabler-filled icon-tabler-trash">
+                                                                                        <path stroke="none"
+                                                                                            d="M0 0h24v24H0z"
+                                                                                            fill="none" />
+                                                                                        <path
+                                                                                            d="M20 6a1 1 0 0 1 .117 1.993l-.117 .007h-.081l-.919 11a3 3 0 0 1 -2.824 2.995l-.176 .005h-8c-1.598 0 -2.904 -1.249 -2.992 -2.75l-.005 -.167l-.923 -11.083h-.08a1 1 0 0 1 -.117 -1.993l.117 -.007h16z" />
+                                                                                        <path
+                                                                                            d="M14 2a2 2 0 0 1 2 2a1 1 0 0 1 -1.993 .117l-.007 -.117h-4l-.007 .117a1 1 0 0 1 -1.993 -.117a2 2 0 0 1 1.85 -1.995l.15 -.005h4z" />
+                                                                                    </svg>
+                                                                                    Delete
+                                                                                </button>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            <?php else: ?>
+                                                                <td>
+                                                                    <div class="text-center">
+                                                                        <a href="#" class="edit btn btn-info btn-sm"
+                                                                            id="<?php echo e($s->id); ?>">
                                                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                                                 width="24" height="24"
-                                                                                viewBox="0 0 24 24" fill="currentColor"
-                                                                                class="icon icon-tabler icons-tabler-filled icon-tabler-trash">
+                                                                                viewBox="0 0 24 24" fill="none"
+                                                                                stroke="currentColor" stroke-width="2"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"
+                                                                                class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
                                                                                 <path stroke="none" d="M0 0h24v24H0z"
                                                                                     fill="none" />
                                                                                 <path
-                                                                                    d="M20 6a1 1 0 0 1 .117 1.993l-.117 .007h-.081l-.919 11a3 3 0 0 1 -2.824 2.995l-.176 .005h-8c-1.598 0 -2.904 -1.249 -2.992 -2.75l-.005 -.167l-.923 -11.083h-.08a1 1 0 0 1 -.117 -1.993l.117 -.007h16z" />
+                                                                                    d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
                                                                                 <path
-                                                                                    d="M14 2a2 2 0 0 1 2 2a1 1 0 0 1 -1.993 .117l-.007 -.117h-4l-.007 .117a1 1 0 0 1 -1.993 -.117a2 2 0 0 1 1.85 -1.995l.15 -.005h4z" />
+                                                                                    d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                                                                                <path d="M16 5l3 3" />
                                                                             </svg>
-                                                                            Delete
-                                                                        </button>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    <?php else: ?>
-                                                        <td width="13%">
-                                                            <div class="text-center">
-                                                                <span class="badge bg-primary">Akun Anda</span>
-                                                            </div>
-                                                        </td>
-                                                    <?php endif; ?>
-                                                </tr>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        </tbody>
-                                    </table>
-                                    <?php echo e($users->links('vendor.pagination.bootstrap-5')); ?>
+                                                                            Edit
+                                                                        </a>
+                                                                    </div>
+                                                                </td>
+                                                            <?php endif; ?>
+                                                        </tr>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <?php echo e($users->links('vendor.pagination.bootstrap-5')); ?>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -316,50 +331,49 @@
                                 </select>
                             </div>
                         </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <button class="btn btn-primary w-100">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="icon icon-tabler icons-tabler-outline icon-tabler-device-floppy">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path
-                                                d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" />
-                                            <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                                            <path d="M14 4l0 4l-6 0l0 -4" />
-                                        </svg>
-                                        Simpan
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <button type="reset" class="btn btn-danger w-100">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="icon icon-tabler icons-tabler-outline icon-tabler-restore">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M3.06 13a9 9 0 1 0 .49 -4.087" />
-                                            <path d="M3 4.001v5h5" />
-                                            <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-                                        </svg>
-                                        Reset
-                                    </button>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <button class="btn btn-primary w-100">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-device-floppy">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path
+                                                        d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" />
+                                                    <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                                    <path d="M14 4l0 4l-6 0l0 -4" />
+                                                </svg>
+                                                Simpan
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <button type="reset" class="btn btn-danger w-100">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-restore">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M3.06 13a9 9 0 1 0 .49 -4.087" />
+                                                    <path d="M3 4.001v5h5" />
+                                                    <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                                                </svg>
+                                                Reset
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
-                </form>
             </div>
         </div>
-    </div>
     </div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startPush('myscript'); ?>

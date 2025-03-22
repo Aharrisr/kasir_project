@@ -10,26 +10,26 @@
             -moz-appearance: textfield;
         }
     </style>
-    <div class="page-header d-print-none">
-        <div class="container-xl">
-            <div class="row g-2 align-items-center">
-                <div class="col">
-                    <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        Overview
-                    </div>
-                    <h2 class="page-title">
-                        Pembelian
-                    </h2>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="page-body">
         <div class="container-xl">
-            <div class="row">
+            <div class="row mt-3">
                 <div class="col-12">
                     <div class="card shadow-lg p-3 mb-5 rounded">
+                        <div class="card-header">
+                            <h3 class="card-title">Data Pembelian</h3>
+                            <div class="card-actions">
+                                <a href="#" class="btn btn-primary" id="btn-tambah">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    </svg>
+                                    tambah
+                                </a>
+                            </div>
+                        </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12">
@@ -48,21 +48,6 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-12">
-                                    <a href="#" class="btn btn-primary" id="btn-tambah">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <line x1="12" y1="5" x2="12" y2="19" />
-                                            <line x1="5" y1="12" x2="19" y2="12" />
-                                        </svg>
-                                        Tambah
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
                                 <div class="col-12">
                                     <form action="/produk" method="get">
                                         <div class="row">
@@ -127,107 +112,115 @@
                             </div>
                             <div class="row mt-3">
                                 <div class="col-12">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered">
-                                            <thead class="table-primary">
-                                                <tr>
-                                                    <th class="text-center" width="1%">No</th>
-                                                    <th class="text-center" width="8%">
-                                                        Tanggal
-                                                    </th>
-                                                    <th class="text-center" width="8%">Kode Transaksi</th>
-                                                    <th width="15%">Nama Supplier</th>
-                                                    <th class="text-center" width="3%">Total Item</th>
-                                                    <th class="text-center" width="12%">
-                                                        Total Harga
-                                                    </th>
-                                                    <th class="text-center" width="1%">
-                                                        Discount
-                                                    </th>
-                                                    <th class="text-center" width="12%">
-                                                        Total Bayar
-                                                    </th>
-                                                    <th class="text-center" width="10%">Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="hasil-pencarian">
-                                                <?php $__currentLoopData = $pembelian; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <div class="card">
+                                        <div class="table-responsive">
+                                            <table class="table table-vcenter card-table table-striped">
+                                                <thead class="table-primary">
                                                     <tr>
-                                                        <input type="hidden" value="<?php echo e($s->id_pembelian); ?>">
-                                                        <td class="text-center">
-                                                            <?php echo e($loop->iteration + $pembelian->firstItem() - 1); ?>
-
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <?php echo e(date('d-m-Y', strtotime($s->tanggal))); ?>
-
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <span class="badge bg-success"><?php echo e($s->kode_transaksi); ?></span>
-                                                        </td>
-                                                        <td><?php echo e($s->nama_splr); ?></td>
-                                                        <td class="text-center"><?php echo e($s->total_item); ?></td>
-                                                        <td class="text-center">
-                                                            <?php echo e(number_format($s->total_harga, 0, ',', '.')); ?>
-
-                                                        </td>
-                                                        <td class="text-center"><?php echo e($s->diskon); ?>%</td>
-                                                        <td class="text-center">
-                                                            <?php echo e(number_format($s->bayar, 0, ',', '.')); ?>
-
-                                                        </td>
-                                                        <td>
-                                                            <div class="text-center">
-                                                                <div class="btn-group">
-                                                                    <a href="#"
-                                                                        class="btn-detail btn btn-info btn-sm me-2"
-                                                                        kode_transaksi="<?php echo e($s->kode_transaksi); ?>">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                            width="24" height="24"
-                                                                            viewBox="0 0 24 24" fill="none"
-                                                                            stroke="currentColor" stroke-width="2"
-                                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-eye-search">
-                                                                            <path stroke="none" d="M0 0h24v24H0z"
-                                                                                fill="none" />
-                                                                            <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-                                                                            <path
-                                                                                d="M12 18c-.328 0 -.652 -.017 -.97 -.05c-3.172 -.332 -5.85 -2.315 -8.03 -5.95c2.4 -4 5.4 -6 9 -6c3.465 0 6.374 1.853 8.727 5.558" />
-                                                                            <path
-                                                                                d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-                                                                            <path d="M20.2 20.2l1.8 1.8" />
-                                                                        </svg>
-                                                                        Detail
-                                                                    </a>
-                                                                    <a href="#"
-                                                                        class="btn-edit btn btn-success btn-sm"
-                                                                        data-kode="<?php echo e($s->kode_transaksi); ?>">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                            width="24" height="24"
-                                                                            viewBox="0 0 24 24" fill="none"
-                                                                            stroke="currentColor" stroke-width="2"
-                                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
-                                                                            <path stroke="none" d="M0 0h24v24H0z"
-                                                                                fill="none" />
-                                                                            <path
-                                                                                d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
-                                                                            <path
-                                                                                d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
-                                                                            <path d="M16 5l3 3" />
-                                                                        </svg>
-                                                                        edit
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
+                                                        <th class="text-center" width="1%">No</th>
+                                                        <th class="text-center" width="8%">
+                                                            Tanggal
+                                                        </th>
+                                                        <th class="text-center" width="8%">Kode Transaksi</th>
+                                                        <th width="15%">Nama Supplier</th>
+                                                        <th class="text-center" width="3%">Total Item</th>
+                                                        <th class="text-center" width="12%">
+                                                            Total Harga
+                                                        </th>
+                                                        <th class="text-center" width="1%">
+                                                            Discount
+                                                        </th>
+                                                        <th class="text-center" width="12%">
+                                                            Total Bayar
+                                                        </th>
+                                                        <th class="text-center" width="5%"></th>
                                                     </tr>
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <?php echo e($pembelian->links('vendor.pagination.bootstrap-5')); ?>
+                                                </thead>
+                                                <tbody id="hasil-pencarian">
+                                                    <?php $__currentLoopData = $pembelian; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <tr>
+                                                            <input type="hidden" value="<?php echo e($s->id_pembelian); ?>">
+                                                            <td class="text-center">
+                                                                <?php echo e($loop->iteration + $pembelian->firstItem() - 1); ?>
 
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <?php echo e(date('d-m-Y', strtotime($s->tanggal))); ?>
+
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <span
+                                                                    class="badge bg-success"><?php echo e($s->kode_transaksi); ?></span>
+                                                            </td>
+                                                            <td><?php echo e($s->nama_splr); ?></td>
+                                                            <td class="text-center"><?php echo e($s->total_item); ?></td>
+                                                            <td class="text-center">
+                                                                <?php echo e(number_format($s->total_harga, 0, ',', '.')); ?>
+
+                                                            </td>
+                                                            <td class="text-center"><?php echo e($s->diskon); ?>%</td>
+                                                            <td class="text-center">
+                                                                <?php echo e(number_format($s->bayar, 0, ',', '.')); ?>
+
+                                                            </td>
+                                                            <td>
+                                                                <div class="text-center">
+                                                                    <div class="btn-group">
+                                                                        <a href="#"
+                                                                            class="btn-detail btn btn-info btn-sm me-2"
+                                                                            kode_transaksi="<?php echo e($s->kode_transaksi); ?>">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                width="24" height="24"
+                                                                                viewBox="0 0 24 24" fill="none"
+                                                                                stroke="currentColor" stroke-width="2"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"
+                                                                                class="icon icon-tabler icons-tabler-outline icon-tabler-eye-search">
+                                                                                <path stroke="none" d="M0 0h24v24H0z"
+                                                                                    fill="none" />
+                                                                                <path
+                                                                                    d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                                                                                <path
+                                                                                    d="M12 18c-.328 0 -.652 -.017 -.97 -.05c-3.172 -.332 -5.85 -2.315 -8.03 -5.95c2.4 -4 5.4 -6 9 -6c3.465 0 6.374 1.853 8.727 5.558" />
+                                                                                <path
+                                                                                    d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                                                                                <path d="M20.2 20.2l1.8 1.8" />
+                                                                            </svg>
+                                                                            Detail
+                                                                        </a>
+                                                                        <a href="#"
+                                                                            class="btn-edit btn btn-success btn-sm"
+                                                                            data-kode="<?php echo e($s->kode_transaksi); ?>">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                width="24" height="24"
+                                                                                viewBox="0 0 24 24" fill="none"
+                                                                                stroke="currentColor" stroke-width="2"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"
+                                                                                class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
+                                                                                <path stroke="none" d="M0 0h24v24H0z"
+                                                                                    fill="none" />
+                                                                                <path
+                                                                                    d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+                                                                                <path
+                                                                                    d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                                                                                <path d="M16 5l3 3" />
+                                                                            </svg>
+                                                                            edit
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <?php echo e($pembelian->links('vendor.pagination.bootstrap-5')); ?>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -247,52 +240,65 @@
                     <?php echo csrf_field(); ?>
                     <div class="row justify-content-center">
                         <div class="col-md-10">
-                            <table class="table table-bordered">
-                                <thead class="table-primary">
-                                    <tr>
-                                        <th class="text-center" width="1%">No</th>
-                                        <th width="15%">Nama Supplier</th>
-                                        <th width="10%">NO.Hp</th>
-                                        <th width="30%">Alamat</th>
-                                        <th class="text-center" width="5%">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $__currentLoopData = $supplier1; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $d): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <tr>
-                                            <input type="hidden" id="kode_splr" name="kode_splr"
-                                                value="<?php echo e($d->kode_splr); ?>">
-                                            <td class="text-center">
-                                                <?php echo e($loop->iteration + $supplier1->firstItem() - 1); ?>
+                            <div class="card">
+                                <div class="table-responsive">
+                                    <table class="table table-vcenter card-table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center" width="1%">No</th>
+                                                <th class="text-center" width="3%">
+                                                    Kode Supplier
+                                                </th>
+                                                <th width="10%">Nama Supplier</th>
+                                                <th width="10%">No.Hp</th>
+                                                <th width="30%">Alamat</th>
+                                                <th width="5%"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="hasil-pencarian">
+                                            <?php $__currentLoopData = $supplier1; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $d): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <tr>
+                                                    <td class="text-center">
+                                                        <?php echo e($loop->iteration + $supplier1->firstItem() - 1); ?>
 
-                                            </td>
-                                            <td><?php echo e($d->nama_splr); ?></td>
-                                            <td><?php echo e($d->no_hp); ?></td>
-                                            <td><?php echo e($d->alamat); ?></td>
-                                            <td class="text-center">
-                                                <div class="btn-group">
-                                                    <a href="#" class="btn-pilih btn btn-info btn-sm"
-                                                        data-kode="<?php echo e($d->kode_splr); ?>">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-check">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                            <path d="M5 12l5 5l10 -10" />
-                                                        </svg>
-                                                        Pilih
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </tbody>
-                            </table>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <span class="badge bg-success"><?php echo e($s->kode_splr); ?></span>
+                                                    </td>
+                                                    <td><?php echo e($d->nama_splr); ?></td>
+                                                    <td><?php echo e($d->no_hp); ?></td>
+                                                    <td><?php echo e($d->alamat); ?></td>
+                                                    <td>
+                                                        <div class="text-center">
+                                                            <div class="btn-group">
+                                                                <a href="#" class="btn-pilih btn btn-info btn-sm"
+                                                                    data-kode="<?php echo e($d->kode_splr); ?>">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="icon icon-tabler icons-tabler-outline icon-tabler-check">
+                                                                        <path stroke="none" d="M0 0h24v24H0z"
+                                                                            fill="none" />
+                                                                        <path d="M5 12l5 5l10 -10" />
+                                                                    </svg>
+                                                                    Pilih
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <?php echo e($supplier1->links('vendor.pagination.bootstrap-5')); ?>
+                    <div class="mt-2">
+                        <?php echo e($supplier1->links('vendor.pagination.bootstrap-5')); ?>
 
+                    </div>
                 </div>
             </div>
         </div>
