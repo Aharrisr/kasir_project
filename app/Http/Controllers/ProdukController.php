@@ -16,7 +16,7 @@ class ProdukController extends Controller
     public function index(Request $request)
     {
         $db = Produk::query();
-        $db->select('produk.*', 'nama_produk', 'nama_splr', 'tanggal', 'stok', 'kode_produk');
+        $db->select('produk.*', 'nama_produk', 'nama_splr', 'stok', 'kode_produk');
         $db->join('supplier', 'produk.kode_splr', '=', 'supplier.kode_splr');
         $db->orderBy('nama_produk');
         if (!empty($request->kode_produk)) {
@@ -45,7 +45,6 @@ class ProdukController extends Controller
         $harga = $request->harga;
         $stok = $request->stok;
         $kode_splr = $request->kode_splr;
-        $tanggal = date('Y-m-d H:i:s');
         $discount = $request->discount;
 
         $produk = DB::table('produk')->latest('id_produk')->first();
@@ -64,7 +63,6 @@ class ProdukController extends Controller
                 'harga' => $harga,
                 'stok' => $stok,
                 'kode_splr' => $kode_splr,
-                'tanggal' => $tanggal,
                 'kode_produk' => $kode_produk,
                 'discount' => $discount
             ];
@@ -74,7 +72,7 @@ class ProdukController extends Controller
                 return Redirect::back()->with(['success' => 'Data Berhasil Disimpan']);
             }
         } catch (\Exception $e) {
-            // dd($e->getMessage());
+            dd($e->getMessage());
             return Redirect::back()->with(['warning' => 'Data Gagal Disimpan']);
         }
     }

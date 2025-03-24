@@ -120,7 +120,7 @@
                                                         <th class="text-center" width="5%">
                                                             Kode Produk
                                                         </th>
-                                                        <th width="30%">Nama Barang</th>
+                                                        <th width="15%">Nama Barang</th>
                                                         <th width="15%">Merk</th>
                                                         <th class="text-center" width="8%">
                                                             Harga Jual

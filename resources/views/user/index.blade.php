@@ -122,10 +122,10 @@
                                                     <tr>
                                                         <th class="text-center" width="1%">No</th>
                                                         <th width="20%">Nama User</th>
-                                                        <th width="25%">email</th>
-                                                        <th width="15%">Nomer Hp</th>
-                                                        <th class="text-center" width="5%">Status</th>
-                                                        <th width="5%"></th>
+                                                        <th width="20%">email</th>
+                                                        <th width="10%">Nomer Hp</th>
+                                                        <th class="text-center" width="8%">Status</th>
+                                                        <th width="6%"></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>

@@ -27,165 +27,198 @@
             color: #000000;
         }
     </style>
-    <div class="page-header d-print-none">
-        <div class="container-xl">
-            <div class="row g-2 align-items-center">
-                <div class="col">
-                    <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        Overview
-                    </div>
-                    <h2 class="page-title">
-                        Transaksi
-                    </h2>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="page-body">
         <div class="container-xl">
-            <div class="row">
+            <div class="row mt-3">
                 <div class="col-12">
                     <div class="card shadow-lg p-2 mb-5 rounded">
+                        <div class="card-header">
+                            <h3 class="card-title">Edit Pembelian</h3>
+                            <div class="card-actions">
+                                <a class="btn btn-primary" id="btn-tambah">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    </svg>
+                                    tambah
+                                </a>
+                                <button id="btn-close" type="button" class="btn-close ms-2" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                        </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12">
                                     @if (Session::get('success'))
-                                        <div class="alert alert-success">
-                                            {{ Session::get('success') }}
+                                        <div class="alert alert-success alert-dismissible d-flex align-items-center"
+                                            role="alert">
+                                            <div class="alert-icon me-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon alert-icon icon-2">
+                                                    <path d="M5 12l5 5l10 -10"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                {{ Session::get('success') }}
+                                            </div>
+                                            <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
                                         </div>
                                     @endif
                                     @if (Session::get('warning'))
-                                        <div class="alert alert-warning">
-                                            {{ Session::get('warning') }}
+                                        <div class="alert alert-danger alert-dismissible d-flex align-items-center"
+                                            role="alert">
+                                            <div class="alert-icon me-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon alert-icon icon-2">
+                                                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                                    <path d="M12 8v4"></path>
+                                                    <path d="M12 16h.01"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                {{ Session::get('warning') }}
+                                            </div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
                                         </div>
                                     @endif
                                 </div>
                             </div>
-                            <div class="mb-2">
-                                <p class="mb-1"><strong>Nama Supplier:</strong> {{ $pembelian->nama_splr }}</p>
-                                <p class="mb-1"><strong>No HP:</strong> {{ $pembelian->no_hp }}</p>
-                                <p class="mb-1"><strong>Alamat:</strong> {{ $pembelian->alamat }}</p>
-                                <p class="mb-1"><strong>Kode Transaksi:</strong> {{ $transaksi->kode_transaksi }}</p>
+                            <div class="row"><label for="">Nama supplier : {{ $pembelian->nama_splr }}</label>
                             </div>
-                            <div class="row mt-2">
-                                <div class="form-group">
-                                    <button class="btn btn-primary" id="btn-tambah">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <line x1="12" y1="5" x2="12" y2="19" />
-                                            <line x1="5" y1="12" x2="19" y2="12" />
-                                        </svg>
-                                        Tambah
-                                    </button>
-                                </div>
-                            </div>
+                            <div class="row"><label for="">No Hp : {{ $pembelian->no_hp }}</label></div>
+                            <div class="row"><label for="">Alamat : {{ $pembelian->alamat }}</label></div>
+                            <div class="row"><label for="">Kode Transaksi :
+                                    {{ $transaksi->kode_transaksi }}</label></div>
                             <form action="/transaksi/{{ $transaksi->kode_transaksi }}/edit" method="POST" id="frmedit"
                                 onkeydown="return event.key !== 'Enter';">
                                 @csrf
-                                <div class="row mt-2">
+                                <div class="row mt-3">
                                     <div class="col-12">
-                                        <table class="table table-bordered">
-                                            <thead class="table-primary">
-                                                <tr>
-                                                    <th class="text-center" width="1%">No</th>
-                                                    <th class="text-center" width="5%">
-                                                        Kode Produk
-                                                    </th>
-                                                    <th width="20%">Nama Barang</th>
-                                                    <th class="text-center" width="10%">
-                                                        Harga beli
-                                                    </th>
-                                                    <th class="text-center" width="5%">
-                                                        Jumlah
-                                                    </th>
-                                                    <th width="10%">Subtotal</th>
-                                                    <th width="5%">Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($pembelian_detail as $s)
-                                                    @if ($s->kode_transaksi == $transaksi->kode_transaksi)
+                                        <div class="card">
+                                            <div class="table-responsive">
+                                                <table class="table table-vcenter card-table table-striped"
+                                                    id="tabeldetail">
+                                                    <thead>
                                                         <tr>
-                                                            @php
-                                                                $no = 0;
-                                                            @endphp
-                                                            <td class="text-center">
-                                                                {{ $loop->iteration + $no - 1 }}
-                                                            </td>
-                                                            <td class="text-center">
-                                                                <span class="badge bg-success">{{ $s->kode_produk }}</span>
-                                                            </td>
-                                                            <td>{{ $s->nama_produk }}</td>
-                                                            <td class="text-center">
-                                                                Rp. {{ number_format($s->harga_beli, 0, ',', '.') }}
-                                                            </td>
-                                                            <td>
-                                                                <input type="number" name="jumlah"
-                                                                    class="jumlah-input form-control"
-                                                                    data-harga="{{ $s->harga_beli }}"
-                                                                    value="{{ $s->jumlah }}" min="1">
-                                                            </td>
-                                                            <td>
-                                                                <span class="subtotal-text">
-                                                                    <input type="text" name="subtotal" id="subtotal"
-                                                                        value="{{ $s->harga_beli * $s->jumlah }}" hidden>
-                                                                    <span>Rp.
-                                                                        {{ number_format($s->harga_beli * $s->jumlah, 0, ',', '.') }}</span>
-                                                                </span>
-                                                            </td>
-                                                            <td hidden><input type="text"
-                                                                    value="{{ $transaksi->kode_transaksi }}"
-                                                                    id="kode_transaksi" name="kode_transaksi">
-                                                            </td>
-                                                            <td hidden>
-                                                                <input type="text" value="{{ $s->id_pembelian_detail }}"
-                                                                    id="id_pembelian_detail" name="id_pembelian_detail">
-                                                            </td>
-                                                            <td hidden>
-                                                                <input type="text" value="{{ $pembelian->kode_splr }}"
-                                                                    id="kode_splr" name="kode_splr">
-                                                            </td>
-                                                            <td hidden>
-                                                                <input type="text" value="{{ $s->stok }}"
-                                                                    id="stok" name="stok">
-                                                                <input type="text" value="{{ $s->id_produk }}"
-                                                                    id="id_produk" name="id_produk">
-                                                            </td>
-                                                            <td class="text-center">
-                                                                <button type="button"
-                                                                    class="btn btn-danger btn-sm delete-btn"
-                                                                    data-id="{{ $s->id_pembelian_detail }}">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
-                                                                        <path stroke="none" d="M0 0h24v24H0z"
-                                                                            fill="none" />
-                                                                        <path d="M4 7l16 0" />
-                                                                        <path d="M10 11l0 6" />
-                                                                        <path d="M14 11l0 6" />
-                                                                        <path
-                                                                            d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                                                        <path
-                                                                            d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                                                    </svg>
-                                                                    Hapus
-                                                                </button>
-                                                            </td>
+                                                            <th class="text-center" width="1%">No</th>
+                                                            <th class="text-center" width="5%">
+                                                                Kode Produk
+                                                            </th>
+                                                            <th width="15%">Nama Barang</th>
+                                                            <th class="text-center" width="10%">
+                                                                Harga beli
+                                                            </th>
+                                                            <th class="text-center" width="5%">
+                                                                Jumlah
+                                                            </th>
+                                                            <th class="text-center" width="10%">Subtotal</th>
+                                                            <th width="8%"></th>
                                                         </tr>
-                                                    @endif
-                                                @endforeach
-                                            </tbody>
-                                        </table>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($pembelian_detail as $s)
+                                                            @if ($s->kode_transaksi == $transaksi->kode_transaksi)
+                                                                <tr>
+                                                                    <td class="text-center">
+                                                                    </td>
+                                                                    <td class="text-center">
+                                                                        <span
+                                                                            class="badge bg-success">{{ $s->kode_produk }}</span>
+                                                                    </td>
+                                                                    <td>{{ $s->nama_produk }}</td>
+                                                                    <td class="text-center">
+                                                                        Rp.
+                                                                        {{ number_format($s->harga_beli, 0, ',', '.') }}
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" name="jumlah"
+                                                                            id="jumlah"
+                                                                            class="jumlah-input form-control"
+                                                                            data-harga="{{ $s->harga_beli }}"
+                                                                            value="{{ $s->jumlah }}" min="1">
+                                                                        <input class="upstok-input form-control"
+                                                                            type="hidden" name="upstok" id="upstok"
+                                                                            value="{{ $s->jumlah }}">
+                                                                        <input type="hidden" id="hasil"
+                                                                            name="hasil" class="form-control" readonly>
+                                                                    </td>
+                                                                    <td class="text-center">
+                                                                        <span class="subtotal-text">
+                                                                            <input type="text" name="subtotal"
+                                                                                id="subtotal"
+                                                                                value="{{ $s->harga_beli * $s->jumlah }}"
+                                                                                hidden>
+                                                                            <span>Rp.
+                                                                                {{ number_format($s->harga_beli * $s->jumlah, 0, ',', '.') }}</span>
+                                                                        </span>
+                                                                    </td>
+                                                                    <td hidden><input type="text"
+                                                                            value="{{ $transaksi->kode_transaksi }}"
+                                                                            id="kode_transaksi" name="kode_transaksi">
+                                                                    </td>
+                                                                    <td hidden>
+                                                                        <input type="text"
+                                                                            value="{{ $s->id_pembelian_detail }}"
+                                                                            id="id_pembelian_detail"
+                                                                            name="id_pembelian_detail">
+                                                                    </td>
+                                                                    <td hidden>
+                                                                        <input type="text"
+                                                                            value="{{ $pembelian->kode_splr }}"
+                                                                            id="kode_splr" name="kode_splr">
+                                                                    </td>
+                                                                    <td hidden>
+                                                                        <input type="text" value="{{ $s->stok }}"
+                                                                            id="stok" name="stok">
+                                                                        <input type="text" value="{{ $s->id_produk }}"
+                                                                            id="id_produk" name="id_produk">
+                                                                    </td>
+                                                                    <td class="text-center">
+                                                                        @if ($count == 1)
+                                                                        @else
+                                                                            <button type="button"
+                                                                                class="btn btn-danger btn-sm delete-btn"
+                                                                                data-id="{{ $s->id_pembelian_detail }}">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                    width="24" height="24"
+                                                                                    viewBox="0 0 24 24" fill="none"
+                                                                                    stroke="currentColor" stroke-width="2"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                                                                                    <path stroke="none" d="M0 0h24v24H0z"
+                                                                                        fill="none" />
+                                                                                    <path d="M4 7l16 0" />
+                                                                                    <path d="M10 11l0 6" />
+                                                                                    <path d="M14 11l0 6" />
+                                                                                    <path
+                                                                                        d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                                                                    <path
+                                                                                        d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                                                                </svg>
+                                                                                Hapus
+                                                                            </button>
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
+                                                            @endif
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                         {{ $produk->links('vendor.pagination.bootstrap-5') }}
                                     </div>
                                 </div>
-                                <div class="row mt-2">
+                                <div class="row mt-3">
                                     <div class="col-12">
                                         <div class="row">
                                             <div class="col-8">
@@ -232,7 +265,8 @@
                                     </button>
                                 </div>
                             </form>
-                            <form action="/transaksi/{{ $transaksi->kode_transaksi }}/delete" method="POST" style="margin-left:5px ">
+                            <form action="/transaksi/{{ $transaksi->kode_transaksi }}/delete" method="POST"
+                                style="margin-left:5px ">
                                 @csrf
                                 <div class="form-group mt-2" style="text-align: right;">
                                     <button class="btn btn-danger delete-confirm w-25">
@@ -265,71 +299,87 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th class="text-center" width="1%">No</th>
-                                <th class="text-center" width="5%">
-                                    Kode Produk
-                                </th>
-                                <th width="30%">Nama Barang</th>
-                                <th class="text-center" width="8%">
-                                    Harga
-                                </th>
-                                <th width="5%">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($produk as $s)
-                                <form action="/transaksi/{{ $s->kode_produk }}/tambah" method="POST">
-                                    @csrf
-                                    <tr>
-                                        @if ($s->kode_splr == $pembelian->kode_splr)
-                                            <td class="text-center">
-                                                {{ $loop->iteration + $produk->firstItem() - 1 }}
-                                            </td>
-                                            <td hidden> <input type="text" name="kode_transaksi"
-                                                    value="{{ $transaksi }}"></td>
-                                            <td class="text-center" id="kode_produk">
-                                                <span class="badge bg-success"><input type="text" hidden
-                                                        name="kode_produk"
-                                                        value="{{ $s->kode_produk }}">{{ $s->kode_produk }}</span>
-                                            </td>
-                                            <td id="nama_produk"><input type="text" hidden name="nama_produk"
-                                                    value="{{ $s->nama_produk }}">{{ $s->nama_produk }}</td>
-                                            <td class="text-center" id="harga"><input type="text" hidden
-                                                    name="harga_beli" value="{{ $s->harga }}">
-                                                {{ number_format($s->harga, 0, ',', '.') }}
-                                            </td>
-                                            <td hidden id="stok"><input type="text" hidden name="jumlah"
-                                                    value="1"></td>
-                                            <td hidden id="subtotal"><input type="text" hidden name="subtotal"
-                                                    value="{{ $s->harga }}">{{ number_format($s->harga, 0, ',', '.') }}
-                                            </td>
-                                            <td class="text-center">
-                                                <div class="btn-group">
-                                                    <button class="btn btn-primary btn-sm">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                            <line x1="12" y1="5" x2="12"
-                                                                y2="19" />
-                                                            <line x1="5" y1="12" x2="19"
-                                                                y2="12" />
-                                                        </svg>
-                                                        tambah
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        @endif
-                                    </tr>
-                                </form>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <div class="row justify-content-center">
+                        <div class="col-md-10">
+                            <div class="card">
+                                <div class="table-responsive">
+                                    <table class="table table-vcenter card-table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center" width="1%">No</th>
+                                                <th class="text-center" width="10%">
+                                                    Kode Produk
+                                                </th>
+                                                <th width="10%">Nama Barang</th>
+                                                <th class="text-center" width="8%">
+                                                    Harga
+                                                </th>
+                                                <th class="text-center" width="3%">Stok</th>
+                                                <th width="5%"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($produk as $s)
+                                                <form action="/transaksi/{{ $s->kode_produk }}/tambah" method="POST">
+                                                    @csrf
+                                                    <tr>
+                                                        @if ($s->kode_splr == $pembelian->kode_splr)
+                                                            <td class="text-center">
+                                                                {{ $loop->iteration + $produk->firstItem() - 1 }}
+                                                            </td>
+                                                            <td hidden> <input type="text" name="kode_transaksi"
+                                                                    value="{{ $transaksi->kode_transaksi }}"></td>
+                                                            <td class="text-center" id="kode_produk">
+                                                                <span
+                                                                    class="badge bg-success">{{ $s->kode_produk }}</span>
+                                                                <input type="text" hidden name="kode_produk"
+                                                                    value="{{ $s->kode_produk }}">
+                                                            </td>
+                                                            <td id="nama_produk"><input type="text" hidden
+                                                                    name="nama_produk"
+                                                                    value="{{ $s->nama_produk }}">{{ $s->nama_produk }}
+                                                            </td>
+                                                            <td class="text-center" id="harga"><input type="text"
+                                                                    hidden name="harga_beli" value="{{ $s->harga }}">
+                                                                {{ number_format($s->harga, 0, ',', '.') }}
+                                                            </td>
+                                                            <td class="text-center">{{ $s->stok }}</td>
+                                                            <td hidden id="stok"><input type="text" hidden
+                                                                    name="jumlah" value="1"></td>
+                                                            <td hidden id="subtotal"><input type="text" hidden
+                                                                    name="subtotal"
+                                                                    value="{{ $s->harga }}">{{ number_format($s->harga, 0, ',', '.') }}
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <div class="btn-group">
+                                                                    <button class="btn btn-primary btn-sm">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                            width="24" height="24"
+                                                                            viewBox="0 0 24 24" fill="none"
+                                                                            stroke="currentColor" stroke-width="2"
+                                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
+                                                                            <path stroke="none" d="M0 0h24v24H0z"
+                                                                                fill="none" />
+                                                                            <line x1="12" y1="5"
+                                                                                x2="12" y2="19" />
+                                                                            <line x1="5" y1="12"
+                                                                                x2="19" y2="12" />
+                                                                        </svg>
+                                                                        tambah
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        @endif
+                                                    </tr>
+                                                </form>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     {{ $produk->links('vendor.pagination.bootstrap-5') }}
                 </div>
             </div>
@@ -340,7 +390,6 @@
     <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-status bg-success"></div>
                 <div class="modal-body text-center py-4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"
@@ -369,7 +418,6 @@
     <div class="modal fade" id="errorModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-status bg-danger"></div>
                 <div class="modal-body text-center py-4">
                     <!-- Ikon Error -->
@@ -393,11 +441,75 @@
             </div>
         </div>
     </div>
+
+    {{-- *Modal Yakin Ente* --}}
+    <div class="modal modal-blur fade" id="yakinModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-title">Apakah anda yakin?</div>
+                    <div>Jika anda yakin, Data yang anda edit akan hilang.</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link link-secondary me-auto"
+                        data-bs-dismiss="modal">Tidak</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btnyes">Ya,Hapus saja</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @push('myscript')
     <script>
+        $("#btn-close").click(function() {
+            $("#yakinModal").modal("show");
+            $("#btnyes").click(function() {
+                window.location.href = "/pembelian";
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            let tabeldetail = document.querySelector("#tabeldetail tbody");
+
+            updateRowNumbers();
+
+            let observer = new MutationObserver(updateRowNumbers);
+            observer.observe(tabeldetail, {
+                childList: true
+            });
+        });
+
+        function updateRowNumbers() {
+            let tableRows = document.querySelectorAll("#tabeldetail tbody tr"); // Hanya di tabelDetail
+            tableRows.forEach((row, index) => {
+                let firstCell = row.querySelector("td:first-child");
+                if (firstCell) {
+                    firstCell.textContent = index + 1;
+                }
+            });
+        }
+
         $("#btn-tambah").click(function() {
             $("#modal-input").modal("show");
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            let jumlahInput = document.getElementById("jumlah");
+            let upstokInput = document.getElementById("upstok");
+            let hasilInput = document.getElementById("hasil");
+
+            function updateHasil() {
+                let jumlah = parseInt(jumlahInput.value) || 0;
+                let upstok = parseInt(upstokInput.value) || 0;
+                let hasil = jumlah - upstok;
+
+                hasilInput.value = hasil; // Menampilkan hasil tanpa pembatasan
+            }
+
+            jumlahInput.addEventListener("input", updateHasil);
+            upstokInput.addEventListener("input", updateHasil);
+
+            updateHasil(); // Memastikan hasil ditampilkan saat halaman dimuat
         });
 
         $(document).on("click", ".delete-btn", function() {
@@ -544,6 +656,12 @@
                 var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
                 errorModal.show();
             @endif
+
+            @if (session('warning_tambah'))
+                document.getElementById("errorMessage").textContent = 'Data sudah ada. Silakan pilih data lain.';
+                var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+                errorModal.show();
+            @endif
         });
 
         $(document).ready(function() {
@@ -554,6 +672,10 @@
                 $(this).val("Rp. " + bayarFormatted);
                 $("#bayar").val(bayarInput);
 
+                validatePayment();
+            });
+
+            $("#jumlah").on("input", function() {
                 validatePayment();
             });
 

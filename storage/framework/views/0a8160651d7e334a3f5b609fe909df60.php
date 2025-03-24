@@ -115,14 +115,14 @@
                                     <div class="card">
                                         <div class="table-responsive">
                                             <table class="table table-vcenter card-table table-striped">
-                                                <thead class="table-primary">
+                                                <thead>
                                                     <tr>
                                                         <th class="text-center" width="1%">No</th>
                                                         <th class="text-center" width="8%">
                                                             Tanggal
                                                         </th>
                                                         <th class="text-center" width="8%">Kode Transaksi</th>
-                                                        <th width="15%">Nama Supplier</th>
+                                                        <th class="text-center" width="15%">Nama Supplier</th>
                                                         <th class="text-center" width="3%">Total Item</th>
                                                         <th class="text-center" width="12%">
                                                             Total Harga
@@ -152,7 +152,7 @@
                                                                 <span
                                                                     class="badge bg-success"><?php echo e($s->kode_transaksi); ?></span>
                                                             </td>
-                                                            <td><?php echo e($s->nama_splr); ?></td>
+                                                            <td class="text-center"><?php echo e($s->nama_splr); ?></td>
                                                             <td class="text-center"><?php echo e($s->total_item); ?></td>
                                                             <td class="text-center">
                                                                 <?php echo e(number_format($s->total_harga, 0, ',', '.')); ?>
@@ -251,7 +251,7 @@
                                                 </th>
                                                 <th width="10%">Nama Supplier</th>
                                                 <th width="10%">No.Hp</th>
-                                                <th width="30%">Alamat</th>
+                                                <th width="20%">Alamat</th>
                                                 <th width="5%"></th>
                                             </tr>
                                         </thead>
@@ -263,7 +263,7 @@
 
                                                     </td>
                                                     <td class="text-center">
-                                                        <span class="badge bg-success"><?php echo e($s->kode_splr); ?></span>
+                                                        <span class="badge bg-success"><?php echo e($d->kode_splr); ?></span>
                                                     </td>
                                                     <td><?php echo e($d->nama_splr); ?></td>
                                                     <td><?php echo e($d->no_hp); ?></td>
@@ -376,6 +376,11 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startPush('myscript'); ?>
     <script>
+        history.pushState(null, null, location.href);
+        window.onpopstate = function() {
+            history.pushState(null, null, location.href);
+        };
+
         $("#btn-tambah").click(function() {
             $("#modal-input").modal("show");
         });

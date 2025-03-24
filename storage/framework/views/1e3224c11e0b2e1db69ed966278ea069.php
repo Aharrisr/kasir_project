@@ -30,7 +30,7 @@
         <div class="container-xl">
             <div class="row mt-3">
                 <div class="col-12">
-                    <div class="card">
+                    <div class="card shadow-lg p-2 mb-5 rounded">
                         <div class="card-header">
                             <h3 class="card-title">Data Pembelian</h3>
                             <div class="card-actions">
@@ -50,20 +50,48 @@
                             <div class="row">
                                 <div class="col-12">
                                     <?php if(Session::get('success')): ?>
-                                        <div class="alert alert-success">
-                                            <?php echo e(Session::get('success')); ?>
+                                        <div class="alert alert-success alert-dismissible d-flex align-items-center"
+                                            role="alert">
+                                            <div class="alert-icon me-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon alert-icon icon-2">
+                                                    <path d="M5 12l5 5l10 -10"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <?php echo e(Session::get('success')); ?>
 
+                                            </div>
+                                            <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
                                         </div>
                                     <?php endif; ?>
                                     <?php if(Session::get('warning')): ?>
-                                        <div class="alert alert-warning">
-                                            <?php echo e(Session::get('warning')); ?>
+                                        <div class="alert alert-danger alert-dismissible d-flex align-items-center"
+                                            role="alert">
+                                            <div class="alert-icon me-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon alert-icon icon-2">
+                                                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                                    <path d="M12 8v4"></path>
+                                                    <path d="M12 16h.01"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <?php echo e(Session::get('warning')); ?>
 
+                                            </div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
                                         </div>
                                     <?php endif; ?>
                                 </div>
                             </div>
-                            <label for="">Nama supplier : <?php echo e($supplier->nama_splr); ?></label>
+                            <div class="row"><label for="">Nama supplier : <?php echo e($supplier->nama_splr); ?></label>
+                            </div>
                             <div class="row"><label for="">No Hp : <?php echo e($supplier->no_hp); ?></label></div>
                             <div class="row"><label for="">Alamat : <?php echo e($supplier->alamat); ?></label></div>
                             <div class="row"><label for="">Kode Transaksi : <?php echo e($kode_transaksi); ?></label></div>
@@ -74,31 +102,29 @@
                                     <div class="col-12">
                                         <div class="card">
                                             <div class="table-responsive">
-                                                <table class="table table-vcenter card-table table-striped">
+                                                <table class="table table-vcenter card-table table-striped"
+                                                    id="tabeldetail">
                                                     <thead>
                                                         <tr>
                                                             <th class="text-center" width="1%">No</th>
                                                             <th class="text-center" width="5%">
                                                                 Kode Produk
                                                             </th>
-                                                            <th width="20%">Nama Barang</th>
+                                                            <th width="15%">Nama Barang</th>
                                                             <th class="text-center" width="10%">
                                                                 Harga beli
                                                             </th>
                                                             <th class="text-center" width="5%">
                                                                 Jumlah
                                                             </th>
-                                                            <th width="10%">Subtotal</th>
-                                                            <th width="5%"></th>
+                                                            <th class="text-center" width="10%">Subtotal</th>
+                                                            <th width="8%"></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <?php $__currentLoopData = $pembelian_detail; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                             <?php if($s->kode_transaksi == $kode_transaksi): ?>
                                                                 <tr>
-                                                                    <?php
-                                                                        $no = 0;
-                                                                    ?>
                                                                     <td class="text-center">
                                                                     </td>
                                                                     <td class="text-center">
@@ -110,13 +136,13 @@
                                                                         Rp. <?php echo e(number_format($s->harga_beli, 0, ',', '.')); ?>
 
                                                                     </td>
-                                                                    <td>
+                                                                    <td class="text-center">
                                                                         <input type="number" name="jumlah"
                                                                             class="jumlah-input form-control"
                                                                             data-harga="<?php echo e($s->harga_beli); ?>"
                                                                             value="<?php echo e($s->jumlah); ?>" min="1">
                                                                     </td>
-                                                                    <td>
+                                                                    <td class="text-center">
                                                                         <span class="subtotal-text">
                                                                             <input type="text" name="subtotal"
                                                                                 id="subtotal"
@@ -206,12 +232,11 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round"
-                                            class="icon icon-tabler icons-tabler-outline icon-tabler-device-floppy">
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-currency-dollar">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                             <path
-                                                d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" />
-                                            <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                                            <path d="M14 4l0 4l-6 0l0 -4" />
+                                                d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2" />
+                                            <path d="M12 3v3m0 12v3" />
                                         </svg>
                                         Bayar
                                     </button>
@@ -256,13 +281,14 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-center" width="1%">No</th>
-                                                <th class="text-center" width="5%">
+                                                <th class="text-center" width="10%">
                                                     Kode Produk
                                                 </th>
-                                                <th width="15%">Nama Barang</th>
+                                                <th width="10%">Nama Barang</th>
                                                 <th class="text-center" width="8%">
                                                     Harga
                                                 </th>
+                                                <th class="text-center" width="3%">Stok</th>
                                                 <th width="5%"></th>
                                             </tr>
                                         </thead>
@@ -293,6 +319,7 @@
                                                                 <?php echo e(number_format($s->harga, 0, ',', '.')); ?>
 
                                                             </td>
+                                                            <td class="text-center"><?php echo e($s->stok); ?></td>
                                                             <td hidden id="stok"><input type="text" hidden
                                                                     name="jumlah" value="1"></td>
                                                             <td hidden id="subtotal"><input type="text" hidden
@@ -398,15 +425,22 @@
 <?php $__env->startPush('myscript'); ?>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            let tabeldetail = document.querySelector("#tabeldetail tbody");
+
             updateRowNumbers();
+
+            let observer = new MutationObserver(updateRowNumbers);
+            observer.observe(tabeldetail, {
+                childList: true
+            });
         });
 
         function updateRowNumbers() {
-            let tableRows = document.querySelectorAll("table tbody tr");
+            let tableRows = document.querySelectorAll("#tabeldetail tbody tr"); // Hanya di tabelDetail
             tableRows.forEach((row, index) => {
                 let firstCell = row.querySelector("td:first-child");
                 if (firstCell) {
-                    firstCell.textContent = index + 1; // Menambahkan nomor urut mulai dari 1
+                    firstCell.textContent = index + 1;
                 }
             });
         }

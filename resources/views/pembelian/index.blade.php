@@ -114,14 +114,14 @@
                                     <div class="card">
                                         <div class="table-responsive">
                                             <table class="table table-vcenter card-table table-striped">
-                                                <thead class="table-primary">
+                                                <thead>
                                                     <tr>
                                                         <th class="text-center" width="1%">No</th>
                                                         <th class="text-center" width="8%">
                                                             Tanggal
                                                         </th>
                                                         <th class="text-center" width="8%">Kode Transaksi</th>
-                                                        <th width="15%">Nama Supplier</th>
+                                                        <th class="text-center" width="15%">Nama Supplier</th>
                                                         <th class="text-center" width="3%">Total Item</th>
                                                         <th class="text-center" width="12%">
                                                             Total Harga
@@ -149,7 +149,7 @@
                                                                 <span
                                                                     class="badge bg-success">{{ $s->kode_transaksi }}</span>
                                                             </td>
-                                                            <td>{{ $s->nama_splr }}</td>
+                                                            <td class="text-center">{{ $s->nama_splr }}</td>
                                                             <td class="text-center">{{ $s->total_item }}</td>
                                                             <td class="text-center">
                                                                 {{ number_format($s->total_harga, 0, ',', '.') }}
@@ -245,7 +245,7 @@
                                                 </th>
                                                 <th width="10%">Nama Supplier</th>
                                                 <th width="10%">No.Hp</th>
-                                                <th width="30%">Alamat</th>
+                                                <th width="20%">Alamat</th>
                                                 <th width="5%"></th>
                                             </tr>
                                         </thead>
@@ -256,7 +256,7 @@
                                                         {{ $loop->iteration + $supplier1->firstItem() - 1 }}
                                                     </td>
                                                     <td class="text-center">
-                                                        <span class="badge bg-success">{{ $s->kode_splr }}</span>
+                                                        <span class="badge bg-success">{{ $d->kode_splr }}</span>
                                                     </td>
                                                     <td>{{ $d->nama_splr }}</td>
                                                     <td>{{ $d->no_hp }}</td>
@@ -368,6 +368,11 @@
 @endsection
 @push('myscript')
     <script>
+        history.pushState(null, null, location.href);
+        window.onpopstate = function() {
+            history.pushState(null, null, location.href);
+        };
+
         $("#btn-tambah").click(function() {
             $("#modal-input").modal("show");
         });

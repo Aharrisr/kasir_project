@@ -47,7 +47,7 @@ Route::middleware(['auth:user'])->group(function () {
 
     Route::get('/api/get-chart-pengeluaran', [ChartController::class, 'pengeluaran']);
     Route::get('/chart', function () {
-        return view('chart'); // Menampilkan halaman chart
+        return view('chart');
     });
 
     //Produk
@@ -70,10 +70,12 @@ Route::middleware(['auth:user'])->group(function () {
 
     //Data Pembelian
     Route::get('/pembelian', [PembelianController::class, 'index'])->name('pembelian');
-    Route::get('/pembelian/{kode_transaksi}/editform', [PembelianController::class, 'editform'])->name('editform');
-    Route::post('/transaksi/{kode_transaksi}/edit', [PembelianController::class, 'edit'])->name('edit_pembelian');
     Route::Post('/pembelian/detail', [PembelianController::class, 'detail']);
     Route::post('/pembelian/{kode_transaksi}/delete', [PembelianController::class, 'deletepembelian']);
+
+    //Edit Transaksi
+    Route::get('/pembelian/{kode_transaksi}/editform', [PembelianController::class, 'editform'])->name('editform');
+    Route::post('/transaksi/{kode_transaksi}/edit', [PembelianController::class, 'edit'])->name('edit_pembelian');
 
     //transaksi pembelian
     Route::get('/pembelian/{kode_splr}/transaksi', [PembelianController::class, 'transaksi'])->name('transaksi');
