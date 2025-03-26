@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             'no_hp'=> '08123456789',
             'email'=> 'kasir@gmail.com',
             'password'=> bcrypt('123'),
-            'id_level'=> '1',
+            'id_level'=> '2',
             ]);
     }
 }

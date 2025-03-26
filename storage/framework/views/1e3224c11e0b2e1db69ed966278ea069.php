@@ -315,17 +315,16 @@
 
                                                             </td>
                                                             <td class="text-center" id="harga"><input type="text"
-                                                                    hidden name="harga_beli" value="<?php echo e($s->harga); ?>">
-                                                                <?php echo e(number_format($s->harga, 0, ',', '.')); ?>
+                                                                    hidden name="harga_beli"
+                                                                    value="<?php echo e($s->harga_beli); ?>">
+                                                                <?php echo e(number_format($s->harga_beli, 0, ',', '.')); ?>
 
                                                             </td>
                                                             <td class="text-center"><?php echo e($s->stok); ?></td>
                                                             <td hidden id="stok"><input type="text" hidden
                                                                     name="jumlah" value="1"></td>
-                                                            <td hidden id="subtotal"><input type="text" hidden
-                                                                    name="subtotal"
-                                                                    value="<?php echo e($s->harga); ?>"><?php echo e(number_format($s->harga, 0, ',', '.')); ?>
-
+                                                            <td hidden id="subtotal"><input type="text"
+                                                                    name="subtotal" value="<?php echo e($s->harga_beli); ?>">
                                                             </td>
                                                             <td class="text-center">
                                                                 <div class="btn-group">
@@ -368,7 +367,6 @@
     <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-status bg-success"></div>
                 <div class="modal-body text-center py-4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"
@@ -382,11 +380,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="w-100">
-                        <div class="row">
-                            <div class="col">
-                                <button class="btn btn-success w-100" id="btnRedirect">Tutup</button>
-                            </div>
-                        </div>
+                        <button class="btn btn-success w-100" id="btnRedirect">Tutup</button>
                     </div>
                 </div>
             </div>
@@ -397,7 +391,6 @@
     <div class="modal fade" id="errorModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-status bg-danger"></div>
                 <div class="modal-body text-center py-4">
                     <!-- Ikon Error -->
@@ -413,10 +406,8 @@
                     <h3>Terjadi Kesalahan</h3>
                     <div class="text-secondary" id="errorMessage"></div>
                 </div>
-                <div class="modal-footer">
-                    <div class="w-100">
-                        <button class="btn btn-secondary w-100" data-bs-dismiss="modal">Tutup</button>
-                    </div>
+                <div class="modal-footer d-flex justify-content-center gap-2" id="modalerrorFooter">
+                    <button class="btn btn-secondary w-100" data-bs-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>

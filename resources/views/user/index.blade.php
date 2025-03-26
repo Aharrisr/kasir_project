@@ -438,6 +438,56 @@
             </div>
         </div>
     </div>
+
+    {{-- *Modal Success* --}}
+    <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-status bg-success"></div>
+                <div class="modal-body text-center py-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="icon mb-2 text-green icon-lg">
+                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                        <path d="M9 12l2 2l4 -4"></path>
+                    </svg>
+                    <h3>Data Berhasil Diperbarui</h3>
+                    <div class="text-secondary" id="successMessage"></div>
+                </div>
+                <div class="modal-footer">
+                    <div class="w-100">
+                        <button class="btn btn-success w-100" id="btnRedirect">Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- *Modal Error* --}}
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-status bg-danger"></div>
+                <div class="modal-body text-center py-4">
+                    <!-- Ikon Error -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="icon mb-2 text-danger icon-lg">
+                        <path d="M12 9v4"></path>
+                        <path
+                            d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z">
+                        </path>
+                        <path d="M12 16h.01"></path>
+                    </svg>
+                    <h3>Terjadi Kesalahan</h3>
+                    <div class="text-secondary" id="errorMessage"></div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center gap-2" id="modalerrorFooter">
+                    <button class="btn btn-secondary w-100" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @push('myscript')
     <script>
@@ -467,24 +517,23 @@
         $(".delete-confirm").click(function(e) {
             var form = $(this).closest('form');
             e.preventDefault();
-            Swal.fire({
-                title: "Anda Yakin Mau Menghapus Data Ini ?",
-                text: "Data Akan Terhapus Permanen",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Ya, Hapus Data Ini !",
-                cancelButtonText: "Tidak"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                    Swal.fire({
-                        title: "Deleted!",
-                        text: "Data Berhasil Dihapus",
-                        icon: "success",
-                    });
-                }
+
+            // Set teks konfirmasi dalam modal
+            $("#errorMessage").text("Anda yakin mau menghapus data ini? Data akan terhapus permanen.");
+
+            // Tampilkan tombol konfirmasi dan batal
+            $("#modalerrorFooter").html(`
+        <button id="confirmDelete" class="btn btn-danger px-5">Ya, Hapus</button>
+        <button id="cancelDelete" class="btn btn-secondary px-5" data-bs-dismiss="modal">Tidak</button>
+    `);
+
+            // Tampilkan modal
+            $("#errorModal").modal("show");
+
+            // Event listener untuk tombol konfirmasi
+            $("#modalFooter").off("click", "#confirmDelete").on("click", "#confirmDelete", function() {
+                form.submit();
+                $("#errorModal").modal("hide");
             });
         });
 

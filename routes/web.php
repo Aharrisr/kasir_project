@@ -65,6 +65,7 @@ Route::middleware(['auth:user'])->group(function () {
 
     //Data Member
     Route::get('/member', [memberController::class, 'index'])->name('member');
+    Route::post('/member/tambahmember', [MemberController::class, 'tambah']);
 
     //Data Supplier
     Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier');

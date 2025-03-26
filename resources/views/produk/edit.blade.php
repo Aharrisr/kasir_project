@@ -69,9 +69,8 @@
                         <path d="M16 5.25l-8 4.5" />
                     </svg>
                 </span>
-                <input type="text" value="{{ $produk->stok }}" id="stok" class="form-control"
-                    name="stok" placeholder="Stok Produk"
-                    oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                <input type="text" value="{{ $produk->stok }}" id="stok" class="form-control" name="stok"
+                    placeholder="Stok Produk" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
             </div>
         </div>
     </div>
@@ -89,8 +88,8 @@
                     </svg>
                 </span>
                 <input type="text" minlength="1" maxlength="4"
-                    value="{{ $produk->discount ? $produk->discount . '%' : '0%' }}" id="discount"
-                    class="form-control" name="discount" placeholder="Diskon" oninput="formatPersen(this)">
+                    value="{{ $produk->diskon ? $produk->diskon . '%' : '0%' }}" id="diskon" class="form-control"
+                    name="diskon" placeholder="Diskon" oninput="formatPersen(this)">
             </div>
         </div>
     </div>
@@ -104,7 +103,6 @@
                 @endforeach
             </select>
         </div>
-    </div>
     </div>
     <div class="row mt-4">
         <div class="col-12">

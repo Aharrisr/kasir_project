@@ -43,7 +43,8 @@ class UserController extends Controller
         $email = $request->email;
         $id_level = $request->id_level;
         $no_hp = $request->no_hp;
-        $password = Hash::make($request->password);
+        $pass = $request->password;
+        $password = Hash::make($pass);
 
         try {
             $data = [
@@ -54,7 +55,9 @@ class UserController extends Controller
                 'id_level' => $id_level
             ];
             $simpan = DB::table('users')->insert($data);
-            return Redirect::back()->with(['success' => 'Data Berhasil Disimpan']);
+            if ($simpan) {
+                return Redirect::back()->with(['success' => 'Data Berhasil Disimpan']);
+            }
         } catch (\Exception $e) {
             dd($e->getMessage());
             return Redirect::back()->with(['warning' => 'Data Gagal Disimpan']);
@@ -68,24 +71,22 @@ class UserController extends Controller
         return view('user.edit', compact("user"));
     }
 
-    public function update($kode_produk, Request $request)
+    public function update($id, Request $request)
     {
         $nama_user = $request->nama_user;
         $email = $request->email;
         $no_hp = $request->no_hp;
         $id_level = $request->id_level;
-        $password = Hash::make($request->password);
 
         try {
             $data = [
                 'nama_user' => $nama_user,
                 'email' => $email,
                 'no_hp' => $no_hp,
-                'id_level' => $id_level,
-                'password'=> $password
+                'id_level' => $id_level
             ];
 
-            $update = DB::table('produk')->where('kode_produk', $kode_produk)->update($data);
+            $update = DB::table('users')->where('id', $id)->update($data);
             if ($update) {
                 return Redirect::back()->with(['success' => 'Data Berhasil Diupdate']);
             }

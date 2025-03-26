@@ -162,7 +162,7 @@ class PembelianController extends Controller
 
         //data pembelian detail
         $db = pembeliandetail::query();
-        $db->select('pembelian_detail.*', 'id_pembelian_detail', 'harga_beli', 'jumlah', 'subtotal', 'nama_produk', 'kode_transaksi', 'stok', 'id_produk');
+        $db->select('pembelian_detail.*', 'id_pembelian_detail', 'jumlah', 'subtotal', 'nama_produk', 'kode_transaksi', 'stok', 'id_produk');
         $db->join('produk', 'pembelian_detail.kode_produk', '=', 'produk.kode_produk');
         $db->orderBy('id_pembelian_detail');
         $pembelian_detail = $db->paginate(10);

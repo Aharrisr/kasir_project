@@ -14,8 +14,8 @@
                         <path d="M20.732 12a2 2 0 0 0 -3.732 1v1a2 2 0 0 0 3.726 1.01" />
                     </svg>
                 </span>
-                <input type="text" value="" id="nama_user1" class="form-control" autocomplete="off"
-                    name="nama_user" placeholder="Nama Lengkap">
+                <input type="text" value="{{ $user->nama_user }}" id="nama_user1" class="form-control"
+                    autocomplete="off" name="nama_user" placeholder="Nama Lengkap">
             </div>
         </div>
     </div>
@@ -32,8 +32,8 @@
                             d="M19 4c1.08 0 2.027 .57 2.555 1.427l-9.555 6.37l-9.555 -6.37a2.999 2.999 0 0 1 2.354 -1.42l.201 -.007h14z" />
                     </svg>
                 </span>
-                <input type="text" id="email1" class="form-control" autocomplete="off" name="email"
-                    placeholder="Masukkan Email" oninput="validateEmail(this)">
+                <input type="text" value="{{ $user->email }}" id="email1" class="form-control" autocomplete="off"
+                    name="email" placeholder="Masukkan Email" oninput="validateEmail(this)">
             </div>
             <small id="emailError" style="color: red;"></small>
         </div>
@@ -52,43 +52,21 @@
                         <path d="M15 3a6 6 0 0 1 6 6" />
                     </svg>
                 </span>
-                <input type="number" id="no_hp1" class="form-control" autocomplete="off" name="no_hp"
-                    placeholder="Nomer Hp" minlength="12" maxlength="13"
+                <input type="number" value="{{ $user->no_hp }}" id="no_hp1" class="form-control" autocomplete="off"
+                    name="no_hp" placeholder="Nomer Hp" minlength="12" maxlength="13"
                     oninput="this.value=this.value.slice(0,this.maxLength)">
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-12">
-            <div class="input-icon">
-                <span class="input-icon-addon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-password">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M12 10v4" />
-                        <path d="M10 13l4 -2" />
-                        <path d="M10 11l4 2" />
-                        <path d="M5 10v4" />
-                        <path d="M3 13l4 -2" />
-                        <path d="M3 11l4 2" />
-                        <path d="M19 10v4" />
-                        <path d="M17 13l4 -2" />
-                        <path d="M17 11l4 2" />
-                    </svg>
-                </span>
-                <input type="text" id="password" class="form-control" autocomplete="off" name="password"
-                    placeholder="Password" minlength="8" oninput="validatePassword()" onblur="validatePassword()">
-            </div>
-            <p id="error-message" style="color: red; font-size: 14px; margin-top: 5px;"></p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
             <select name="id_level" id="id_level1" class="form-select">
                 <option value="">Role</option>
-                <option value="1">Admin</option>
-                <option value="2">Kasir</option>
+                @foreach ([1 => 'Admin', 2 => 'Kasir'] as $id => $role)
+                    <option {{ $user->id_level == $id ? 'selected' : '' }} value="{{ $id }}">
+                        {{ $role }}
+                    </option>
+                @endforeach
             </select>
         </div>
     </div>
@@ -98,9 +76,9 @@
                 <div class="col-6">
                     <div class="form-group">
                         <button class="btn btn-primary w-100">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round"
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
                                 class="icon icon-tabler icons-tabler-outline icon-tabler-device-floppy">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" />

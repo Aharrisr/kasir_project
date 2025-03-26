@@ -36,27 +36,6 @@
                     Data Master
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('produk') ? 'active' : '' }} " href="/produk">
-                        <span
-                            class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-package">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" />
-                                <path d="M12 12l8 -4.5" />
-                                <path d="M12 12l0 9" />
-                                <path d="M12 12l-8 -4.5" />
-                                <path d="M16 5.25l-8 4.5" />
-                            </svg>
-                        </span>
-                        <span class="nav-link-title">
-                            Produk
-                        </span>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link {{ request()->is('supplier') ? 'active' : '' }} " href="/supplier">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -78,6 +57,27 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link {{ request()->is('produk') ? 'active' : '' }} " href="/produk">
+                        <span
+                            class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-package">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" />
+                                <path d="M12 12l8 -4.5" />
+                                <path d="M12 12l0 9" />
+                                <path d="M12 12l-8 -4.5" />
+                                <path d="M16 5.25l-8 4.5" />
+                            </svg>
+                        </span>
+                        <span class="nav-link-title">
+                            Produk
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link {{ request()->is('member') ? 'active' : '' }} " href="/member">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -93,30 +93,13 @@
                         </span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->is('user') ? 'active' : '' }} " href="/user">
-                        <span class="nav-link-icon d-md-none d-lg-inline-block">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-user">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M12 2a5 5 0 1 1 -5 5l.005 -.217a5 5 0 0 1 4.995 -4.783z" />
-                                <path
-                                    d="M14 14a5 5 0 0 1 5 5v1a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-1a5 5 0 0 1 5 -5h4z" />
-                            </svg>
-                        </span>
-                        <span class="nav-link-title">
-                            User
-                        </span>
-                    </a>
-                </li>
                 <li class="nav-item" style="border-bottom: 1px solid rgba(255, 255, 255, 0.2); margin-bottom: 10px;">
                 </li>
                 <li class="nav-title"
                     style="font-size: 15px; margin-left: 16px; display: block; margin-bottom: 10px; cursor: default; text-decoration: underline;text-decoration-color: #ffffff; text-underline-offset: 5px;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="icon icon-tabler icons-tabler-outline icon-tabler-cash-banknote">
+                        stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-cash-banknote">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
                         <path d="M3 6m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
@@ -234,6 +217,23 @@
                         <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
                     </svg>
                     System
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('user') ? 'active' : '' }} " href="/user">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="currentColor"
+                                class="icon icon-tabler icons-tabler-filled icon-tabler-user">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M12 2a5 5 0 1 1 -5 5l.005 -.217a5 5 0 0 1 4.995 -4.783z" />
+                                <path
+                                    d="M14 14a5 5 0 0 1 5 5v1a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-1a5 5 0 0 1 5 -5h4z" />
+                            </svg>
+                        </span>
+                        <span class="nav-link-title">
+                            User
+                        </span>
+                    </a>
                 </li>
             </ul>
         </div>

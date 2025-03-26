@@ -1,17 +1,42 @@
 @extends('layouts.dashboard')
 @section('content')
-    <div class="row">
-        <div class="col-12">
-            @if (Session::get('success'))
-                <div class="alert alert-success">
-                    {{ Session::get('success') }}
-                </div>
-            @endif
-        </div>
-    </div>
     <div class="page-body">
         <div class="container-xl">
             <div class="row mt-3">
+                <div class="col-12">
+                    @if (Session::get('success'))
+                        <div class="alert alert-success alert-dismissible d-flex align-items-center" role="alert">
+                            <div class="alert-icon me-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="icon alert-icon icon-2">
+                                    <path d="M5 12l5 5l10 -10"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-grow-1">
+                                {{ Session::get('success') }}
+                            </div>
+                            <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
+                        </div>
+                    @endif
+                    @if (Session::get('warning'))
+                        <div class="alert alert-danger alert-dismissible d-flex align-items-center" role="alert">
+                            <div class="alert-icon me-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="icon alert-icon icon-2">
+                                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                    <path d="M12 8v4"></path>
+                                    <path d="M12 16h.01"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-grow-1">
+                                {{ Session::get('warning') }}
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+                </div>
                 <div class="col-md-6 col-xl-3">
                     <div class="card card-sm shadow-lg rounded">
                         <div class="card-body">

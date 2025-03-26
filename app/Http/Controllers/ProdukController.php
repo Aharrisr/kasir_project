@@ -46,7 +46,7 @@ class ProdukController extends Controller
         $harga_jual = preg_replace('/[^\d]/', '', str_replace(['Rp', '.', ','], '', $request->harga_jual));
         $stok = $request->stok;
         $kode_splr = $request->kode_splr;
-        $discount = preg_replace('/\D/', '', $request->discount);
+        $diskon = preg_replace('/\D/', '', $request->diskon);
 
         $produk = DB::table('produk')->latest('id_produk')->first();
 
@@ -66,7 +66,7 @@ class ProdukController extends Controller
                 'stok' => $stok,
                 'kode_splr' => $kode_splr,
                 'kode_produk' => $kode_produk,
-                'discount' => $discount
+                'diskon' => $diskon
             ];
 
             $simpan = DB::table('produk')->insert($data);
@@ -74,7 +74,7 @@ class ProdukController extends Controller
                 return Redirect::back()->with(['success' => 'Data Berhasil Disimpan']);
             }
         } catch (\Exception $e) {
-            // dd($e->getMessage());
+            dd($e->getMessage());
             return Redirect::back()->with(['warning' => 'Data Gagal Disimpan']);
         }
     }
