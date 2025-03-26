@@ -18,7 +18,7 @@ return new class extends Migration
             $table->decimal('harga_jual', 10, 2);
             $table->integer('stok');
             $table->string('kode_splr');
-            $table->string('diskon', 10)->default(0);
+            $table->integer('diskon')->default(0);
             $table->string('kode_produk');
             $table->timestamps();
         });
