@@ -34,15 +34,42 @@
                             <div class="row">
                                 <div class="col-12">
                                     <?php if(Session::get('success')): ?>
-                                        <div class="alert alert-success">
-                                            <?php echo e(Session::get('success')); ?>
+                                        <div class="alert alert-success alert-dismissible d-flex align-items-center"
+                                            role="alert">
+                                            <div class="alert-icon me-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon alert-icon icon-2">
+                                                    <path d="M5 12l5 5l10 -10"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <?php echo e(Session::get('success')); ?>
 
+                                            </div>
+                                            <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
                                         </div>
                                     <?php endif; ?>
                                     <?php if(Session::get('warning')): ?>
-                                        <div class="alert alert-warning">
-                                            <?php echo e(Session::get('warning')); ?>
+                                        <div class="alert alert-danger alert-dismissible d-flex align-items-center"
+                                            role="alert">
+                                            <div class="alert-icon me-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon alert-icon icon-2">
+                                                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                                    <path d="M12 8v4"></path>
+                                                    <path d="M12 16h.01"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <?php echo e(Session::get('warning')); ?>
 
+                                            </div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
                                         </div>
                                     <?php endif; ?>
                                 </div>
@@ -68,8 +95,8 @@
                                             <div class="col-3">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" placeholder="Merk"
-                                                        id="nama_splr" name="nama_splr" value="<?php echo e(Request('nama_splr')); ?>"
-                                                        autocomplete="off">
+                                                        id="nama_splr" name="nama_splr"
+                                                        value="<?php echo e(Request('nama_splr')); ?>" autocomplete="off">
                                                 </div>
                                             </div>
                                             <div class="col-1">
@@ -123,14 +150,17 @@
                                                         </th>
                                                         <th width="15%">Nama Barang</th>
                                                         <th width="15%">Merk</th>
-                                                        <th class="text-center" width="8%">
-                                                            Harga Jual
+                                                        <th class="text-center" width="10%">
+                                                            Harga Beli / Item
+                                                        </th>
+                                                        <th class="text-center" width="10%">
+                                                            Harga Jual / Item
                                                         </th>
                                                         <th class="text-center" width="3%">
                                                             Discount
                                                         </th>
-                                                        <th class="text-center" width="3%">
-                                                            Stok
+                                                        <th class="text-center" width="5%">
+                                                            Stok / Item
                                                         </th>
                                                         <th width="10%"></th>
                                                     </tr>
@@ -148,7 +178,11 @@
                                                             <td><?php echo e($s->nama_produk); ?></td>
                                                             <td><?php echo e($s->nama_splr); ?></td>
                                                             <td class="text-center">
-                                                                <?php echo e(number_format($s->harga, 0, ',', '.')); ?>
+                                                                <?php echo e('Rp ' . number_format($s->harga_beli, 0, ',', '.')); ?>
+
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <?php echo e('Rp ' . number_format($s->harga_jual - ($s->harga_jual * $s->discount) / 100, 0, ',', '.')); ?>
 
                                                             </td>
                                                             <td class="text-center"><?php echo e($s->discount); ?>%</td>
@@ -221,7 +255,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Tambah Produk</h5>
+                    <h5 class="modal-title">Tambah Data Produk</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -241,7 +275,8 @@
                                         </svg>
                                     </span>
                                     <input type="text" value="" id="nama_produk1" class="form-control"
-                                        autocomplete="off" name="nama_produk" placeholder="Nama Produk">
+                                        autocomplete="off" name="nama_produk" placeholder="Nama Produk"
+                                        oninput="capitalizeFirstLetter(this)">
                                 </div>
                             </div>
                         </div>
@@ -260,8 +295,30 @@
                                                 d="M14 8h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5m2 0v1.5m0 -9v1.5" />
                                         </svg>
                                     </span>
-                                    <input type="number" value="" id="harga" class="form-control"
-                                        autocomplete="off" name="harga" placeholder="Harga">
+                                    <input type="text" value="" id="harga_beli" class="form-control"
+                                        autocomplete="off" name="harga_beli" placeholder="Harga Beli / Item"
+                                        oninput="formatRupiah(this)">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="input-icon mb-3">
+                                    <span class="input-icon-addon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-receipt-2">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path
+                                                d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2" />
+                                            <path
+                                                d="M14 8h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5m2 0v1.5m0 -9v1.5" />
+                                        </svg>
+                                    </span>
+                                    <input type="text" value="" id="harga_jual" class="form-control"
+                                        autocomplete="off" name="harga_jual" placeholder="Harga Jual / Item"
+                                        oninput="formatRupiah(this)">
                                 </div>
                             </div>
                         </div>
@@ -281,8 +338,9 @@
                                             <path d="M16 5.25l-8 4.5" />
                                         </svg>
                                     </span>
-                                    <input type="number" value="" id="stok" class="form-control"
-                                        autocomplete="off" name="stok" placeholder="Stok">
+                                    <input type="text" value="" id="stok" class="form-control"
+                                        autocomplete="off" name="stok" placeholder="Stok / Item"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                 </div>
                             </div>
                         </div>
@@ -300,9 +358,9 @@
                                             <path d="M6 18l12 -12" />
                                         </svg>
                                     </span>
-                                    <input type="number" minlength="1" maxlength="3" id="discount"
+                                    <input type="text" minlength="1" maxlength="3" id="discount"
                                         autocomplete="off" class="form-control" name="discount" placeholder="Diskon"
-                                        oninput="this.value=this.value.slice(0,this.maxLength)">
+                                        oninput="formatPersen(this)">
                                 </div>
                             </div>
                         </div>
@@ -318,7 +376,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="row mt-3">
+                        <div class="row mt-4">
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-6">
@@ -404,9 +462,36 @@
             $("#modal-editproduk").modal("show");
         });
 
+        function capitalizeFirstLetter(input) {
+            let words = input.value.split(' ');
+            input.value = words
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+        }
+
+        function formatRupiah(input) {
+            let angka = input.value.replace(/[^0-9]/g, ''); // Hanya angka
+            if (angka === '') {
+                input.value = ''; // Kosongkan jika input dihapus
+                return;
+            }
+            input.value = new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(angka);
+        }
+
+        function formatPersen(input) {
+            let value = input.value.replace(/[^0-9]/g, ""); // Hanya angka
+            if (value > 100) value = 100; // Maksimal 100%
+            input.value = value + "%";
+        }
+
         $("#frmtambah").submit(function() {
             var nama_produk1 = $("#nama_produk1").val();
-            var harga = $("#harga").val();
+            var harga_beli = $("#harga_beli").val();
+            var harga_jual = $("#harga_jual").val();
             var stok = $("#stok").val();
             var kode_splr2 = $("#kode_splr2").val();
             if (nama_produk1 == "") {
@@ -419,14 +504,24 @@
                     $("#nama_produk1").focus();
                 });
                 return false;
-            } else if (harga == "") {
+            } else if (harga_beli == "") {
                 Swal.fire({
                     title: 'Opps!',
                     text: 'Harga Tidak Boleh Kosong',
                     icon: 'warning',
                     confirmButtonText: 'OK'
                 }).then((result) => {
-                    $("#harga").focus();
+                    $("#harga_beli").focus();
+                });
+                return false;
+            } else if (harga_jual == "") {
+                Swal.fire({
+                    title: 'Opps!',
+                    text: 'Harga Tidak Boleh Kosong',
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    $("#harga_jual").focus();
                 });
                 return false;
             } else if (stok == "") {

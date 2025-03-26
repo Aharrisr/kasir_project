@@ -6,6 +6,7 @@ use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class SupplierController extends Controller
 {
@@ -25,5 +26,47 @@ class SupplierController extends Controller
         $id = Auth::guard('user')->user()->id;
         $user = DB::table('users')->where('id', $id)->first();
         return view('supplier.index', compact('user', 'supplier'));
+    }
+
+    public function tambah(Request $request)
+    {
+        $kode_splr = $request->kode_splr;
+        $nama_splr = $request->nama_splr;
+        $no_hp = $request->no_hp;
+        $alamat = $request->alamat;
+
+        try {
+            $data = [
+                'kode_splr'=> $kode_splr,
+                'nama_splr'=> $nama_splr,
+                'no_hp'=> $no_hp,
+                'alamat'=> $alamat
+            ];
+
+            $simpan = DB::table('supplier')->insert($data);
+            if ($simpan) {
+                return Redirect::back()->with(['success' => 'Data Berhasil Disimpan']);
+            }
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+            return Redirect::back()->with(['warning' => 'Data Gagal Disimpan']);
+        }
+    }
+
+    public function edit(Request $request)
+    {
+        $kode_splr = $request->kode_splr;
+        $supplier = DB::table('supplier')->where('kode_splr', $kode_splr)->first();
+        return view('supplier.edit', compact("supplier"));
+    }
+
+    public function deletesplr($kode_splr)
+    {
+        $delete = DB::table('supplier')->where('kode_splr', $kode_splr)->delete();
+        if ($delete) {
+            return Redirect::back()->with(['success' => 'Data Berhasil Dihapus']);
+        } else {
+            return Redirect::back()->with(['warning' => 'Data Gagal Dihapus']);
+        }
     }
 }

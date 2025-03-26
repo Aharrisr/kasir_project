@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pembelian;
+use App\Models\{
+Pembelian,
+Penjualan
+};
 use Illuminate\Http\Request;
 
 class ChartController extends Controller
@@ -28,6 +31,32 @@ class ChartController extends Controller
             "series" => [
                 [
                     "name" => "Total Pembelian (Rp)",
+                    "data" => $data
+                ]
+            ],
+            "categories" => $categories
+        ]);
+    }
+
+    public function pemasukan(){
+        $penjualan = Penjualan::selectRaw('MONTH(tanggal) as month, SUM(bayar) as total')
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
+
+        // Format data untuk chart
+        $categories = $penjualan->pluck('month')->map(function ($month) {
+            return date('F', mktime(0, 0, 0, $month, 1)); // Konversi angka bulan ke nama bulan
+        })->toArray();
+
+        $data = $penjualan->pluck('total')->map(function ($total) {
+            return number_format($total, 0, ',', '.'); // Format Rp (tanpa simbol)
+        })->toArray();
+
+        return response()->json([
+            "series" => [
+                [
+                    "name" => "Total Penjualan (Rp)",
                     "data" => $data
                 ]
             ],

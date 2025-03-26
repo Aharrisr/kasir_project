@@ -39,16 +39,16 @@ class UserController extends Controller
 
     public function tambahuser(Request $request)
     {
-        $name = $request->name;
-        $username = $request->username;
+        $nama_user = $request->nama_user;
+        $email = $request->email;
         $id_level = $request->id_level;
         $no_hp = $request->no_hp;
-        $password = Hash::make(12345);
+        $password = Hash::make($request->password);
 
         try {
             $data = [
-                'name' => $name,
-                'username' => $username,
+                'nama_user' => $nama_user,
+                'email' => $email,
                 'password' => $password,
                 'no_hp' => $no_hp,
                 'id_level' => $id_level
@@ -56,8 +56,42 @@ class UserController extends Controller
             $simpan = DB::table('users')->insert($data);
             return Redirect::back()->with(['success' => 'Data Berhasil Disimpan']);
         } catch (\Exception $e) {
-            // dd($e->getMessage());
+            dd($e->getMessage());
             return Redirect::back()->with(['warning' => 'Data Gagal Disimpan']);
+        }
+    }
+
+    public function edit(Request $request)
+    {
+        $id = $request->id;
+        $user = DB::table('users')->where('id', $id)->first();
+        return view('user.edit', compact("user"));
+    }
+
+    public function update($kode_produk, Request $request)
+    {
+        $nama_user = $request->nama_user;
+        $email = $request->email;
+        $no_hp = $request->no_hp;
+        $id_level = $request->id_level;
+        $password = Hash::make($request->password);
+
+        try {
+            $data = [
+                'nama_user' => $nama_user,
+                'email' => $email,
+                'no_hp' => $no_hp,
+                'id_level' => $id_level,
+                'password'=> $password
+            ];
+
+            $update = DB::table('produk')->where('kode_produk', $kode_produk)->update($data);
+            if ($update) {
+                return Redirect::back()->with(['success' => 'Data Berhasil Diupdate']);
+            }
+        } catch (\Exception $e) {
+            // dd($e->getMessage());
+            return Redirect::back()->with(['warning' => 'Data Gagal Diupdate']);
         }
     }
 

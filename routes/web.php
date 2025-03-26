@@ -11,10 +11,8 @@ use App\Http\Controllers\{
     PembelianController,
     TransaksiController
 };
-use App\Models\Pembelian;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::middleware(['guest:user'])->group(function () {
     Route::get('/', function () {
@@ -45,6 +43,7 @@ Route::middleware(['auth:user'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/proseslogout', [AuthControler::class, 'proseslogout']);
 
+    Route::get('/api/get-chart-pemasukan', [ChartController::class, 'pemasukan']);
     Route::get('/api/get-chart-pengeluaran', [ChartController::class, 'pengeluaran']);
     Route::get('/chart', function () {
         return view('chart');
@@ -60,6 +59,8 @@ Route::middleware(['auth:user'])->group(function () {
     //Data User
     Route::get('/user', [UserController::class, 'index'])->name('user');
     Route::post('/user/tambahuser', [UserController::class, 'tambahuser']);
+    Route::Post('/user/edit', [UserController::class, 'edit']);
+    Route::Post('/user/{id}/update', [UserController::class, 'update']);
     Route::post('user/{id}/delete', [UserController::class, 'deleteuser']);
 
     //Data Member
@@ -67,6 +68,11 @@ Route::middleware(['auth:user'])->group(function () {
 
     //Data Supplier
     Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier');
+    Route::post('/supplier/tambah', [SupplierController::class, 'tambah']);
+    Route::Post('/supplier/edit', [SupplierController::class, 'edit']);
+    Route::Post('/supplier/{kode_splr}/update', [SupplierController::class, 'update']);
+    Route::post('supplier/{kode_splr}/delete', [SupplierController::class, 'deletesplr']);
+
 
     //Data Pembelian
     Route::get('/pembelian', [PembelianController::class, 'index'])->name('pembelian');

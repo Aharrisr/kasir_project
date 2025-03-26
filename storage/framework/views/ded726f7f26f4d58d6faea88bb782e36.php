@@ -156,7 +156,7 @@
                             <h3 class="card-title">Penjualan</h3>
                         </div>
                         <div class="card-body">
-                            <div id="chart-penjualan"></div>
+                            <div id="chart-pemasukan"></div>
                         </div>
                     </div>
                 </div>
@@ -166,6 +166,7 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startPush('myscript'); ?>
     <script>
+        //chart-pengeluaran
         document.addEventListener("DOMContentLoaded", function() {
             let chartContainer = document.getElementById("chart-pengeluaran");
 
@@ -175,6 +176,105 @@
             }
 
             fetch('/api/get-chart-pengeluaran')
+                .then(response => response.json())
+                .then(data => {
+                    if (!data || !data.series || !data.categories) {
+                        console.error("Format data salah:", data);
+                        return;
+                    }
+
+                    // Konversi nilai data ke angka (karena number_format di PHP mengubah ke string)
+                    let formattedSeries = data.series.map(series => ({
+                        ...series,
+                        data: series.data.map(value => parseFloat(value.replace(/\./g, '')))
+                    }));
+
+                    let chart = new ApexCharts(chartContainer, {
+                        chart: {
+                            type: "bar",
+                            fontFamily: 'inherit',
+                            height: 320,
+                            parentHeightOffset: 0,
+                            toolbar: {
+                                show: false
+                            },
+                            animations: {
+                                enabled: false
+                            },
+                        },
+                        plotOptions: {
+                            bar: {
+                                columnWidth: '50%'
+                            }
+                        },
+                        dataLabels: {
+                            enabled: false
+                        },
+                        fill: {
+                            opacity: 1
+                        },
+                        series: formattedSeries,
+                        tooltip: {
+                            theme: 'dark',
+                            y: {
+                                formatter: function(value) {
+                                    return "Rp " + value.toLocaleString(
+                                        "id-ID"); // Format IDR di tooltip
+                                }
+                            }
+                        },
+                        grid: {
+                            padding: {
+                                top: -20,
+                                right: 0,
+                                left: -4,
+                                bottom: -4
+                            },
+                            strokeDashArray: 4,
+                        },
+                        xaxis: {
+                            labels: {
+                                padding: 0
+                            },
+                            tooltip: {
+                                enabled: false
+                            },
+                            axisBorder: {
+                                show: false
+                            },
+                            categories: data.categories,
+                        },
+                        yaxis: {
+                            labels: {
+                                padding: 4,
+                                formatter: function(value) {
+                                    return "Rp " + value.toLocaleString(
+                                        "id-ID"); // Format di sumbu Y
+                                }
+                            }
+                        },
+                        colors: [tabler.getColor("primary")],
+                        legend: {
+                            show: false
+                        },
+                    });
+
+                    chart.render();
+                })
+                .catch(error => console.error("Gagal mengambil data:", error));
+        });
+
+
+        //chart-pemasukan
+        document.addEventListener("DOMContentLoaded", function() {
+            let chartContainer = document.getElementById("chart-pemasukan");
+
+            if (!chartContainer) {
+                console.error("Element #chart-pemasukan tidak ditemukan!");
+                return;
+            }
+
+            fetch('/api/get-chart-pemasukan')
                 .then(response => response.json())
                 .then(data => {
                     if (!data || !data.series || !data.categories) {

@@ -1,5 +1,16 @@
 @extends('layouts.dashboard')
 @section('content')
+    <style>
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+    </style>
     <div class="page-body">
         <div class="container-xl">
             <div class="row mt-3">
@@ -24,13 +35,40 @@
                             <div class="row">
                                 <div class="col-12">
                                     @if (Session::get('success'))
-                                        <div class="alert alert-success">
-                                            {{ Session::get('success') }}
+                                        <div class="alert alert-success alert-dismissible d-flex align-items-center"
+                                            role="alert">
+                                            <div class="alert-icon me-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon alert-icon icon-2">
+                                                    <path d="M5 12l5 5l10 -10"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                {{ Session::get('success') }}
+                                            </div>
+                                            <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
                                         </div>
                                     @endif
                                     @if (Session::get('warning'))
-                                        <div class="alert alert-warning">
-                                            {{ Session::get('warning') }}
+                                        <div class="alert alert-danger alert-dismissible d-flex align-items-center"
+                                            role="alert">
+                                            <div class="alert-icon me-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon alert-icon icon-2">
+                                                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                                    <path d="M12 8v4"></path>
+                                                    <path d="M12 16h.01"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                {{ Session::get('warning') }}
+                                            </div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
                                         </div>
                                     @endif
                                 </div>
@@ -287,17 +325,6 @@
                                 <small id="emailError" style="color: red;"></small>
                             </div>
                         </div>
-                        <style>
-                            input[type="number"]::-webkit-outer-spin-button,
-                            input[type="number"]::-webkit-inner-spin-button {
-                                -webkit-appearance: none;
-                                margin: 0;
-                            }
-
-                            input[type="number"] {
-                                -moz-appearance: textfield;
-                            }
-                        </style>
                         <div class="row">
                             <div class="col-12">
                                 <div class="input-icon mt-3 mb-3">
@@ -314,9 +341,36 @@
                                         </svg>
                                     </span>
                                     <input type="number" id="no_hp1" class="form-control" autocomplete="off"
-                                        name="no_hp" placeholder="Nomer Hp" minlength="8" maxlength="9"
+                                        name="no_hp" placeholder="Nomer Hp" minlength="12" maxlength="13"
                                         oninput="this.value=this.value.slice(0,this.maxLength)">
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-password">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M12 10v4" />
+                                            <path d="M10 13l4 -2" />
+                                            <path d="M10 11l4 2" />
+                                            <path d="M5 10v4" />
+                                            <path d="M3 13l4 -2" />
+                                            <path d="M3 11l4 2" />
+                                            <path d="M19 10v4" />
+                                            <path d="M17 13l4 -2" />
+                                            <path d="M17 11l4 2" />
+                                        </svg>
+                                    </span>
+                                    <input type="text" id="password" class="form-control" autocomplete="off"
+                                        name="password" placeholder="Password" minlength="8"
+                                        oninput="validatePassword()" onblur="validatePassword()">
+                                </div>
+                                <p id="error-message" style="color: red; font-size: 14px; margin-top: 5px;"></p>
                             </div>
                         </div>
                         <div class="row">
@@ -372,6 +426,18 @@
             </div>
         </div>
     </div>
+    <div class="modal modal-blur fade" id="modal-edit" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Data Supplier</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="loadeditform">
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @push('myscript')
     <script>
@@ -379,6 +445,23 @@
             $("#btn-tambah").click(function() {
                 $("#modal-input").modal("show");
             });
+        });
+
+        $(".edit").click(function() {
+            var id = $(this).attr('id');
+            $.ajax({
+                type: 'POST',
+                url: '/user/edit',
+                cache: false,
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    id: id
+                },
+                success: function(respond) {
+                    $("#loadeditform").html(respond);
+                }
+            });
+            $("#modal-edit").modal("show");
         });
 
         $(".delete-confirm").click(function(e) {
@@ -458,7 +541,18 @@
             if (!input.value.includes("@")) {
                 errorMessage.innerText = "Email harus mengandung '@'";
             } else {
-                errorMessage.innerText = ""; // Hapus pesan jika valid
+                errorMessage.innerText = "";
+            }
+        }
+
+        function validatePassword() {
+            let input = document.getElementById("password");
+            let errorMessage = document.getElementById("error-message");
+
+            if (input.value.length < 8) {
+                errorMessage.textContent = "Minimal 8 karakter!";
+            } else {
+                errorMessage.textContent = "";
             }
         }
     </script>

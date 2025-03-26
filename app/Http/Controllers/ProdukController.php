@@ -42,10 +42,11 @@ class ProdukController extends Controller
     public function tambah(Request $request)
     {
         $nama_produk = $request->nama_produk;
-        $harga = $request->harga;
+        $harga_beli = preg_replace('/[^\d]/', '', str_replace(['Rp', '.', ','], '', $request->harga_beli));
+        $harga_jual = preg_replace('/[^\d]/', '', str_replace(['Rp', '.', ','], '', $request->harga_jual));
         $stok = $request->stok;
         $kode_splr = $request->kode_splr;
-        $discount = $request->discount;
+        $discount = preg_replace('/\D/', '', $request->discount);
 
         $produk = DB::table('produk')->latest('id_produk')->first();
 
@@ -60,7 +61,8 @@ class ProdukController extends Controller
         try {
             $data = [
                 'nama_produk' => $nama_produk,
-                'harga' => $harga,
+                'harga_beli' => $harga_beli,
+                'harga_jual' => $harga_jual,
                 'stok' => $stok,
                 'kode_splr' => $kode_splr,
                 'kode_produk' => $kode_produk,
@@ -72,7 +74,7 @@ class ProdukController extends Controller
                 return Redirect::back()->with(['success' => 'Data Berhasil Disimpan']);
             }
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            // dd($e->getMessage());
             return Redirect::back()->with(['warning' => 'Data Gagal Disimpan']);
         }
     }
@@ -82,8 +84,6 @@ class ProdukController extends Controller
         $kode_produk = $request->kode_produk;
         $supplier = DB::table('supplier')->get();
         $produk = DB::table('produk')->where('kode_produk', $kode_produk)->first();
-        // Log::info("Kode Produk: " . $kode_produk);  //cek bug di storage/logs/laravel.log
-        // Log::info("Data Produk: ", (array) $produk); //cek bug di storage/logs/laravel.log
         return view('produk.edit', compact('supplier', "produk"));
     }
 
@@ -91,15 +91,17 @@ class ProdukController extends Controller
     {
         $kode_produk = $request->kode_produk;
         $nama_produk = $request->nama_produk;
-        $harga = $request->harga;
+        $harga_beli = preg_replace('/[^\d]/', '', str_replace(['Rp', '.', ','], '', $request->harga_beli));
+        $harga_jual = preg_replace('/[^\d]/', '', str_replace(['Rp', '.', ','], '', $request->harga_jual));
         $stok = $request->stok;
-        $discount = $request->discount;
+        $discount = preg_replace('/\D/', '', $request->discount);
         $kode_splr = $request->kode_splr;
 
         try {
             $data = [
                 'nama_produk' => $nama_produk,
-                'harga' => $harga,
+                'harga_beli' => $harga_beli,
+                'harga_jual' => $harga_jual,
                 'stok' => $stok,
                 'kode_splr' => $kode_splr,
                 'discount' => $discount

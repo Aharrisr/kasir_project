@@ -35,13 +35,40 @@
                             <div class="row">
                                 <div class="col-12">
                                     @if (Session::get('success'))
-                                        <div class="alert alert-success">
-                                            {{ Session::get('success') }}
+                                        <div class="alert alert-success alert-dismissible d-flex align-items-center"
+                                            role="alert">
+                                            <div class="alert-icon me-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon alert-icon icon-2">
+                                                    <path d="M5 12l5 5l10 -10"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                {{ Session::get('success') }}
+                                            </div>
+                                            <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
                                         </div>
                                     @endif
                                     @if (Session::get('warning'))
-                                        <div class="alert alert-warning">
-                                            {{ Session::get('warning') }}
+                                        <div class="alert alert-danger alert-dismissible d-flex align-items-center"
+                                            role="alert">
+                                            <div class="alert-icon me-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon alert-icon icon-2">
+                                                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                                    <path d="M12 8v4"></path>
+                                                    <path d="M12 16h.01"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                {{ Session::get('warning') }}
+                                            </div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
                                         </div>
                                     @endif
                                 </div>
@@ -67,8 +94,8 @@
                                             <div class="col-3">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" placeholder="Merk"
-                                                        id="nama_splr" name="nama_splr" value="{{ Request('nama_splr') }}"
-                                                        autocomplete="off">
+                                                        id="nama_splr" name="nama_splr"
+                                                        value="{{ Request('nama_splr') }}" autocomplete="off">
                                                 </div>
                                             </div>
                                             <div class="col-1">
@@ -142,7 +169,7 @@
                                                                 <div class="text-center">
                                                                     <div class="btn-group">
                                                                         <a href="#" class="edit btn btn-info btn-sm"
-                                                                            kode_produk="{{ $s->kode_produk }}">
+                                                                            kode_splr="{{ $s->kode_splr }}">
                                                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                                                 width="24" height="24"
                                                                                 viewBox="0 0 24 24" fill="none"
@@ -161,7 +188,7 @@
                                                                             Edit
                                                                         </a>
                                                                         <form
-                                                                            action="/produk/{{ $s->kode_produk }}/delete"
+                                                                            action="/supplier/{{ $s->kode_splr }}/delete"
                                                                             method="POST" style="margin-left:5px ">
                                                                             @csrf
                                                                             <button
@@ -205,12 +232,37 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Tambah Produk</h5>
+                    <h5 class="modal-title">Tambah Data Supplier</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/produk/tambah" method="POST" id="frmtambah" enctype="multipart/form-data">
+                    <form action="/supplier/tambah" method="POST" id="frmtambah" enctype="multipart/form-data">
                         @csrf
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="input-icon mb-3">
+                                    <span class="input-icon-addon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-barcode">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M4 7v-1a2 2 0 0 1 2 -2h2" />
+                                            <path d="M4 17v1a2 2 0 0 0 2 2h2" />
+                                            <path d="M16 4h2a2 2 0 0 1 2 2v1" />
+                                            <path d="M16 20h2a2 2 0 0 0 2 -2v-1" />
+                                            <path d="M5 11h1v2h-1z" />
+                                            <path d="M10 11l0 2" />
+                                            <path d="M14 11h1v2h-1z" />
+                                            <path d="M19 11l0 2" />
+                                        </svg>
+                                    </span>
+                                    <input type="text" value="" id="kode_splr1" class="form-control"
+                                        minlength="1" maxlength="4" autocomplete="off" name="kode_splr"
+                                        placeholder="Kode Supplier" oninput="KodesplrInput(this)">
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-12">
                                 <div class="input-icon mb-3">
@@ -224,8 +276,9 @@
                                                 d="M16.52 7h-10.52a2 2 0 0 0 -2 2v6a2 2 0 0 0 2 2h10.52a1 1 0 0 0 .78 -.375l3.7 -4.625l-3.7 -4.625a1 1 0 0 0 -.78 -.375" />
                                         </svg>
                                     </span>
-                                    <input type="text" value="" id="nama_produk1" class="form-control"
-                                        autocomplete="off" name="nama_produk" placeholder="Nama Produk">
+                                    <input type="text" value="" id="nama_splr1" class="form-control"
+                                        autocomplete="off" name="nama_splr" placeholder="Nama Supplier"
+                                        oninput="capitalizeFirstLetter(this)">
                                 </div>
                             </div>
                         </div>
@@ -236,72 +289,44 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round"
-                                            class="icon icon-tabler icons-tabler-outline icon-tabler-receipt-2">
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-device-mobile">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                             <path
-                                                d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2" />
+                                                d="M6 5a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-14z" />
+                                            <path d="M11 4h2" />
+                                            <path d="M12 17v.01" />
+                                        </svg>
+                                    </span>
+                                    <input type="text" value="" id="no_hp" class="form-control"
+                                        autocomplete="off" name="no_hp" placeholder="Nomer Hp" minlength="1"
+                                        maxlength="13" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-address-book">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                             <path
-                                                d="M14 8h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5m2 0v1.5m0 -9v1.5" />
+                                                d="M20 6v12a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2z" />
+                                            <path d="M10 16h6" />
+                                            <path d="M13 11m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                            <path d="M4 8h3" />
+                                            <path d="M4 12h3" />
+                                            <path d="M4 16h3" />
                                         </svg>
                                     </span>
-                                    <input type="number" value="" id="harga" class="form-control"
-                                        autocomplete="off" name="harga" placeholder="Harga">
+                                    <input type="text" name="alamat" id="alamat" class="form-control"
+                                        placeholder="Alamat" autocomplete="off">
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="input-icon mb-3">
-                                    <span class="input-icon-addon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="icon icon-tabler icons-tabler-outline icon-tabler-package">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" />
-                                            <path d="M12 12l8 -4.5" />
-                                            <path d="M12 12l0 9" />
-                                            <path d="M12 12l-8 -4.5" />
-                                            <path d="M16 5.25l-8 4.5" />
-                                        </svg>
-                                    </span>
-                                    <input type="number" value="" id="stok" class="form-control"
-                                        autocomplete="off" name="stok" placeholder="Stok">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="input-icon mb-3">
-                                    <span class="input-icon-addon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="icon icon-tabler icons-tabler-outline icon-tabler-percentage">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M17 17m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-                                            <path d="M7 7m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-                                            <path d="M6 18l12 -12" />
-                                        </svg>
-                                    </span>
-                                    <input type="number" minlength="1" maxlength="3" id="discount"
-                                        autocomplete="off" class="form-control" name="discount" placeholder="Diskon"
-                                        oninput="this.value=this.value.slice(0,this.maxLength)">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <select name="kode_splr" id="kode_splr2" class="form-select">
-                                    <option value="-">Supplier</option>
-                                    @foreach ($supplier as $d)
-                                        <option {{ Request('kode_splr') == $d->kode_splr ? 'selected' : '' }}
-                                            value="{{ $d->kode_splr }}">{{ $d->nama_splr }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
+                        <div class="row mt-4">
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-6">
@@ -345,11 +370,11 @@
             </div>
         </div>
     </div>
-    <div class="modal modal-blur fade" id="modal-editproduk" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal modal-blur fade" id="modal-edit" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Data Produk</h5>
+                    <h5 class="modal-title">Edit Data Supplier</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="loadeditform">
@@ -360,6 +385,25 @@
 @endsection
 @push('myscript')
     <script>
+        function KodesplrInput(input) {
+            let words = input.value.split(' ');
+
+            input.value = words.map(word => {
+                if (word.length <= 4) {
+                    return word.toUpperCase(); // Jika <= 3 huruf, buat huruf besar semua
+                } else {
+                    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(); // Huruf pertama besar
+                }
+            }).join(' ');
+        }
+
+        function capitalizeFirstLetter(input) {
+            let words = input.value.split(' ');
+            input.value = words
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+        }
+
         $("#btn-tambah").click(function() {
             $("#modal-input").modal("show");
         });
@@ -371,20 +415,20 @@
         });
 
         $(".edit").click(function() {
-            var kode_produk = $(this).attr('kode_produk');
+            var kode_splr = $(this).attr('kode_splr');
             $.ajax({
                 type: 'POST',
-                url: '/produk/edit',
+                url: '/supplier/edit',
                 cache: false,
                 data: {
                     _token: "{{ csrf_token() }}",
-                    kode_produk: kode_produk
+                    kode_splr: kode_splr
                 },
                 success: function(respond) {
                     $("#loadeditform").html(respond);
                 }
             });
-            $("#modal-editproduk").modal("show");
+            $("#modal-edit").modal("show");
         });
 
         $("#frmtambah").submit(function() {

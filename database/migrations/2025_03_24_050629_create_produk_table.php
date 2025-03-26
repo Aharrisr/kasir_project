@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('produk', function (Blueprint $table) {
             $table->id('id_produk'); // Auto-increment primary key
             $table->string('nama_produk');
-            $table->decimal('harga', 10, 2);
+            $table->decimal('harga_beli', 10, 2);
+            $table->decimal('harga_jual', 10, 2);
             $table->integer('stok');
             $table->string('kode_splr');
             $table->string('diskon', 10)->default(0);
