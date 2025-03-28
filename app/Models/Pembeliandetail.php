@@ -9,7 +9,7 @@ class Pembeliandetail extends Model
 {
     use HasFactory;
     protected $table = 'pembelian_detail';
-    protected $primaryKey = 'id_pembelian_detail'; // Ubah sesuai database
+    protected $primaryKey = 'id_pembelian_detail';
     protected $fillable = [
         'id_pembelian_detail',
         'kode_produk',

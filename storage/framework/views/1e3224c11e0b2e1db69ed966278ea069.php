@@ -242,11 +242,11 @@
                                     </button>
                                 </div>
                             </form>
-                            <form action="/transaksi/<?php echo e($kode_transaksi); ?>/cancel" method="POST"
-                                style="margin-left:5px ">
-                                <?php echo csrf_field(); ?>
-                                <div class="form-group mt-2" style="text-align: right;">
-                                    <button class="btn btn-danger delete-confirm w-25">
+                            <div class="form-group mt-2" style="text-align: right;">
+                                <form action="/transaksi/<?php echo e($kode_transaksi); ?>/cancel" method="POST"
+                                    style="margin-left:5px">
+                                    <?php echo csrf_field(); ?>
+                                    <button class="btn btn-danger cancel-confirm w-25">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round"
@@ -257,8 +257,8 @@
                                         </svg>
                                         Batalkan Transaksi
                                     </button>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -286,7 +286,7 @@
                                                 </th>
                                                 <th width="10%">Nama Barang</th>
                                                 <th class="text-center" width="8%">
-                                                    Harga
+                                                    Harga Satuan
                                                 </th>
                                                 <th class="text-center" width="3%">Stok</th>
                                                 <th width="5%"></th>
@@ -469,6 +469,29 @@
                     $("#errorMessage").text(xhr.responseJSON?.message ||
                         "Terjadi kesalahan." + error);
                 }
+            });
+        });
+
+        $(".cancel-confirm").click(function(e) {
+            var form = $(this).closest('form');
+            e.preventDefault();
+
+            // Set teks konfirmasi dalam modal
+            $("#errorMessage").text("Anda yakin mau menghapus data ini? Data akan terhapus permanen.");
+
+            // Tampilkan tombol konfirmasi dan batal dalam modal footer
+            $("#modalerrorFooter").html(`
+        <button id="confirm" class="btn btn-danger px-5">Ya, Hapus</button>
+        <button id="cancelDelete" class="btn btn-secondary px-5" data-bs-dismiss="modal">Tidak</button>
+    `);
+
+            // Tampilkan modal
+            $("#errorModal").modal("show");
+
+            // Event listener untuk tombol konfirmasi (pastikan ID sesuai)
+            $("#modalerrorFooter").off("click", "#confirm").on("click", "#confirm", function() {
+                form.submit();
+                $("#errorModal").modal("hide");
             });
         });
 

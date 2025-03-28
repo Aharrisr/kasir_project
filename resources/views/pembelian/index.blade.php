@@ -183,26 +183,28 @@
                                                                             </svg>
                                                                             Detail
                                                                         </a>
-                                                                        <a href="#"
-                                                                            class="btn-edit btn btn-success btn-sm"
-                                                                            data-kode="{{ $s->kode_transaksi }}">
-                                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                width="24" height="24"
-                                                                                viewBox="0 0 24 24" fill="none"
-                                                                                stroke="currentColor" stroke-width="2"
-                                                                                stroke-linecap="round"
-                                                                                stroke-linejoin="round"
-                                                                                class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
-                                                                                <path stroke="none" d="M0 0h24v24H0z"
-                                                                                    fill="none" />
-                                                                                <path
-                                                                                    d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
-                                                                                <path
-                                                                                    d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
-                                                                                <path d="M16 5l3 3" />
-                                                                            </svg>
-                                                                            edit
-                                                                        </a>
+                                                                        <form
+                                                                            action="/pembelian/{{ $s->id_pembelian }}/delete"
+                                                                            method="POST" style="margin-left:5px ">
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                            <button
+                                                                                class="btn btn-danger btn-sm delete-confirm">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                    width="24" height="24"
+                                                                                    viewBox="0 0 24 24"
+                                                                                    fill="currentColor"
+                                                                                    class="icon icon-tabler icons-tabler-filled icon-tabler-trash">
+                                                                                    <path stroke="none" d="M0 0h24v24H0z"
+                                                                                        fill="none" />
+                                                                                    <path
+                                                                                        d="M20 6a1 1 0 0 1 .117 1.993l-.117 .007h-.081l-.919 11a3 3 0 0 1 -2.824 2.995l-.176 .005h-8c-1.598 0 -2.904 -1.249 -2.992 -2.75l-.005 -.167l-.923 -11.083h-.08a1 1 0 0 1 -.117 -1.993l.117 -.007h16z" />
+                                                                                    <path
+                                                                                        d="M14 2a2 2 0 0 1 2 2a1 1 0 0 1 -1.993 .117l-.007 -.117h-4l-.007 .117a1 1 0 0 1 -1.993 -.117a2 2 0 0 1 1.85 -1.995l.15 -.005h4z" />
+                                                                                </svg>
+                                                                                Delete
+                                                                            </button>
+                                                                        </form>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -312,7 +314,6 @@
     <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-status bg-success"></div>
                 <div class="modal-body text-center py-4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"
@@ -326,11 +327,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="w-100">
-                        <div class="row">
-                            <div class="col">
-                                <button class="btn btn-success w-100" id="btnRedirect">Tutup</button>
-                            </div>
-                        </div>
+                        <button class="btn btn-success w-100" id="btnRedirect">Tutup</button>
                     </div>
                 </div>
             </div>
@@ -341,7 +338,6 @@
     <div class="modal fade" id="errorModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-status bg-danger"></div>
                 <div class="modal-body text-center py-4">
                     <!-- Ikon Error -->
@@ -357,10 +353,8 @@
                     <h3>Terjadi Kesalahan</h3>
                     <div class="text-secondary" id="errorMessage"></div>
                 </div>
-                <div class="modal-footer">
-                    <div class="w-100">
-                        <button class="btn btn-secondary w-100" data-bs-dismiss="modal">Tutup</button>
-                    </div>
+                <div class="modal-footer d-flex justify-content-center gap-2" id="modalerrorFooter">
+                    <button class="btn btn-secondary w-100" data-bs-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>
@@ -368,11 +362,6 @@
 @endsection
 @push('myscript')
     <script>
-        history.pushState(null, null, location.href);
-        window.onpopstate = function() {
-            history.pushState(null, null, location.href);
-        };
-
         $("#btn-tambah").click(function() {
             $("#modal-input").modal("show");
         });
@@ -415,24 +404,26 @@
             });
         });
 
-        $(document).on("click", ".btn-edit", function(e) {
+        $(".delete-confirm").click(function(e) {
+            var form = $(this).closest('form');
             e.preventDefault();
 
-            var kode_transaksi = $(this).data("kode");
+            // Set teks konfirmasi dalam modal
+            $("#errorMessage").text("Anda yakin mau menghapus data ini? Data akan terhapus permanen.");
 
-            $.ajax({
-                type: 'GET',
-                url: '/pembelian/' + kode_transaksi + '/editform',
-                cache: false,
-                success: function(response) {
-                    window.location.href = '/pembelian/' + kode_transaksi + '/editform';
-                },
-                error: function(xhr, status, error) {
-                    console.error("Terjadi Kesalahan:", error);
-                    $("#errorModal").modal("show");
-                    $("#errorMessage").text(xhr.responseJSON?.message ||
-                        "Terjadi kesalahan." + error);
-                }
+            // Tampilkan tombol konfirmasi dan batal
+            $("#modalerrorFooter").html(`
+        <button id="confirmDelete" class="btn btn-danger px-5">Ya, Hapus</button>
+        <button id="cancelDelete" class="btn btn-secondary px-5" data-bs-dismiss="modal">Tidak</button>
+    `);
+
+            // Tampilkan modal
+            $("#errorModal").modal("show");
+
+            // Event listener untuk tombol konfirmasi
+            $("#modalerrorFooter").off("click", "#confirmDelete").on("click", "#confirmDelete", function() {
+                form.submit();
+                $("#errorModal").modal("hide");
             });
         });
     </script>

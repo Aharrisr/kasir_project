@@ -458,7 +458,7 @@
             $("#errorModal").modal("show");
 
             // Event listener untuk tombol konfirmasi
-            $("#modalFooter").off("click", "#confirmDelete").on("click", "#confirmDelete", function() {
+            $("#modalerrorFooter").off("click", "#confirmDelete").on("click", "#confirmDelete", function() {
                 form.submit();
                 $("#errorModal").modal("hide");
             });

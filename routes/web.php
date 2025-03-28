@@ -78,7 +78,7 @@ Route::middleware(['auth:user'])->group(function () {
     //Data Pembelian
     Route::get('/pembelian', [PembelianController::class, 'index'])->name('pembelian');
     Route::Post('/pembelian/detail', [PembelianController::class, 'detail']);
-    Route::post('/pembelian/{kode_transaksi}/delete', [PembelianController::class, 'deletepembelian']);
+    Route::delete('/pembelian/{id_pembelian}/delete', [PembelianController::class, 'deletepembelian']);
 
     //Edit Transaksi
     Route::get('/pembelian/{kode_transaksi}/editform', [PembelianController::class, 'editform'])->name('editform');

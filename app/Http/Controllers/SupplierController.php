@@ -60,6 +60,29 @@ class SupplierController extends Controller
         return view('supplier.edit', compact("supplier"));
     }
 
+    public function update($kode_splr, Request $request)
+    {
+        $nama_splr = $request->nama_splr;
+        $no_hp = $request->no_hp;
+        $alamat = $request->alamat;
+
+        try {
+            $data = [
+                "nama_splr"=> $nama_splr,
+                "no_hp"=> $no_hp,
+                "alamat"=> $alamat
+            ];
+
+            $update = DB::table('supplier')->where('kode_splr', $kode_splr)->update($data);
+            if ($update) {
+                return Redirect::back()->with(['success' => 'Data Berhasil Diupdate']);
+            }
+        } catch (\Exception $e) {
+            // dd($e->getMessage());
+            return Redirect::back()->with(['warning' => 'Data Gagal Diupdate']);
+        }
+    }
+
     public function deletesplr($kode_splr)
     {
         $delete = DB::table('supplier')->where('kode_splr', $kode_splr)->delete();

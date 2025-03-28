@@ -49,7 +49,7 @@ class PembelianController extends Controller
     {
         //data pembelian detail
         $db = pembeliandetail::query();
-        $db->select('pembelian_detail.*', 'id_pembelian_detail', 'harga_beli', 'jumlah', 'subtotal', 'nama_produk', 'kode_transaksi', 'stok', 'id_produk');
+        $db->select('pembelian_detail.*', 'id_pembelian_detail', 'jumlah', 'subtotal', 'nama_produk', 'kode_transaksi', 'stok', 'id_produk');
         $db->join('produk', 'pembelian_detail.kode_produk', '=', 'produk.kode_produk');
         $db->orderBy('id_pembelian_detail');
         $pembelian_detail = $db->paginate(10);
@@ -78,8 +78,6 @@ class PembelianController extends Controller
 
     public function edit($kode_transaksi, Request $request)
     {
-
-
         $total_item = $request->total_jumlah;
         $total_harga = $request->total_harga;
         $diskon = $request->diskon;
@@ -134,8 +132,6 @@ class PembelianController extends Controller
 
     }
 
-    public function deletepembelian($kode_transaksi) {}
-
     public function detail(Request $request)
     {
         $kode_transaksi = $request->kode_transaksi;
@@ -147,6 +143,20 @@ class PembelianController extends Controller
             ->paginate(10);
         return view('pembelian.detail', compact("detail"));
     }
+
+    public function deletepembelian($id_pembelian){
+        $pembelian = Pembelian::find($id_pembelian);
+        $detail = pembeliandetail::where('id_pembelian', $pembelian->id_pembelian)->get();
+        foreach ($detail as $s) {
+            $produk = produk::find($s->id_produk);
+            if ($produk) {
+                $produk->stok -= $s->jumlah;
+                $produk->update();
+        }
+        $s->delete();
+    }
+    $pembelian->delete();
+}
 
     //**transaksi**\\
     public function transaksi($kode_splr, Request $request)
@@ -163,7 +173,7 @@ class PembelianController extends Controller
         //data pembelian detail
         $db = pembeliandetail::query();
         $db->select('pembelian_detail.*', 'id_pembelian_detail', 'jumlah', 'subtotal', 'nama_produk', 'kode_transaksi', 'stok', 'id_produk');
-        $db->join('produk', 'pembelian_detail.kode_produk', '=', 'produk.kode_produk');
+        $db->join('produk', 'pembelian_detail.id_produk', '=', 'produk.id_produk');
         $db->orderBy('id_pembelian_detail');
         $pembelian_detail = $db->paginate(10);
 
@@ -315,10 +325,15 @@ class PembelianController extends Controller
 
     public function cancel($kode_transaksi)
     {
+        $hitung_data = PembelianDetail::where('kode_transaksi', $kode_transaksi)->count();
+        if ( $hitung_data == 0) {
+            return redirect()->back()->with('success_cancel', 'Kode transaksi tidak ditemukan.');
+        } else {
         $transaksi = pembeliandetail::where('kode_transaksi', $kode_transaksi)->delete();
         if (!$transaksi) {
             return redirect()->back()->with('warning_cencel', 'Data gagal dihapus');
         }
         return redirect()->back()->with('success_cancel', 'Data berhasil dihapus');
     }
+}
 }

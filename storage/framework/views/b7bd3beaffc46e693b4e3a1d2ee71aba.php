@@ -19,7 +19,7 @@
                     </svg>
                 </span>
                 <input type="text" value="<?php echo e($supplier->kode_splr); ?>" id="kode_splr" class="form-control" minlength="1" maxlength="4"
-                    autocomplete="off" name="kode_splr" placeholder="Kode Supplier" oninput="KodesplrInput(this)">
+                    autocomplete="off" name="kode_splr" placeholder="Kode Supplier" oninput="KodesplrInput(this)" readonly>
             </div>
         </div>
     </div>

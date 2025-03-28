@@ -94,7 +94,7 @@ class ProdukController extends Controller
         $harga_beli = preg_replace('/[^\d]/', '', str_replace(['Rp', '.', ','], '', $request->harga_beli));
         $harga_jual = preg_replace('/[^\d]/', '', str_replace(['Rp', '.', ','], '', $request->harga_jual));
         $stok = $request->stok;
-        $discount = preg_replace('/\D/', '', $request->discount);
+        $diskon = preg_replace('/\D/', '', $request->diskon);
         $kode_splr = $request->kode_splr;
 
         try {
@@ -104,7 +104,7 @@ class ProdukController extends Controller
                 'harga_jual' => $harga_jual,
                 'stok' => $stok,
                 'kode_splr' => $kode_splr,
-                'discount' => $discount
+                'diskon' => $diskon
             ];
 
             $update = DB::table('produk')->where('kode_produk', $kode_produk)->update($data);
