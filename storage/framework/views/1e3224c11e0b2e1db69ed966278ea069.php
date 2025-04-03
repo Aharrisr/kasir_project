@@ -32,7 +32,7 @@
                 <div class="col-12">
                     <div class="card shadow-lg p-2 mb-5 rounded">
                         <div class="card-header">
-                            <h3 class="card-title">Data Pembelian</h3>
+                            <h3 class="card-title">Data Produk</h3>
                             <div class="card-actions">
                                 <a href="#" class="btn btn-primary" id="btn-tambah">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -195,7 +195,7 @@
                                                 </table>
                                             </div>
                                         </div>
-                                        <?php echo e($produk->links('vendor.pagination.bootstrap-5')); ?>
+                                        <?php echo e($pembelian_detail->links('vendor.pagination.bootstrap-5')); ?>
 
                                     </div>
                                 </div>
@@ -303,7 +303,12 @@
 
                                                             </td>
                                                             <td hidden> <input type="text" name="kode_transaksi"
-                                                                    value="<?php echo e($kode_transaksi); ?>"></td>
+                                                                    value="<?php echo e($kode_transaksi); ?>">
+                                                            </td>
+                                                            <td hidden>
+                                                                <input type="text" name="id_produk" id="id_produk"
+                                                                    value="<?php echo e($s->id_produk); ?>">
+                                                            </td>
                                                             <td class="text-center" id="kode_produk">
                                                                 <span class="badge bg-success"><input type="text"
                                                                         hidden name="kode_produk"
@@ -375,7 +380,7 @@
                         <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
                         <path d="M9 12l2 2l4 -4"></path>
                     </svg>
-                    <h3>Data Berhasil Diperbarui</h3>
+                    <h3 id="successTitle">Data Berhasil Diperbarui</h3>
                     <div class="text-secondary" id="successMessage"></div>
                 </div>
                 <div class="modal-footer">
@@ -403,7 +408,7 @@
                         </path>
                         <path d="M12 16h.01"></path>
                     </svg>
-                    <h3>Terjadi Kesalahan</h3>
+                    <h3 id="errorTitle">Terjadi Kesalahan</h3>
                     <div class="text-secondary" id="errorMessage"></div>
                 </div>
                 <div class="modal-footer d-flex justify-content-center gap-2" id="modalerrorFooter">
@@ -477,6 +482,7 @@
             e.preventDefault();
 
             // Set teks konfirmasi dalam modal
+            $("#errorTitle").text("Apakah Anda Yakin?")
             $("#errorMessage").text("Anda yakin mau menghapus data ini? Data akan terhapus permanen.");
 
             // Tampilkan tombol konfirmasi dan batal dalam modal footer
@@ -591,8 +597,30 @@
             });
         });
 
-        // alert btn simpan atau bayar
+        //alert btn cancel
         document.addEventListener("DOMContentLoaded", function() {
+            <?php if(session('success_cancel')): ?>
+                document.getElementById("successTitle").textContent = 'Berhasil';
+                document.getElementById("successMessage").textContent = 'Pembatalan transaksi berhasil';
+                var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                successModal.show();
+                document.getElementById("btnRedirect").addEventListener("click", function() {
+                    window.location.href = "/pembelian";
+                });
+            <?php endif; ?>
+
+            <?php if(session('warning_cancel')): ?>
+                document.getElementById("errorMessage").textContent = 'Data gagal diproses. Silakan coba lagi.';
+                var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+                errorModal.show();
+            <?php endif; ?>
+
+            <?php if(session('warning_tambah')): ?>
+                document.getElementById("errorMessage").textContent = 'Data sudah ada.';
+                var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+                errorModal.show();
+            <?php endif; ?>
+
             <?php if(session('success_updatedata')): ?>
                 document.getElementById("successMessage").textContent = 'Data Berhasil Simpan.';
                 var successModal = new bootstrap.Modal(document.getElementById('successModal'));
@@ -603,24 +631,6 @@
             <?php endif; ?>
 
             <?php if(session('warning_updatedata')): ?>
-                document.getElementById("errorMessage").textContent = 'Data gagal diproses. Silakan coba lagi.';
-                var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
-                errorModal.show();
-            <?php endif; ?>
-        });
-
-        //alert btn cancel
-        document.addEventListener("DOMContentLoaded", function() {
-            <?php if(session('success_cancel')): ?>
-                document.getElementById("successMessage").textContent = 'Pembatalan transaksi berhasil';
-                var successModal = new bootstrap.Modal(document.getElementById('successModal'));
-                successModal.show();
-                document.getElementById("btnRedirect").addEventListener("click", function() {
-                    window.location.href = "/pembelian";
-                });
-            <?php endif; ?>
-
-            <?php if(session('warning_cancel')): ?>
                 document.getElementById("errorMessage").textContent = 'Data gagal diproses. Silakan coba lagi.';
                 var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
                 errorModal.show();

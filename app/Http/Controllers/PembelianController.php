@@ -137,16 +137,16 @@ class PembelianController extends Controller
         $kode_transaksi = $request->kode_transaksi;
         $detail = DB::table('pembelian_detail')
             ->where('pembelian_detail.kode_transaksi', $kode_transaksi)
-            ->join('produk', 'produk.kode_produk', '=', 'pembelian_detail.kode_produk')
-            ->select('pembelian_detail.*', 'produk.nama_produk')
-            ->orderBy('pembelian_detail.kode_produk')
+            ->join('produk', 'produk.id_produk', '=', 'pembelian_detail.id_produk')
+            ->select('pembelian_detail.*', 'produk.nama_produk','produk.kode_produk')
+            ->orderBy('pembelian_detail.id_produk')
             ->paginate(10);
         return view('pembelian.detail', compact("detail"));
     }
 
-    public function deletepembelian($id_pembelian){
-        $pembelian = Pembelian::find($id_pembelian);
-        $detail = pembeliandetail::where('id_pembelian', $pembelian->id_pembelian)->get();
+    public function deletepembelian($kode_transaksi){
+        $pembelian = Pembelian::where('kode_transaksi',$kode_transaksi)->first();
+        $detail = pembeliandetail::where('kode_transaksi', $kode_transaksi)->get();
         foreach ($detail as $s) {
             $produk = produk::find($s->id_produk);
             if ($produk) {
@@ -156,6 +156,7 @@ class PembelianController extends Controller
         $s->delete();
     }
     $pembelian->delete();
+    return Redirect::back()->with(['success' => 'Data Berhasil Disimpan']);
 }
 
     //**transaksi**\\
@@ -172,7 +173,7 @@ class PembelianController extends Controller
 
         //data pembelian detail
         $db = pembeliandetail::query();
-        $db->select('pembelian_detail.*', 'id_pembelian_detail', 'jumlah', 'subtotal', 'nama_produk', 'kode_transaksi', 'stok', 'id_produk');
+        $db->select('pembelian_detail.*', 'id_pembelian_detail', 'jumlah', 'subtotal', 'nama_produk', 'kode_transaksi', 'stok', 'kode_produk');
         $db->join('produk', 'pembelian_detail.id_produk', '=', 'produk.id_produk');
         $db->orderBy('id_pembelian_detail');
         $pembelian_detail = $db->paginate(10);
@@ -198,10 +199,11 @@ class PembelianController extends Controller
         $kode_transaksi = $request->kode_transaksi;
         $harga_beli = $request->harga_beli;
         $subtotal = $request->subtotal;
+        $id_produk = $request->id_produk;
         $tanggal = date("y-m-d");
 
         try {
-            $produkAda = DB::table('produk')->where('kode_produk', $kode_produk)->exists();
+            $produkAda = DB::table('produk')->where('id_produk', $id_produk)->exists();
 
             if (!$produkAda) {
                 return Redirect::back()->with(['warning' => 'Kode Produk tidak ditemukan di tabel pembelian']);
@@ -209,7 +211,7 @@ class PembelianController extends Controller
 
             $cekDetail = DB::table('pembelian_detail')
                 ->where('kode_transaksi', $kode_transaksi)
-                ->where('kode_produk', $kode_produk)
+                ->where('id_produk', $id_produk)
                 ->first();
 
             if ($cekDetail) {
@@ -218,15 +220,15 @@ class PembelianController extends Controller
                 DB::table('pembelian_detail')->insert([
                     'kode_transaksi' => $kode_transaksi,
                     'harga_beli' => $harga_beli,
+                    'id_produk' => $id_produk,
                     'jumlah' => 1,
-                    'kode_produk' => $kode_produk,
                     'subtotal' => $subtotal,
                     'tanggal' => $tanggal
                 ]);
             }
             return Redirect::back()->with(['success' => 'Data Berhasil Ditambah']);
         } catch (\Exception $e) {
-            // dd($e->getMessage());
+            dd($e->getMessage());
             return Redirect::back()->with(['warning' => 'Data Gagal Ditambah']);
         }
     }

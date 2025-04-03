@@ -7,4 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class member extends Model
 {
     protected $table = 'member';
+    protected $primaryKey = 'id_member';
+    protected $fillable = [
+        'id_member',
+        'nama','no_hp',
+        'alamat',
+        'kode_member',
+    ];
 }

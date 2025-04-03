@@ -12,11 +12,10 @@ class Pembeliandetail extends Model
     protected $primaryKey = 'id_pembelian_detail';
     protected $fillable = [
         'id_pembelian_detail',
-        'kode_produk',
+        'id_produk',
         'harga_beli',
         'jumlah',
         'subtotal',
         'kode_transaksi'
     ];
-    public $timestamps = false;
 }

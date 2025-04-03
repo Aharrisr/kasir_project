@@ -9,8 +9,9 @@ use App\Http\Controllers\{
     ProdukController,
     SupplierController,
     PembelianController,
-    TransaksiController
+    PenjualandetailController,
 };
+use App\Http\Controllers\PenjualanController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -78,16 +79,28 @@ Route::middleware(['auth:user'])->group(function () {
     //Data Pembelian
     Route::get('/pembelian', [PembelianController::class, 'index'])->name('pembelian');
     Route::Post('/pembelian/detail', [PembelianController::class, 'detail']);
-    Route::delete('/pembelian/{id_pembelian}/delete', [PembelianController::class, 'deletepembelian']);
+    Route::delete('/pembelian/{kode_transaksi}/delete', [PembelianController::class, 'deletepembelian']);
 
     //Edit Transaksi
     Route::get('/pembelian/{kode_transaksi}/editform', [PembelianController::class, 'editform'])->name('editform');
     Route::post('/transaksi/{kode_transaksi}/edit', [PembelianController::class, 'edit'])->name('edit_pembelian');
 
     //transaksi pembelian
-    Route::get('/pembelian/{kode_splr}/transaksi', [PembelianController::class, 'transaksi'])->name('transaksi');
+    Route::get('/pembelian/{kode_splr}/transaksi', [PembelianController::class, 'transaksi'])->name('transaksi-pembelian');
     Route::post('/transaksi/{kode_produk}/tambah', [PembelianController::class, 'tambah']);
     Route::post('/transaksi/{kode_transaksi}/update', [PembelianController::class, 'updatedata']);
     Route::delete('/transaksi/{id_pembelian_detail}', [PembelianController::class, 'deletedata']);
     Route::post('/transaksi/{kode_transaksi}/cancel', [PembelianController::class, 'cancel']);
+
+    //penjualan
+    Route::get('/penjualan', [PenjualanController::class, 'index'])->name('transaksi-penjualan');
+    Route::post('/penjualan/{kode_produk}/tambah', [PenjualanController::class, 'tambah']);
+    Route::delete('/penjualan/{id_penjualan_detail}', [PenjualanController::class, 'deletedata']);
+    Route::get('/get-discount', [PenjualanController::class, 'getDiscount'])->name('getDiscount');
+    Route::post('/penjualan/{kode_transaksi}/cancel', [PenjualanController::class, 'cancel']);
+    Route::post('/penjualan/{kode_transaksi}/update', [PenjualanController::class, 'updatedata']);
+
+    Route::get('/penjualan-detail', [PenjualandetailController::class, 'index'])->name('penjualan');
+    Route::Post('/penjualan/detail', [PenjualandetailController::class, 'detail']);
+
 });

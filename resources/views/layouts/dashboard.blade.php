@@ -42,12 +42,14 @@
     <script src="{{ asset('tabler/dist/js/demo-theme.min.js?1674944402') }}"></script>
     <div class="page">
         <!-- Sidebar -->
-        @if (!Route::is('transaksi') && !Route::is('editform'))
+        @if (!Route::is('transaksi-pembelian') && !Route::is('transaksi-penjualan'))
             @include('layouts.sidebar')
         @endif
 
         <!-- Navbar -->
-        @include('layouts.header')
+        @if (!Route::is('transaksi-pembelian') && !Route::is('transaksi-penjualan'))
+            @include('layouts.header')
+        @endif
         <div class="page-wrapper">
             @yield('content')
             @include('layouts.footer')

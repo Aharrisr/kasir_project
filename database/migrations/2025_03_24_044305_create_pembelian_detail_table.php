@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pembelian_detail', function (Blueprint $table) {
             $table->id('id_pembelian_detail');
             $table->string('kode_transaksi');
-            $table->string('kode_produk');
+            $table->string('id_produk');
             $table->decimal('harga_beli',10,2);
             $table->string('jumlah');
             $table->decimal('subtotal',10,2);

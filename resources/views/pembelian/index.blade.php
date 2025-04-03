@@ -17,7 +17,7 @@
                 <div class="col-12">
                     <div class="card shadow-lg p-3 mb-5 rounded">
                         <div class="card-header">
-                            <h3 class="card-title">Data Pembelian</h3>
+                            <h3 class="card-title">Riwayat Pembelian</h3>
                             <div class="card-actions">
                                 <a href="#" class="btn btn-primary" id="btn-tambah">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -35,13 +35,40 @@
                             <div class="row">
                                 <div class="col-12">
                                     @if (Session::get('success'))
-                                        <div class="alert alert-success">
-                                            {{ Session::get('success') }}
+                                        <div class="alert alert-success alert-dismissible d-flex align-items-center"
+                                            role="alert">
+                                            <div class="alert-icon me-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon alert-icon icon-2">
+                                                    <path d="M5 12l5 5l10 -10"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                {{ Session::get('success') }}
+                                            </div>
+                                            <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
                                         </div>
                                     @endif
                                     @if (Session::get('warning'))
-                                        <div class="alert alert-warning">
-                                            {{ Session::get('warning') }}
+                                        <div class="alert alert-danger alert-dismissible d-flex align-items-center"
+                                            role="alert">
+                                            <div class="alert-icon me-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon alert-icon icon-2">
+                                                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                                    <path d="M12 8v4"></path>
+                                                    <path d="M12 16h.01"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                {{ Session::get('warning') }}
+                                            </div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
                                         </div>
                                     @endif
                                 </div>
@@ -67,8 +94,8 @@
                                             <div class="col-3">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" placeholder="Merk"
-                                                        id="nama_splr" name="nama_splr" value="{{ Request('nama_splr') }}"
-                                                        autocomplete="off">
+                                                        id="nama_splr" name="nama_splr"
+                                                        value="{{ Request('nama_splr') }}" autocomplete="off">
                                                 </div>
                                             </div>
                                             <div class="col-1">
@@ -184,7 +211,7 @@
                                                                             Detail
                                                                         </a>
                                                                         <form
-                                                                            action="/pembelian/{{ $s->id_pembelian }}/delete"
+                                                                            action="/pembelian/{{ $s->kode_transaksi }}/delete"
                                                                             method="POST" style="margin-left:5px ">
                                                                             @csrf
                                                                             @method('DELETE')
@@ -229,7 +256,7 @@
         <div class="modal-dialog modal-full-width modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Beli Produk</h5>
+                    <h5 class="modal-title">Pilih Supplier</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -322,7 +349,7 @@
                         <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
                         <path d="M9 12l2 2l4 -4"></path>
                     </svg>
-                    <h3>Data Berhasil Diperbarui</h3>
+                    <h3 id="successTitle">Data Berhasil Diperbarui</h3>
                     <div class="text-secondary" id="successMessage"></div>
                 </div>
                 <div class="modal-footer">
@@ -350,7 +377,7 @@
                         </path>
                         <path d="M12 16h.01"></path>
                     </svg>
-                    <h3>Terjadi Kesalahan</h3>
+                    <h3 id="errorTitle">Terjadi Kesalahan</h3>
                     <div class="text-secondary" id="errorMessage"></div>
                 </div>
                 <div class="modal-footer d-flex justify-content-center gap-2" id="modalerrorFooter">
@@ -409,6 +436,7 @@
             e.preventDefault();
 
             // Set teks konfirmasi dalam modal
+            $("#errorTitle").text("Apakah Anda Yakin?")
             $("#errorMessage").text("Anda yakin mau menghapus data ini? Data akan terhapus permanen.");
 
             // Tampilkan tombol konfirmasi dan batal
