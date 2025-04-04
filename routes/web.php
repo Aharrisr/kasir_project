@@ -11,6 +11,7 @@ use App\Http\Controllers\{
     PembelianController,
     PenjualandetailController,
 };
+use App\Http\Controllers\Konfigurasicontroller;
 use App\Http\Controllers\PenjualanController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -102,5 +103,7 @@ Route::middleware(['auth:user'])->group(function () {
 
     Route::get('/penjualan-detail', [PenjualandetailController::class, 'index'])->name('penjualan');
     Route::Post('/penjualan/detail', [PenjualandetailController::class, 'detail']);
+    Route::get('/penjualan/selesai',[PenjualandetailController::class, 'selesai']);
 
+    Route::get('/konfigurasi', [Konfigurasicontroller::class,'index'])->name('konfigurasi');
 });

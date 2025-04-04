@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Models\{
-    Penjualan,
     Penjualandetail,
     produk,
     member,
-    Level
+    Diskon
 };
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{
@@ -101,41 +100,26 @@ class PenjualanController extends Controller
 
     public function getDiscount(Request $request)
     {
-        // Ambil kode_member dari query string
         $kodeMember = $request->kode_member;
 
-        // Cari data member berdasarkan kode_member
         $member = Member::where('kode_member', $kodeMember)->first();
 
-        // Jika member tidak ditemukan, kembalikan error
         if (!$member) {
             return response()->json([
                 'error' => 'Member tidak ditemukan',
                 'diskon' => 0,
-                'level'  => ''
+                'id_diskon'  => ''
             ], 404);
         }
 
-        // Pastikan level tidak null, jika null kembalikan error
-        if (is_null($member->level)) {
-            return response()->json([
-                'error' => 'Level member tidak boleh null',
-                'diskon' => 0,
-                'level'  => ''
-            ], 400);
-        }
+        $diskon = $member->id_diskon;
 
-        // Ambil level dari member
-        $level = $member->level;
-
-        // Cari data diskon di tabel diskon berdasarkan level
-        $dataDiskon = Level::where('level', $level)->first();
+        $dataDiskon = Diskon::where('id_diskon', $diskon)->first();
         $nilaiDiskon = $dataDiskon ? $dataDiskon->diskon : 0;
 
-        // Kembalikan data diskon dan level dalam format JSON
         return response()->json([
             'diskon' => $nilaiDiskon,
-            'level'  => $level
+            'level'  => $diskon
         ]);
     }
 
