@@ -5,49 +5,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Nota Kecil</title>
+    <title>Nota</title>
 
     <?php
     $style = '
-            <style>
-                * {
-                    font-family: "consolas", sans-serif;
-                }
-                p {
-                    display: block;
-                    margin: 3px;
-                    font-size: 10pt;
-                }
-                table td {
-                    font-size: 9pt;
-                }
-                .text-center {
-                    text-align: center;
-                }
-                .text-right {
-                    text-align: right;
-                }
+                                <style>
+                                    * {
+                                        font-family: "consolas", sans-serif;
+                                    }
+                                    p {
+                                        display: block;
+                                        margin: 3px;
+                                        font-size: 10pt;
+                                    }
+                                    table td {
+                                        font-size: 9pt;
+                                    }
+                                    .text-center {
+                                        text-align: center;
+                                    }
+                                    .text-right {
+                                        text-align: right;
+                                    }
 
-                @media print {
-                    @page {
-                        margin: 0;
-                        size: 75mm
-            ';
+                                    @media print {
+                                        @page {
+                                            margin: 0;
+                                            size: 75mm
+                                ';
     ?>
     <?php
     $style .= !empty($_COOKIE['innerHeight']) ? $_COOKIE['innerHeight'] . 'mm; }' : '}';
     ?>
     <?php
     $style .= '
-                    html, body {
-                        width: 70mm;
-                    }
-                    .btn-print {
-                        display: none;
-                    }
-                }
-            </style>
-            ';
+                                        html, body {
+                                            width: 70mm;
+                                        }
+                                        .btn-print {
+                                            display: none;
+                                        }
+                                    }
+                                </style>
+                                ';
     ?>
 
     {!! $style !!}
@@ -65,6 +65,7 @@
         <p style="float: right">{{ $penjualan->petugas }}</p>
     </div>
     <div class="clear-both" style="clear: both;"></div>
+    <p>Member : {{ optional($penjualan->member)->nama ?? '-' }}</p>
     <p>No: {{ $penjualan->kode_transaksi }}</p>
     <p class="text-center">===================================</p>
 
@@ -90,23 +91,23 @@
         </tr>
         <tr>
             <td>Total Item:</td>
-            <td class="text-right">{{ 'Rp ' . number_format($penjualan->total_item) }}</td>
+            <td class="text-right">{{ $penjualan->total_item }}</td>
         </tr>
         <tr>
             <td>Diskon:</td>
-            <td class="text-right">{{ 'Rp ' . number_format($penjualan->diskon) }}</td>
+            <td class="text-right">{{ $penjualan->diskon }}%</td>
         </tr>
         <tr>
             <td>Total Bayar:</td>
-            <td class="text-right">{{ 'Rp ' . number_format($penjualan->bayar) }}</td>
+            <td class="text-right">{{ 'Rp ' . number_format($penjualan->total_harga) }}</td>
         </tr>
         <tr>
             <td>Diterima:</td>
-            <td class="text-right">{{ 'Rp ' . number_format($penjualan->diterima) }}</td>
+            <td class="text-right">{{ 'Rp ' . number_format($penjualan->bayar) }}</td>
         </tr>
         <tr>
             <td>Kembali:</td>
-            <td class="text-right">{{ 'Rp ' . number_format($penjualan->diterima - $penjualan->bayar) }}</td>
+            <td class="text-right">{{ 'Rp ' . number_format($penjualan->bayar - $penjualan->total_harga) }}</td>
         </tr>
     </table>
 

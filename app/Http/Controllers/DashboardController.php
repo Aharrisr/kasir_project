@@ -23,10 +23,20 @@ class DashboardController extends Controller
             ->selectRaw('COUNT(id_produk) as stok_tipis')
             ->where('stok', '<', 50)
             ->first();
-            
+
+        $transaksi = DB::table('penjualan')
+            ->selectRaw('COUNT(kode_transaksi) as transaksi_hariini')
+            ->where('tanggal', $hariini)
+            ->first();
+
+        $transaksi2 = DB::table('penjualan')
+            ->selectRaw('SUM(bayar) as duit')
+            ->where('tanggal', $hariini)
+            ->first();
+
         //nama user yang login
         $id = Auth::guard('user')->user()->id;
         $user = DB::table('users')->where('id', $id)->first();
-        return view('dashboard.index', compact('user', 'stok1', 'stok2'));
+        return view('dashboard.index', compact('user', 'stok1', 'stok2', 'transaksi', 'transaksi2'));
     }
 }

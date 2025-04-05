@@ -16,4 +16,8 @@ class Penjualandetail extends Model
         'subtotal',
         'kode_transaksi'
     ];
+    public function produk()
+    {
+        return $this->belongsTo(Produk::class, 'id_produk', 'id_produk');
+    }
 }

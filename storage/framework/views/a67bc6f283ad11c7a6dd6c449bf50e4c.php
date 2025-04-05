@@ -27,7 +27,7 @@
         }
     </style>
     <div class="page-body">
-        <div class="container-xl">
+        <div class="container-fluid">
             <div class="row mt-3">
                 <div class="col-12">
                     <div class="card shadow-lg p-2 mb-5 rounded">
@@ -137,7 +137,8 @@
                                                                         <input type="number" name="jumlah"
                                                                             class="jumlah-input form-control"
                                                                             data-harga="<?php echo e($s->harga_jual); ?>"
-                                                                            value="<?php echo e($s->jumlah); ?>" min="1">
+                                                                            value="<?php echo e($s->jumlah); ?>" min="1"
+                                                                            max="<?php echo e($s->stok); ?>">
                                                                     </td>
                                                                     <td class="text-center">
                                                                         <span class="subtotal-text">
@@ -328,34 +329,40 @@
                                                                 value="<?php echo e($s->nama_produk); ?>"><?php echo e($s->nama_produk); ?>
 
                                                         </td>
-                                                        <td class="text-center" id="harga"><input type="text"
-                                                                hidden name="harga_jual" value="<?php echo e($s->harga_jual); ?>">
-                                                            <?php echo e(number_format($s->harga_jual, 0, ',', '.')); ?>
+                                                        <td class="text-center" id="harga"><input type="hidden"
+                                                                name="harga_jual"
+                                                                value="<?php echo e($s->harga_jual - ($s->harga_jual * $s->diskon) / 100); ?>">
+                                                            <?php echo e('Rp ' . number_format($s->harga_jual - ($s->harga_jual * $s->diskon) / 100, 0, ',', '.')); ?>
 
                                                         </td>
                                                         <td hidden id="stok"><input type="text" hidden
                                                                 name="jumlah" value="1"></td>
                                                         <td hidden id="subtotal"><input type="text" name="subtotal"
-                                                                value="<?php echo e($s->harga_beli); ?>">
+                                                                value="<?php echo e($s->harga_jual - ($s->harga_jual * $s->diskon) / 100); ?>">
                                                         </td>
                                                         <td class="text-center">
-                                                            <div class="btn-group">
-                                                                <button class="btn btn-primary btn-sm">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
-                                                                        <path stroke="none" d="M0 0h24v24H0z"
-                                                                            fill="none" />
-                                                                        <line x1="12" y1="5"
-                                                                            x2="12" y2="19" />
-                                                                        <line x1="5" y1="12"
-                                                                            x2="19" y2="12" />
-                                                                    </svg>
-                                                                    tambah
-                                                                </button>
-                                                            </div>
+                                                            <?php if($s->stok == 0): ?>
+                                                                <span class="badge bg-danger">Stok Habis</span>
+                                                            <?php else: ?>
+                                                                <div class="btn-group">
+                                                                    <button class="btn btn-primary btn-sm">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                            width="24" height="24"
+                                                                            viewBox="0 0 24 24" fill="none"
+                                                                            stroke="currentColor" stroke-width="2"
+                                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
+                                                                            <path stroke="none" d="M0 0h24v24H0z"
+                                                                                fill="none" />
+                                                                            <line x1="12" y1="5"
+                                                                                x2="12" y2="19" />
+                                                                            <line x1="5" y1="12"
+                                                                                x2="19" y2="12" />
+                                                                        </svg>
+                                                                        tambah
+                                                                    </button>
+                                                                </div>
+                                                            <?php endif; ?>
                                                         </td>
                                                     </tr>
                                                 </form>
@@ -664,7 +671,7 @@
                 var successModal = new bootstrap.Modal(document.getElementById('successModal'));
                 successModal.show();
                 document.getElementById("btnRedirect").addEventListener("click", function() {
-                    window.location.href = "/penjualan";
+                    window.location.href = "/penjualan/selesai";
                 });
             <?php endif; ?>
 
@@ -714,11 +721,9 @@
                             document.getElementById('error-message').innerText = res.data.error || 'Terjadi kesalahan';
                             document.getElementById('diskon').value = 0;
                             document.getElementById('diskon_display').value = '0%';
-                            document.getElementById('level_display').value = '';
                         } else {
                             document.getElementById('diskon').value = res.data.diskon;
                             document.getElementById('diskon_display').value = res.data.diskon + '%';
-                            document.getElementById('level_display').value = res.data.level;
                         }
                     })
                     .catch(err => {
@@ -728,7 +733,6 @@
             } else {
                 document.getElementById('diskon').value = 0;
                 document.getElementById('diskon_display').value = '0%';
-                document.getElementById('level_display').value = '';
             }
         }
     </script>

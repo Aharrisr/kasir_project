@@ -42,12 +42,12 @@
     <script src="{{ asset('tabler/dist/js/demo-theme.min.js?1674944402') }}"></script>
     <div class="page">
         <!-- Sidebar -->
-        @if (!Route::is('transaksi-pembelian') && !Route::is('transaksi-penjualan'))
+        @if (!Route::is('transaksi-pembelian') && !Route::is('transaksi-penjualan') && !Route::is('selesai'))
             @include('layouts.sidebar')
         @endif
 
         <!-- Navbar -->
-        @if (!Route::is('transaksi-pembelian') && !Route::is('transaksi-penjualan'))
+        @if (!Route::is('transaksi-pembelian') && !Route::is('transaksi-penjualan') && !Route::is('selesai'))
             @include('layouts.header')
         @endif
         <div class="page-wrapper">

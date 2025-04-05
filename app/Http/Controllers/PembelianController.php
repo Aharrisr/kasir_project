@@ -228,7 +228,7 @@ class PembelianController extends Controller
             }
             return Redirect::back()->with(['success' => 'Data Berhasil Ditambah']);
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            // dd($e->getMessage());
             return Redirect::back()->with(['warning' => 'Data Gagal Ditambah']);
         }
     }
@@ -261,7 +261,7 @@ class PembelianController extends Controller
 
             $simpan = DB::table('pembelian')->insert($data_add);
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            // dd($e->getMessage());
             return Redirect::back()->with(['warning_updatedata' => 'Data Gagal Disimpan']);
         }
 
@@ -275,7 +275,7 @@ class PembelianController extends Controller
                 ->where('id_produk', $id_produk)
                 ->update($data_upproduk);
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            // dd($e->getMessage());
             return Redirect::back()->with(['warning_updatedata' => 'Data Gagal Disimpan']);
         }
 
@@ -302,7 +302,7 @@ class PembelianController extends Controller
                     }
                 }
             } catch (\Exception $e) {
-                dd($e->getMessage());
+                // dd($e->getMessage());
                 return Redirect::back()->with(['warning_updatedata' => 'Data Gagal Disimpan']);
             }
         } else {

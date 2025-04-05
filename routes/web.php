@@ -98,12 +98,15 @@ Route::middleware(['auth:user'])->group(function () {
     Route::post('/penjualan/{kode_produk}/tambah', [PenjualanController::class, 'tambah']);
     Route::delete('/penjualan/{id_penjualan_detail}', [PenjualanController::class, 'deletedata']);
     Route::get('/get-discount', [PenjualanController::class, 'getDiscount'])->name('getDiscount');
+    Route::get('/penjualan/nota', [PenjualanController::class, 'nota'])->name('nota');
+    Route::get('/penjualan/selesai',[PenjualanController::class, 'selesai'])->name('selesai');
     Route::post('/penjualan/{kode_transaksi}/cancel', [PenjualanController::class, 'cancel']);
     Route::post('/penjualan/{kode_transaksi}/update', [PenjualanController::class, 'updatedata']);
 
     Route::get('/penjualan-detail', [PenjualandetailController::class, 'index'])->name('penjualan');
     Route::Post('/penjualan/detail', [PenjualandetailController::class, 'detail']);
-    Route::get('/penjualan/selesai',[PenjualandetailController::class, 'selesai']);
+
+
 
     Route::get('/konfigurasi', [Konfigurasicontroller::class,'index'])->name('konfigurasi');
 });

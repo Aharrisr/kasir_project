@@ -13,16 +13,15 @@
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-dashboard">
+                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-home">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M12 13m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                                <path d="M13.45 11.55l2.05 -2.05" />
-                                <path d="M6.4 20a9 9 0 1 1 11.2 0z" />
+                                <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+                                <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+                                <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
                             </svg>
                         </span>
                         <span class="nav-link-title">
-                            Dashboard
+                            Beranda
                         </span>
                     </a>
                 </li>
@@ -77,7 +76,7 @@
                             </svg>
                         </span>
                         <span class="nav-link-title">
-                            Produk
+                            Barang
                         </span>
                     </a>
                 </li>
@@ -97,7 +96,7 @@
                             </svg>
                         </span>
                         <span class="nav-link-title">
-                            Member
+                            Pelanggan
                         </span>
                     </a>
                 </li>
@@ -155,7 +154,7 @@
                             </svg>
                         </span>
                         <span class="nav-link-title">
-                            Penjualan
+                            Riwayat Penjualan
                         </span>
                     </a>
                 </li>
@@ -194,7 +193,7 @@
                         <path d="M12 17l0 -1" />
                         <path d="M15 17l0 -3" />
                     </svg>
-                    Report
+                    Laporan
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('#') ? 'active' : '' }} " href="/">
@@ -236,19 +235,22 @@
                         <path d="M15.97 17.25l1.3 .75" />
                         <path d="M20.733 20l1.3 .75" />
                     </svg>
-                    System
+                    Sistem
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('user') ? 'active' : '' }} " href="/user">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
-                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                        </svg>
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-user">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                            </svg>
+                        </span>
                         <span class="nav-link-title">
-                            User
+                            Karyawan
                         </span>
                     </a>
                 </li>
@@ -266,7 +268,7 @@
                             </svg>
                         </span>
                         <span class="nav-link-title">
-                            Konfigurasi
+                            Pengaturan
                         </span>
                     </a>
                 </li>

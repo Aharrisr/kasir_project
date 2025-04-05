@@ -54,7 +54,7 @@
                     </svg>
                 </span>
                 <input type="text" value="<?php echo e($supplier->no_hp); ?>" id="no_hp" class="form-control" autocomplete="off"
-                    name="no_hp" placeholder="Nomer Hp" minlength="1" maxlength="13"
+                    name="no_hp" placeholder="No. WA / Hp" minlength="1" maxlength="13"
                     oninput="this.value = this.value.replace(/[^0-9]/g, '')">
             </div>
         </div>
@@ -75,7 +75,7 @@
                         <path d="M4 16h3" />
                     </svg>
                 </span>
-                <input type="text" value="<?php echo e($supplier->alamat); ?>" name="alamat" id="alamat" class="form-control" placeholder="Alamat"
+                <input type="text" value="<?php echo e($supplier->alamat); ?>" name="alamat" id="alamat" class="form-control" placeholder="Alamat Lengkap"
                     autocomplete="off">
             </div>
         </div>
@@ -95,7 +95,7 @@
                                 <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
                                 <path d="M14 4l0 4l-6 0l0 -4" />
                             </svg>
-                            Simpan
+                            Simpan Data
                         </button>
                     </div>
                 </div>
@@ -111,7 +111,7 @@
                                 <path d="M3 4.001v5h5" />
                                 <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
                             </svg>
-                            Reset
+                            Bersihkan Form
                         </button>
                     </div>
                 </div>

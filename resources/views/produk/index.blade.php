@@ -17,7 +17,7 @@
                 <div class="col-12">
                     <div class="card shadow-lg p-3 mb-5 rounded">
                         <div class="card-header">
-                            <h3 class="card-title">Data Produk</h3>
+                            <h3 class="card-title">Daftar Barang</h3>
                             <div class="card-actions">
                                 <a href="#" class="btn btn-primary" id="btn-tambah">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -27,7 +27,7 @@
                                         <line x1="12" y1="5" x2="12" y2="19"></line>
                                         <line x1="5" y1="12" x2="19" y2="12"></line>
                                     </svg>
-                                    tambah
+                                    Tambah Barang
                                 </a>
                             </div>
                         </div>
@@ -79,21 +79,21 @@
                                         <div class="row">
                                             <div class="col-3">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Kode Produk"
+                                                    <input type="text" class="form-control" placeholder="Kode Barang"
                                                         id="kode_produk" name="kode_produk"
                                                         value="{{ Request('kode_produk') }}" autocomplete="off">
                                                 </div>
                                             </div>
                                             <div class="col-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Nama Produk"
+                                                    <input type="text" class="form-control" placeholder="Nama barang"
                                                         id="nama_produk" name="nama_produk"
                                                         value="{{ Request('nama_produk') }}" autocomplete="off">
                                                 </div>
                                             </div>
                                             <div class="col-3">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Merk"
+                                                    <input type="text" class="form-control" placeholder="Merek"
                                                         id="nama_splr" name="nama_splr"
                                                         value="{{ Request('nama_splr') }}" autocomplete="off">
                                                 </div>
@@ -145,10 +145,10 @@
                                                     <tr>
                                                         <th class="text-center" width="1%">No</th>
                                                         <th class="text-center" width="5%">
-                                                            Kode Produk
+                                                            Kode Barang
                                                         </th>
                                                         <th width="15%">Nama Barang</th>
-                                                        <th width="15%">Merk</th>
+                                                        <th width="15%">Merek</th>
                                                         <th class="text-center" width="10%">
                                                             Harga Beli / Item
                                                         </th>
@@ -159,7 +159,7 @@
                                                             Diskon
                                                         </th>
                                                         <th class="text-center" width="5%">
-                                                            Stok / Item
+                                                            Stok Tersedia
                                                         </th>
                                                         <th width="10%"></th>
                                                     </tr>
@@ -203,7 +203,7 @@
                                                                                     d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
                                                                                 <path d="M16 5l3 3" />
                                                                             </svg>
-                                                                            Edit
+                                                                            Ubah
                                                                         </a>
                                                                         <form
                                                                             action="/produk/{{ $s->kode_produk }}/delete"
@@ -223,7 +223,7 @@
                                                                                     <path
                                                                                         d="M14 2a2 2 0 0 1 2 2a1 1 0 0 1 -1.993 .117l-.007 -.117h-4l-.007 .117a1 1 0 0 1 -1.993 -.117a2 2 0 0 1 1.85 -1.995l.15 -.005h4z" />
                                                                                 </svg>
-                                                                                Delete
+                                                                                Hapus
                                                                             </button>
                                                                         </form>
                                                                     </div>
@@ -250,7 +250,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Tambah Data Produk</h5>
+                    <h5 class="modal-title">Tambah Produk Baru</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -270,7 +270,7 @@
                                         </svg>
                                     </span>
                                     <input type="text" value="" id="nama_produk1" class="form-control"
-                                        autocomplete="off" name="nama_produk" placeholder="Nama Produk"
+                                        autocomplete="off" name="nama_produk" placeholder="Nama Barang"
                                         oninput="capitalizeFirstLetter(this)">
                                 </div>
                             </div>

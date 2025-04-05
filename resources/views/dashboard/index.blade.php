@@ -56,10 +56,10 @@
                                 </div>
                                 <div class="col">
                                     <div class="font-weight-medium">
-
+                                        Rp. {{ number_format($transaksi2->duit, 0, ',', '.') }}
                                     </div>
                                     <div class="text-secondary">
-                                        Pendapatan Hari Ini
+                                        Uang Masuk Hari Ini
                                     </div>
                                 </div>
                             </div>
@@ -88,9 +88,10 @@
                                 </div>
                                 <div class="col">
                                     <div class="font-weight-medium">
+                                        {{ $transaksi->transaksi_hariini }}
                                     </div>
                                     <div class="text-secondary">
-                                        Jumlah Transaksi Hari Ini
+                                        Transaksi Hari Ini
                                     </div>
                                 </div>
                             </div>
@@ -154,7 +155,7 @@
                                         {{ $stok2->stok_tipis }}
                                     </div>
                                     <div class="text-secondary">
-                                        Stok Hampir Habis
+                                        Stok Mau Habis
                                     </div>
                                 </div>
                             </div>
@@ -166,7 +167,7 @@
                 <div class="col-6">
                     <div class="card shadow-lg p-3 rounded">
                         <div class="card-header">
-                            <h3 class="card-title">Pengeluaran</h3>
+                            <h3 class="card-title">Uang Keluar</h3>
                         </div>
                         <div class="card-body">
                             <div id="chart-pengeluaran"></div>
@@ -176,7 +177,7 @@
                 <div class="col-6">
                     <div class="card shadow-lg p-3 rounded">
                         <div class="card-header">
-                            <h3 class="card-title">Penjualan</h3>
+                            <h3 class="card-title">Barang Terjual</h3>
                         </div>
                         <div class="card-body">
                             <div id="chart-pemasukan"></div>

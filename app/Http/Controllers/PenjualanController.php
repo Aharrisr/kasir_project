@@ -5,7 +5,9 @@ use App\Models\{
     Penjualandetail,
     produk,
     member,
-    Diskon
+    Diskon,
+    Penjualan,
+    Setting
 };
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{
@@ -31,7 +33,7 @@ class PenjualanController extends Controller
         $db->select('penjualan_detail.*', 'id_penjualan_detail', 'jumlah', 'subtotal', 'nama_produk', 'kode_transaksi', 'stok', 'kode_produk');
         $db->join('produk', 'penjualan_detail.id_produk', '=', 'produk.id_produk');
         $db->orderBy('id_penjualan_detail');
-        $penjualan_detail = $db->paginate(10);
+        $penjualan_detail = $db->paginate();
 
         //data produk
         $db1 = Produk::query();
@@ -100,26 +102,11 @@ class PenjualanController extends Controller
 
     public function getDiscount(Request $request)
     {
-        $kodeMember = $request->kode_member;
-
-        $member = Member::where('kode_member', $kodeMember)->first();
-
-        if (!$member) {
-            return response()->json([
-                'error' => 'Member tidak ditemukan',
-                'diskon' => 0,
-                'id_diskon'  => ''
-            ], 404);
-        }
-
-        $diskon = $member->id_diskon;
-
-        $dataDiskon = Diskon::where('id_diskon', $diskon)->first();
-        $nilaiDiskon = $dataDiskon ? $dataDiskon->diskon : 0;
+        $dataDiskon = Setting::where('id_setting', 1)->first();
+        $nilaiDiskon = $dataDiskon ? $dataDiskon->diskon_member : 0;
 
         return response()->json([
             'diskon' => $nilaiDiskon,
-            'level'  => $diskon
         ]);
     }
 
@@ -129,7 +116,7 @@ class PenjualanController extends Controller
         $diskon = $request->diskon;
         $bayar = $request->bayar;
         $total_harga = $request->total_harga;
-        $tanggal = date('Y-m-d H:i:s');
+        $tanggal = date('Y-m-d');
         $petugas = $request->petugas;
         $kode_member = $request->member;
         $id_penjualan_detail = $request->id_penjualan_detail;
@@ -190,33 +177,57 @@ class PenjualanController extends Controller
                     ->update($data_up);
                 if ($upproduk) {
                     if ($update && $simpan) {
-                        return Redirect::back()->with(['success_updatedata' => 'Data Berhasil Disimpan']);
+                        session(['kode_transaksi' => $kode_transaksi]);
+                        return redirect()->route('selesai')->with('success', 'Transaksi Berhasil');
                     }
                 }
             } catch (\Exception $e) {
-                dd($e->getMessage());
+                // dd($e->getMessage());
                 return Redirect::back()->with(['warning_updatedata' => 'Data Gagal Disimpan']);
             }
         } else {
             if ($upproduk) {
                 if ($simpan) {
-                    return Redirect::back()->with(['success_updatedata' => 'Data Berhasil Disimpan']);
+                    session(['kode_transaksi' => $kode_transaksi]);
+                    return redirect()->route('selesai')->with('success', 'Transaksi Berhasil');
                 }
             }
         }
     }
+    public function nota()
+    {
+        $setting = Setting::first();
+        $penjualan = Penjualan::with('member')
+        ->where('kode_transaksi', session('kode_transaksi'))
+        ->first();
+        $detail = PenjualanDetail::with('produk')
+            ->where('kode_transaksi', session('kode_transaksi'))
+            ->get();
+
+        return view('penjualan.nota', compact( 'setting', 'penjualan', 'detail'));
+    }
+
+    public function selesai()
+    {
+        $setting = Setting::first();
+
+        $id = Auth::guard('user')->user()->id;
+        $user = DB::table('users')->where('id', $id)->first();
+
+        return view('penjualan.selesai', compact('setting','user'));
+    }
 
     public function cancel($kode_transaksi)
     {
-        $hitung_data = PenjualanDetail::where('kode_transaksi', $kode_transaksi)->count();
-        if ( $hitung_data == 0) {
-            return redirect()->back()->with('success_cancel', 'Kode transaksi tidak ditemukan.');
-        } else {
-        $transaksi = penjualandetail::where('kode_transaksi', $kode_transaksi)->delete();
-        if (!$transaksi) {
-            return redirect()->back()->with('warning_cencel', 'Data gagal dihapus');
+            $hitung_data = PenjualanDetail::where('kode_transaksi', $kode_transaksi)->count();
+            if ( $hitung_data == 0) {
+                return redirect()->back()->with('success_cancel', 'Kode transaksi tidak ditemukan.');
+            } else {
+            $transaksi = penjualandetail::where('kode_transaksi', $kode_transaksi)->delete();
+            if (!$transaksi) {
+                return redirect()->back()->with('warning_cencel', 'Data gagal dihapus');
+            }
+            return redirect()->back()->with('success_cancel', 'Data berhasil dihapus');
         }
-        return redirect()->back()->with('success_cancel', 'Data berhasil dihapus');
     }
-}
 }

@@ -17,7 +17,7 @@
                 <div class="col-12">
                     <div class="card shadow-lg p-3 mb-5 rounded">
                         <div class="card-header">
-                            <h3 class="card-title">Data Supplier</h3>
+                            <h3 class="card-title">Daftar Supplier</h3>
                             <div class="card-actions">
                                 <a href="#" class="btn btn-primary" id="btn-tambah">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -27,7 +27,7 @@
                                         <line x1="12" y1="5" x2="12" y2="19"></line>
                                         <line x1="5" y1="12" x2="19" y2="12"></line>
                                     </svg>
-                                    tambah
+                                    tambah Baru
                                 </a>
                             </div>
                         </div>
@@ -148,7 +148,7 @@
                                                             Kode Supplier
                                                         </th>
                                                         <th width="10%">Nama Supplier</th>
-                                                        <th width="10%">No.Hp</th>
+                                                        <th width="10%">No. WA / Telp</th>
                                                         <th width="30%">Alamat</th>
                                                         <th width="5%"></th>
                                                     </tr>
@@ -185,7 +185,7 @@
                                                                                     d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
                                                                                 <path d="M16 5l3 3" />
                                                                             </svg>
-                                                                            Edit
+                                                                            Ubah
                                                                         </a>
                                                                         <form
                                                                             action="/supplier/{{ $s->kode_splr }}/delete"
@@ -205,7 +205,7 @@
                                                                                     <path
                                                                                         d="M14 2a2 2 0 0 1 2 2a1 1 0 0 1 -1.993 .117l-.007 -.117h-4l-.007 .117a1 1 0 0 1 -1.993 -.117a2 2 0 0 1 1.85 -1.995l.15 -.005h4z" />
                                                                                 </svg>
-                                                                                Delete
+                                                                                Hapus
                                                                             </button>
                                                                         </form>
                                                                     </div>
@@ -232,7 +232,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Tambah Data Supplier</h5>
+                    <h5 class="modal-title">Tambah Supplier Baru</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -298,7 +298,7 @@
                                         </svg>
                                     </span>
                                     <input type="text" value="" id="no_hp" class="form-control"
-                                        autocomplete="off" name="no_hp" placeholder="Nomer Hp" minlength="1"
+                                        autocomplete="off" name="no_hp" placeholder="No. WA / HP" minlength="1"
                                         maxlength="13" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                 </div>
                             </div>
@@ -322,7 +322,7 @@
                                         </svg>
                                     </span>
                                     <input type="text" name="alamat" id="alamat" class="form-control"
-                                        placeholder="Alamat" autocomplete="off">
+                                        placeholder="Alamat Lengkap" autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -342,7 +342,7 @@
                                                     <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
                                                     <path d="M14 4l0 4l-6 0l0 -4" />
                                                 </svg>
-                                                Simpan
+                                                Simpan Data
                                             </button>
                                         </div>
                                     </div>
@@ -374,7 +374,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Data Supplier</h5>
+                    <h5 class="modal-title">Ubah Data Supplier</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="loadeditform">
