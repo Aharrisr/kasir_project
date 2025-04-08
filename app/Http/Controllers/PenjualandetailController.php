@@ -22,6 +22,12 @@ class PenjualandetailController extends Controller
         $db = Penjualan::query();
         $db->select('penjualan.*', 'id_penjualan', 'kode_transaksi', 'tanggal', 'total_item', 'total_harga', 'diskon', 'bayar', 'petugas', 'kode_member');
         $db->orderBy('kode_transaksi');
+        if (!empty($request->kode_transaksi)) {
+            $db->where('kode_transaksi', 'like', '%' . $request->kode_transaksi . '%');
+        }
+        if (!empty($request->tanggal)) {
+            $db->where('tanggal', 'like', '%' . $request->tanggal . '%');
+        }
         $penjualan = $db->paginate(10);
 
         $supplier = DB::table('supplier')->get();

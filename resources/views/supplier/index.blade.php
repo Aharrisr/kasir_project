@@ -75,49 +75,37 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <form action="/produk" method="get">
+                                    <form action="/supplier" method="get">
                                         <div class="row">
                                             <div class="col-3">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Kode Produk"
-                                                        id="kode_produk" name="kode_produk"
-                                                        value="{{ Request('kode_produk') }}" autocomplete="off">
+                                                    <input type="text" class="form-control" placeholder="Kode Supplier"
+                                                        id="kode_splr" name="kode_splr" value="{{ Request('kode_splr') }}"
+                                                        autocomplete="off">
                                                 </div>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-8">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Nama Produk"
-                                                        id="nama_produk" name="nama_produk"
-                                                        value="{{ Request('nama_produk') }}" autocomplete="off">
+                                                    <input type="text" class="form-control" placeholder="Nama Supplier"
+                                                        id="nama_splr" name="nama_splr" value="{{ Request('nama_splr') }}"
+                                                        autocomplete="off">
                                                 </div>
                                             </div>
-                                            <div class="col-3">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Merk"
-                                                        id="nama_splr" name="nama_splr"
-                                                        value="{{ Request('nama_splr') }}" autocomplete="off">
-                                                </div>
-                                            </div>
-                                            <div class="col-1">
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-search">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-                                                            <path d="M21 21l-6 -6" />
-                                                        </svg>
-                                                        Cari
-                                                    </button>
-                                                </div>
-                                            </div>
+                                            <button type="submit" hidden class="btn btn-primary">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-search">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                                                    <path d="M21 21l-6 -6" />
+                                                </svg>
+                                                Cari
+                                            </button>
                                             <div class="col-1">
                                                 <div class="form-group">
                                                     <button type="reset" id="reset" name="reset"
-                                                        class="btn btn-danger" onclick="window.location.href='/produk'">
+                                                        class="btn btn-danger" onclick="window.location.href='/supplier'">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                             height="24" viewBox="0 0 24 24" fill="none"
                                                             stroke="currentColor" stroke-width="2" stroke-linecap="round"

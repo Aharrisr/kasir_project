@@ -16,7 +16,7 @@
                 <div class="col-12">
                     <div class="card shadow-lg p-3 mb-5 rounded">
                         <div class="card-header">
-                            <h3 class="card-title">Data Supplier</h3>
+                            <h3 class="card-title">Daftar Akun Karyawan</h3>
                             <div class="card-actions">
                                 <a href="#" class="btn btn-primary" id="btn-tambah">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -26,7 +26,7 @@
                                         <line x1="12" y1="5" x2="12" y2="19"></line>
                                         <line x1="5" y1="12" x2="19" y2="12"></line>
                                     </svg>
-                                    tambah
+                                    Tambah Akun
                                 </a>
                             </div>
                         </div>
@@ -78,24 +78,17 @@
                                 <div class="col-12">
                                     <form action="/user" method="get">
                                         <div class="row">
-                                            <div class="col-2">
+                                            <div class="col-3">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" placeholder="Nama User"
                                                         id="nama_user" name="nama_user" value="<?php echo e(Request('nama_user')); ?>"
                                                         autocomplete="off">
                                                 </div>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-3">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="username"
-                                                        id="username" name="email" value="<?php echo e(Request('email')); ?>"
-                                                        autocomplete="off">
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Nomer Hp"
-                                                        id="no_hp" name="no_hp" value="<?php echo e(Request('no_hp')); ?>"
+                                                    <input type="text" class="form-control" placeholder="Email"
+                                                        id="email" name="email" value="<?php echo e(Request('email')); ?>"
                                                         autocomplete="off">
                                                 </div>
                                             </div>
@@ -162,7 +155,7 @@
                                                         <th class="text-center" width="1%">No</th>
                                                         <th width="20%">Nama User</th>
                                                         <th width="20%">email</th>
-                                                        <th width="10%">Nomer Hp</th>
+                                                        <th width="10%">No. wa / telp</th>
                                                         <th class="text-center" width="8%">Status</th>
                                                         <th width="6%"></th>
                                                     </tr>
@@ -344,7 +337,7 @@
                                         </svg>
                                     </span>
                                     <input type="number" id="no_hp1" class="form-control" autocomplete="off"
-                                        name="no_hp" placeholder="Nomer Hp" minlength="12" maxlength="13"
+                                        name="no_hp" placeholder="No. wa / telp" minlength="12" maxlength="13"
                                         oninput="this.value=this.value.slice(0,this.maxLength)">
                                 </div>
                             </div>
@@ -369,9 +362,26 @@
                                             <path d="M17 11l4 2" />
                                         </svg>
                                     </span>
-                                    <input type="text" id="password" class="form-control" autocomplete="off"
-                                        name="password" placeholder="Password" minlength="8"
-                                        oninput="validatePassword()" onblur="validatePassword()">
+                                    <div class="input-group input-group-flat">
+                                        <input type="password" id="password" class="form-control" autocomplete="off"
+                                            name="password" placeholder="Kata Sandi" minlength="8"
+                                            oninput="validatePassword()" onblur="validatePassword()">
+                                        <span class="input-group-text">
+                                            <a href="#" class="link-secondary" title="Lihat Password"
+                                                onclick="togglePassword()"
+                                                data-bs-toggle="tooltip"><!-- Download SVG icon from http://tabler-icons.io/i/eye -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
+                                                    height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                    stroke="currentColor" fill="none" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <circle cx="12" cy="12" r="2" />
+                                                    <path
+                                                        d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7" />
+                                                </svg>
+                                            </a>
+                                        </span>
+                                    </div>
                                 </div>
                                 <p id="error-message" style="color: red; font-size: 14px; margin-top: 5px;"></p>
                             </div>
@@ -379,13 +389,13 @@
                         <div class="row">
                             <div class="col-12">
                                 <select name="id_level" id="id_level1" class="form-select">
-                                    <option value="">Role</option>
+                                    <option value="">Pilih Peran</option>
                                     <option value="1">Admin</option>
                                     <option value="2">Kasir</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="row mt-3">
+                        <div class="row mt-4">
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-6">
@@ -605,6 +615,24 @@
                 errorMessage.textContent = "Minimal 8 karakter!";
             } else {
                 errorMessage.textContent = "";
+            }
+        }
+
+        function togglePassword() {
+            var passwordInput = document.getElementById("password");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+            } else {
+                passwordInput.type = "password";
+            }
+        }
+
+        function validateEmail(input) {
+            let errorMessage = document.getElementById("emailError");
+            if (!input.value.includes("@")) {
+                errorMessage.innerText = "Email harus mengandung '@'";
+            } else {
+                errorMessage.innerText = ""; // Hapus pesan jika valid
             }
         }
     </script>

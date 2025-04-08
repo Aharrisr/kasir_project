@@ -75,64 +75,37 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <form action="/user" method="get">
+                                    <form action="/member" method="get">
                                         <div class="row">
-                                            <div class="col-2">
+                                            <div class="col-5">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Nama User"
-                                                        id="nama_user" name="nama_user" value="{{ Request('nama_user') }}"
+                                                    <input type="text" class="form-control" placeholder="Kode Member"
+                                                        id="kode_member" name="kode_member"
+                                                        value="{{ Request('kode_member') }}" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Nama Member"
+                                                        id="nama" name="nama" value="{{ Request('nama') }}"
                                                         autocomplete="off">
                                                 </div>
                                             </div>
-                                            <div class="col-2">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="username"
-                                                        id="username" name="email" value="{{ Request('email') }}"
-                                                        autocomplete="off">
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Nomer Hp"
-                                                        id="no_hp" name="no_hp" value="{{ Request('no_hp') }}"
-                                                        autocomplete="off">
-                                                </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                    <select name="id_level" id="id_level" class="form-select">
-                                                        <option value=""
-                                                            {{ request('id_level') == '' ? 'selected' : '' }}>Pilih Role
-                                                        </option>
-                                                        <option value="1"
-                                                            {{ request('id_level') == '1' ? 'selected' : '' }}>Admin
-                                                        </option>
-                                                        <option value="2"
-                                                            {{ request('id_level') == '2' ? 'selected' : '' }}>Kasir
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-1">
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-search">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-                                                            <path d="M21 21l-6 -6" />
-                                                        </svg>
-                                                        Cari
-                                                    </button>
-                                                </div>
-                                            </div>
+                                            <button type="submit" hidden class="btn btn-primary">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-search">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                                                    <path d="M21 21l-6 -6" />
+                                                </svg>
+                                                Cari
+                                            </button>
                                             <div class="col-1">
                                                 <div class="form-group">
                                                     <button type="reset" id="reset" name="reset"
-                                                        class="btn btn-danger" onclick="window.location.href='/user'">
+                                                        class="btn btn-danger" onclick="window.location.href='/member'">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                             height="24" viewBox="0 0 24 24" fill="none"
                                                             stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -175,8 +148,7 @@
                                                                 {{ $loop->iteration + $member->firstItem() - 1 }}
                                                             </td>
                                                             <td class="text-center">
-                                                                <span
-                                                                    class="badge bg-success">{{ $s->kode_member }}</span>
+                                                                <span class="badge bg-success">{{ $s->kode_member }}</span>
                                                             </td>
                                                             <td>{{ $s->nama }}</td>
                                                             <td>{{ $s->no_hp }}</td>

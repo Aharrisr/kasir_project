@@ -18,61 +18,18 @@ use Illuminate\Support\Facades\{
 
 class PembelianController extends Controller
 {
-    //**Pembelian**\\
-    public function index(Request $request)
+    public function index()
     {
-        $db = Pembelian::query();
-        $db->select('pembelian.*', 'id_pembelian', 'nama_splr', 'tanggal', 'total_item', 'total_harga', 'diskon', 'bayar');
-        $db->join('supplier', 'pembelian.kode_splr', '=', 'supplier.kode_splr');
-        $db->orderBy('kode_transaksi');
-        if (!empty($request->kode_splr)) {
-            $db->where('kode_splr', 'like', '%' . $request->kode_splr . '%');
-        }
-        if (!empty($request->tanggal)) {
-            $db->where('tanggal', 'like', '%' . $request->tanggal . '%');
-        }
-        $pembelian = $db->paginate(10);
-
-        $supplier = DB::table('supplier')->get();
-
-        $db1 = Supplier::query();
-        $db1->select('supplier.*', 'kode_splr', 'nama_splr', 'no_hp', 'alamat');
-        $db1->orderBy('nama_splr');
-        $supplier1 = $db1->paginate(10);
+        $db = Supplier::query();
+        $db->select('supplier.*', 'kode_splr', 'nama_splr', 'no_hp', 'alamat');
+        $db->orderBy('nama_splr');
+        $supplier = $db->paginate(10);
 
         $id = Auth::guard('user')->user()->id;
         $user = DB::table('users')->where('id', $id)->first();
-        return view('pembelian.index', compact('user', 'pembelian', 'supplier', 'supplier1'));
+        return view('transaksi.pembelian', compact('user', 'supplier'));
     }
 
-    public function detail(Request $request)
-    {
-        $kode_transaksi = $request->kode_transaksi;
-        $detail = DB::table('pembelian_detail')
-            ->where('pembelian_detail.kode_transaksi', $kode_transaksi)
-            ->join('produk', 'produk.id_produk', '=', 'pembelian_detail.id_produk')
-            ->select('pembelian_detail.*', 'produk.nama_produk','produk.kode_produk')
-            ->orderBy('pembelian_detail.id_produk')
-            ->paginate(10);
-        return view('pembelian.detail', compact("detail"));
-    }
-
-    public function deletepembelian($kode_transaksi){
-        $pembelian = Pembelian::where('kode_transaksi',$kode_transaksi)->first();
-        $detail = pembeliandetail::where('kode_transaksi', $kode_transaksi)->get();
-        foreach ($detail as $s) {
-            $produk = produk::find($s->id_produk);
-            if ($produk) {
-                $produk->stok -= $s->jumlah;
-                $produk->update();
-        }
-        $s->delete();
-    }
-    $pembelian->delete();
-    return Redirect::back()->with(['success' => 'Data Berhasil Disimpan']);
-}
-
-    //**transaksi**\\
     public function transaksi($kode_splr, Request $request)
     {
         //Kode transaksi
@@ -82,7 +39,7 @@ class PembelianController extends Controller
         {
             return str_pad($angka, $panjang, '0', STR_PAD_LEFT);
         }
-        $kode_transaksi = 'TP' . tambah_nol_didepan($id_terbaru, 6);
+        $kode_transaksi = 'TB' . tambah_nol_didepan($id_terbaru, 6);
 
         //data pembelian detail
         $db = pembeliandetail::query();
@@ -96,15 +53,42 @@ class PembelianController extends Controller
         $db1->select('produk.*', 'nama_produk', 'nama_splr', 'stok', 'kode_produk');
         $db1->join('supplier', 'produk.kode_splr', '=', 'supplier.kode_splr');
         $db1->orderBy('nama_produk');
+        if (!empty($request->kode_produk)) {
+            $db1->where('kode_produk', 'like', '%' . $request->kode_produk . '%');
+        }
+        if (!empty($request->nama_produk)) {
+            $db1->where('nama_produk', 'like', '%' . $request->nama_produk . '%');
+        }
+        if (!empty($request->nama_splr)) {
+            $db1->where('nama_splr', 'like', '%' . $request->nama_splr . '%');
+        }
         $produk = $db1->paginate(10);
 
         $id = Auth::guard('user')->user()->id;
         $user = DB::table('users')->where('id', $id)->first();
 
         $supplier = Supplier::where('kode_splr', $kode_splr)->firstOrFail();
-        // Log::info("transaksi : " . $transaksi);  //cek bug di storage/logs/laravel.log
-        // Log::info("Data Produk: ", (array) $produk); //cek bug di storage/logs/laravel.log
         return view('pembelian.transaksi', compact('pembelian_detail', 'produk', 'user', 'supplier', 'kode_transaksi'));
+    }
+
+    public function cari(Request $request, $id)
+    {
+        //data produk
+        $db1 = Produk::query();
+        $db1->select('produk.*', 'nama_produk', 'nama_splr', 'stok', 'kode_produk');
+        $db1->join('supplier', 'produk.kode_splr', '=', 'supplier.kode_splr');
+        $db1->orderBy('nama_produk');
+        if (!empty($request->kode_produk)) {
+            $db1->where('kode_produk', 'like', '%' . $request->kode_produk . '%');
+        }
+        if (!empty($request->nama_produk)) {
+            $db1->where('nama_produk', 'like', '%' . $request->nama_produk . '%');
+        }
+        if (!empty($request->nama_splr)) {
+            $db1->where('nama_splr', 'like', '%' . $request->nama_splr . '%');
+        }
+        $produk = $db1->paginate(10);
+        return view('pembelian.transaksi', compact('produk'));
     }
 
     public function tambah($kode_produk, Request $request)
@@ -153,7 +137,7 @@ class PembelianController extends Controller
         $total_harga = $request->total_harga;
         $diskon = $request->diskon;
         $bayar = $request->bayar;
-        $tanggal = date('Y-m-d H:i:s');
+        $tanggal = date('Y-m-d');
         $id_pembelian_detail = $request->id_pembelian_detail;
         $jumlah = $request->jumlah;
         $subtotal = $request->subtotal;

@@ -26,7 +26,7 @@ class PenjualanController extends Controller
         {
             return str_pad($angka, $panjang, '0', STR_PAD_LEFT);
         }
-        $kode_transaksi = 'P' . tambah_nol_didepan($id_terbaru, 6);
+        $kode_transaksi = 'TJ' . tambah_nol_didepan($id_terbaru, 6);
 
         //data penjualan detail
         $db = Penjualandetail::query();

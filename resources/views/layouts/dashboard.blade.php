@@ -58,6 +58,7 @@
     <!-- Libs JS -->
     <script src="{{ asset('tabler/dist/libs/apexcharts/dist/apexcharts.min.js?1674944402') }}" defer></script>
     <script src="{{ asset('tabler/dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1674944402') }}" defer></script>
+    <script src="{{ asset('tabler/dist/libs/litepicker/dist/litepicker.js?1668287865') }}" defer></script>
     <script src="{{ asset('tabler/dist/libs/jsvectormap/dist/maps/world.js?1674944402') }}" defer></script>
     <script src="{{ asset('tabler/dist/libs/jsvectormap/dist/maps/world-merc.js?1674944402') }}" defer></script>
     <!-- Tabler Core -->

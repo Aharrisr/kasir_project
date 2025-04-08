@@ -13,17 +13,14 @@ class memberController extends Controller
     public function index(Request $request)
     {
         $db = member::query();
-        $db->select('member.*', 'nama', 'alamat', 'no_hp');
+        $db->select('member.*', 'nama', 'alamat', 'no_hp', 'kode_member');
         $db->orderBy('id_member');
-        // if (!empty($request->kode_produk)) {
-        //     $db->where('kode_produk', 'like', '%' . $request->kode_produk . '%');
-        // }
-        // if (!empty($request->nama_produk)) {
-        //     $db->where('nama_produk', 'like', '%' . $request->nama_produk . '%');
-        // }
-        // if (!empty($request->nama_splr)) {
-        //     $db->where('nama_splr', 'like', '%' . $request->nama_splr . '%');
-        // }
+        if (!empty($request->kode_member)) {
+            $db->where('kode_member', 'like', '%' . $request->kode_member . '%');
+        }
+        if (!empty($request->nama)) {
+            $db->where('nama', 'like', '%' . $request->nama . '%');
+        }
         $member = $db->paginate(10);
 
         $id = Auth::guard('user')->user()->id;

@@ -12,6 +12,7 @@ use App\Http\Controllers\{
     PenjualandetailController,
 };
 use App\Http\Controllers\Konfigurasicontroller;
+use App\Http\Controllers\PembeliandetailController;
 use App\Http\Controllers\PenjualanController;
 use App\Models\Member;
 use Illuminate\Support\Facades\Route;
@@ -52,51 +53,47 @@ Route::middleware(['auth:user'])->group(function () {
         return view('chart');
     });
 
-    //Produk
+    // Data Produk
     Route::get('/produk', [ProdukController::class, 'index'])->name('produk');
     Route::post('/produk/tambah', [ProdukController::class, 'tambah']);
     Route::Post('/produk/edit', [ProdukController::class, 'edit']);
     Route::Post('/produk/{kode_produk}/update', [ProdukController::class, 'update']);
     Route::post('produk/{kode_produk}/delete', [ProdukController::class, 'deleteproduk']);
 
-    //Data User
+    // Data User
     Route::get('/user', [UserController::class, 'index'])->name('user');
     Route::post('/user/tambahuser', [UserController::class, 'tambahuser']);
     Route::Post('/user/edit', [UserController::class, 'edit']);
     Route::Post('/user/{id}/update', [UserController::class, 'update']);
     Route::post('user/{id}/delete', [UserController::class, 'deleteuser']);
 
-    //Data Member
+    // Data Member
     Route::get('/member', [memberController::class, 'index'])->name('member');
     Route::post('/member/tambahmember', [MemberController::class, 'tambah']);
     Route::Post('/member/edit', [MemberController::class, 'edit']);
     Route::post('/member/{id_member}/update', [MemberController::class,'update']);
 
-    //Data Supplier
+    // Data Supplier
     Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier');
     Route::post('/supplier/tambah', [SupplierController::class, 'tambah']);
     Route::Post('/supplier/edit', [SupplierController::class, 'edit']);
     Route::Post('/supplier/{kode_splr}/update', [SupplierController::class, 'update']);
     Route::post('supplier/{kode_splr}/delete', [SupplierController::class, 'deletesplr']);
 
-
-    //Data Pembelian
-    Route::get('/pembelian', [PembelianController::class, 'index'])->name('pembelian');
-    Route::Post('/pembelian/detail', [PembelianController::class, 'detail']);
-    Route::delete('/pembelian/{kode_transaksi}/delete', [PembelianController::class, 'deletepembelian']);
-
-    //Edit Transaksi
-    Route::get('/pembelian/{kode_transaksi}/editform', [PembelianController::class, 'editform'])->name('editform');
-    Route::post('/transaksi/{kode_transaksi}/edit', [PembelianController::class, 'edit'])->name('edit_pembelian');
-
-    //transaksi pembelian
+    // pembelian
+    Route::get('/pembelian',[PembelianController::class,'index']);
     Route::get('/pembelian/{kode_splr}/transaksi', [PembelianController::class, 'transaksi'])->name('transaksi-pembelian');
     Route::post('/transaksi/{kode_produk}/tambah', [PembelianController::class, 'tambah']);
     Route::post('/transaksi/{kode_transaksi}/update', [PembelianController::class, 'updatedata']);
     Route::delete('/transaksi/{id_pembelian_detail}', [PembelianController::class, 'deletedata']);
     Route::post('/transaksi/{kode_transaksi}/cancel', [PembelianController::class, 'cancel']);
 
-    //penjualan
+    // Pembelian detail
+    Route::get('/pembelian-detail', [PembeliandetailController::class, 'index'])->name('pembelian');
+    Route::Post('/pembelian-detail/detail', [PembeliandetailController::class, 'detail']);
+    Route::delete('/pembelian-detail/{kode_transaksi}/delete', [PembeliandetailController::class, 'deletepembelian']);
+
+    // penjualan
     Route::get('/penjualan', [PenjualanController::class, 'index'])->name('transaksi-penjualan');
     Route::post('/penjualan/{kode_produk}/tambah', [PenjualanController::class, 'tambah']);
     Route::delete('/penjualan/{id_penjualan_detail}', [PenjualanController::class, 'deletedata']);
@@ -106,6 +103,7 @@ Route::middleware(['auth:user'])->group(function () {
     Route::post('/penjualan/{kode_transaksi}/cancel', [PenjualanController::class, 'cancel']);
     Route::post('/penjualan/{kode_transaksi}/update', [PenjualanController::class, 'updatedata']);
 
+    // penjualan detail
     Route::get('/penjualan-detail', [PenjualandetailController::class, 'index'])->name('penjualan');
     Route::Post('/penjualan/detail', [PenjualandetailController::class, 'detail']);
 

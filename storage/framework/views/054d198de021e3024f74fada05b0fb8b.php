@@ -64,49 +64,58 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <form action="/" method="get">
+                                    <form action="/penjualan-detail" method="get">
                                         <div class="row">
-                                            <div class="col-3">
+                                            <div class="col-6">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Kode Produk"
-                                                        id="kode_produk" name="kode_produk"
-                                                        value="<?php echo e(Request('kode_produk')); ?>" autocomplete="off">
+                                                    <input type="text" class="form-control" placeholder="Kode Transaksi"
+                                                        id="kode_transaksi" name="kode_transaksi"
+                                                        value="<?php echo e(Request('kode_transaksi')); ?>" autocomplete="off">
                                                 </div>
                                             </div>
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Nama Produk"
-                                                        id="nama_produk" name="nama_produk"
-                                                        value="<?php echo e(Request('nama_produk')); ?>" autocomplete="off">
-                                                </div>
-                                            </div>
-                                            <div class="col-3">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Merk"
-                                                        id="nama_splr" name="nama_splr" value="<?php echo e(Request('nama_splr')); ?>"
-                                                        autocomplete="off">
-                                                </div>
-                                            </div>
-                                            <div class="col-1">
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-search">
+                                            <div class="col-5">
+                                                <div class="input-icon">
+                                                    <span class="input-icon-addon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                            width="24" height="24" viewBox="0 0 24 24"
+                                                            stroke-width="2" stroke="currentColor" fill="none"
+                                                            stroke-linecap="round" stroke-linejoin="round">
                                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-                                                            <path d="M21 21l-6 -6" />
+                                                            <rect x="4" y="5" width="16" height="16"
+                                                                rx="2" />
+                                                            <line x1="16" y1="3" x2="16"
+                                                                y2="7" />
+                                                            <line x1="8" y1="3" x2="8"
+                                                                y2="7" />
+                                                            <line x1="4" y1="11" x2="20"
+                                                                y2="11" />
+                                                            <line x1="11" y1="15" x2="12"
+                                                                y2="15" />
+                                                            <line x1="12" y1="15" x2="12"
+                                                                y2="18" />
                                                         </svg>
-                                                        Cari
-                                                    </button>
+                                                    </span>
+                                                    <input class="form-control" placeholder="Pilih tanggal" readonly
+                                                        id="datepicker-icon-prepend" name="tanggal"
+                                                        value="<?php echo e(Request('tanggal')); ?>" autocomplete="off">
                                                 </div>
                                             </div>
+                                            <button type="submit" hidden class="btn btn-primary">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-search">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                                                    <path d="M21 21l-6 -6" />
+                                                </svg>
+                                                Cari
+                                            </button>
                                             <div class="col-1">
                                                 <div class="form-group">
                                                     <button type="reset" id="reset" name="reset"
-                                                        class="btn btn-danger" onclick="window.location.href='/produk'">
+                                                        class="btn btn-danger"
+                                                        onclick="window.location.href='/penjualan-detail'">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                             height="24" viewBox="0 0 24 24" fill="none"
                                                             stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -381,6 +390,19 @@
                 form.submit();
                 $("#errorModal").modal("hide");
             });
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            window.Litepicker &&
+                new Litepicker({
+                    element: document.getElementById("datepicker-icon-prepend"),
+                    buttonText: {
+                        previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="15 6 9 12 15 18" /></svg>`,
+                        nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="9 6 15 12 9 18" /></svg>`,
+                    },
+                });
         });
     </script>
 <?php $__env->stopPush(); ?>

@@ -53,7 +53,7 @@
                     </svg>
                 </span>
                 <input type="number" value="{{ $user->no_hp }}" id="no_hp1" class="form-control" autocomplete="off"
-                    name="no_hp" placeholder="Nomer Hp" minlength="12" maxlength="13"
+                    name="no_hp" placeholder="No. Wa / Telp" minlength="12" maxlength="13"
                     oninput="this.value=this.value.slice(0,this.maxLength)">
             </div>
         </div>
@@ -61,7 +61,7 @@
     <div class="row">
         <div class="col-12">
             <select name="id_level" id="id_level1" class="form-select">
-                <option value="">Role</option>
+                <option value="">Pilih Peran</option>
                 @foreach ([1 => 'Admin', 2 => 'Kasir'] as $id => $role)
                     <option {{ $user->id_level == $id ? 'selected' : '' }} value="{{ $id }}">
                         {{ $role }}

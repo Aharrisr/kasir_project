@@ -15,12 +15,12 @@ class SupplierController extends Controller
         $db = Supplier::query();
         $db->select('supplier.*', 'kode_splr', 'nama_splr', 'no_hp', 'alamat');
         $db->orderBy('nama_splr');
-        // if (!empty($request->kode_splr)) {
-        //     $db->where('kode_splr', 'like', '%' . $request->kode_splr . '%');
-        // }
-        // if (!empty($request->tanggal)) {
-        //     $db->where('tanggal', 'like', '%' . $request->tanggal . '%');
-        // }
+        if (!empty($request->kode_splr)) {
+            $db->where('kode_splr', 'like', '%' . $request->kode_splr . '%');
+        }
+        if (!empty($request->nama_splr)) {
+            $db->where('nama_splr', 'like', '%' . $request->nama_splr . '%');
+        }
         $supplier = $db->paginate(10);
 
         $id = Auth::guard('user')->user()->id;
