@@ -13,6 +13,7 @@ use App\Http\Controllers\{
 };
 use App\Http\Controllers\Konfigurasicontroller;
 use App\Http\Controllers\PenjualanController;
+use App\Models\Member;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -68,6 +69,8 @@ Route::middleware(['auth:user'])->group(function () {
     //Data Member
     Route::get('/member', [memberController::class, 'index'])->name('member');
     Route::post('/member/tambahmember', [MemberController::class, 'tambah']);
+    Route::Post('/member/edit', [MemberController::class, 'edit']);
+    Route::post('/member/{id_member}/update', [MemberController::class,'update']);
 
     //Data Supplier
     Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier');
@@ -109,4 +112,5 @@ Route::middleware(['auth:user'])->group(function () {
 
 
     Route::get('/konfigurasi', [Konfigurasicontroller::class,'index'])->name('konfigurasi');
+    Route::post('/konfigurasi/update', [Konfigurasicontroller::class,'update']);
 });

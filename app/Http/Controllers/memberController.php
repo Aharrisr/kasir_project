@@ -33,12 +33,22 @@ class memberController extends Controller
 
     public function tambah(Request $request)
     {
+        $member = DB::table('member')->latest('id_member')->first();
+
+        //Kode member
+        $id_terbaru = $member ? $member->id_member + 1 : 1;
+        function tambah_nol_didepan($angka, $panjang)
+        {
+            return str_pad($angka, $panjang, '0', STR_PAD_LEFT);
+        }
+        $kode_member = 'M' . tambah_nol_didepan($id_terbaru, 6);
         $nama = $request->nama;
         $no_hp = $request->no_hp;
         $alamat = $request->alamat;
 
         try {
             $data = [
+                'kode_member'=> $kode_member,
                 'nama' => $nama,
                 'no_hp' => $no_hp,
                 'alamat' => $alamat
@@ -49,8 +59,38 @@ class memberController extends Controller
                 return Redirect::back()->with(['success' => 'Data Berhasil Disimpan']);
             }
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            // dd($e->getMessage());
             return Redirect::back()->with(['warning' => 'Data Gagal Disimpan']);
+        }
+    }
+
+    public function edit(Request $request)
+    {
+        $id_member = $request->id_member;
+        $member = DB::table('member')->where('id_member', $id_member)->first();
+        return view('member.edit', compact("member"));
+    }
+
+    public function update($id_member, Request $request)
+    {
+        $nama = $request->nama;
+        $no_hp = $request->no_hp;
+        $alamat = $request->alamat;
+
+        try {
+            $data = [
+                'nama' => $nama,
+                'no_hp' => $no_hp,
+                'alamat' => $alamat,
+            ];
+
+            $update = DB::table('member')->where('id_member', $id_member)->update($data);
+            if ($update) {
+                return Redirect::back()->with(['success' => 'Data Berhasil Diupdate']);
+            }
+        } catch (\Exception $e) {
+            // dd($e->getMessage());
+            return Redirect::back()->with(['warning' => 'Data Gagal Diupdate']);
         }
     }
 }

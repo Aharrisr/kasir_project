@@ -16,7 +16,7 @@
                 <div class="col-12">
                     <div class="card shadow-lg p-3 mb-5 rounded">
                         <div class="card-header">
-                            <h3 class="card-title">Data Member</h3>
+                            <h3 class="card-title">Daftar Member</h3>
                             <div class="card-actions">
                                 <a href="#" class="btn btn-primary" id="btn-tambah">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -26,7 +26,7 @@
                                         <line x1="12" y1="5" x2="12" y2="19"></line>
                                         <line x1="5" y1="12" x2="19" y2="12"></line>
                                     </svg>
-                                    tambah
+                                    Tambah Member
                                 </a>
                             </div>
                         </div>
@@ -160,8 +160,9 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" width="3%">No</th>
-                                                        <th width="15%">Nama Member</th>
-                                                        <th width="10%">Nomer Hp</th>
+                                                        <th width="5%" class="text-center">Kode Member</th>
+                                                        <th width="20%">Nama Member</th>
+                                                        <th width="15%">No wa / telp</th>
                                                         <th width="20%">Alamat</th>
                                                         <th class="text-center" width="8%"></th>
                                                     </tr>
@@ -169,9 +170,15 @@
                                                 <tbody>
                                                     <?php $__currentLoopData = $member; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <tr>
+                                                            <td hidden><input type="text" name="id_member"
+                                                                    id="id_member" value="<?php echo e($s->id_member); ?>"></td>
                                                             <td class="text-center">
                                                                 <?php echo e($loop->iteration + $member->firstItem() - 1); ?>
 
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <span
+                                                                    class="badge bg-success"><?php echo e($s->kode_member); ?></span>
                                                             </td>
                                                             <td><?php echo e($s->nama); ?></td>
                                                             <td><?php echo e($s->no_hp); ?></td>
@@ -196,7 +203,7 @@
                                                                                     d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
                                                                                 <path d="M16 5l3 3" />
                                                                             </svg>
-                                                                            Edit
+                                                                            Ubah
                                                                         </a>
                                                                         <form action="/member/<?php echo e($s->id_member); ?>/delete"
                                                                             method="POST" style="margin-left:5px ">
@@ -215,7 +222,7 @@
                                                                                     <path
                                                                                         d="M14 2a2 2 0 0 1 2 2a1 1 0 0 1 -1.993 .117l-.007 -.117h-4l-.007 .117a1 1 0 0 1 -1.993 -.117a2 2 0 0 1 1.85 -1.995l.15 -.005h4z" />
                                                                                 </svg>
-                                                                                Delete
+                                                                                Hapus
                                                                             </button>
                                                                         </form>
                                                                     </div>
@@ -243,7 +250,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Tambah Member</h5>
+                    <h5 class="modal-title">Tambah Member Baru</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -264,7 +271,7 @@
                                             <path d="M20.732 12a2 2 0 0 0 -3.732 1v1a2 2 0 0 0 3.726 1.01" />
                                         </svg>
                                     </span>
-                                    <input type="text" value="" id="nama" class="form-control"
+                                    <input type="text" value="" id="nama1" class="form-control"
                                         autocomplete="off" name="nama" placeholder="Nama Lengkap"
                                         oninput="capitalizeFirstLetter(this)">
                                 </div>
@@ -277,23 +284,23 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round"
-                                            class="icon icon-tabler icons-tabler-outline icon-tabler-phone-call">
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-device-mobile">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                             <path
-                                                d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
-                                            <path d="M15 7a2 2 0 0 1 2 2" />
-                                            <path d="M15 3a6 6 0 0 1 6 6" />
+                                                d="M6 5a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-14z" />
+                                            <path d="M11 4h2" />
+                                            <path d="M12 17v.01" />
                                         </svg>
                                     </span>
                                     <input type="number" id="no_hp" class="form-control" autocomplete="off"
-                                        name="no_hp" placeholder="Nomer Hp" minlength="12" maxlength="13"
+                                        name="no_hp" placeholder="No. Wa / Telp" minlength="12" maxlength="13"
                                         oninput="this.value=this.value.slice(0,this.maxLength)">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <div class="input-icon mb-3">
+                                <div class="input-icon">
                                     <span class="input-icon-addon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -310,11 +317,11 @@
                                         </svg>
                                     </span>
                                     <input type="text" value="" id="alamat" class="form-control"
-                                        autocomplete="off" name="alamat" placeholder="Alamat">
+                                        autocomplete="off" name="alamat" placeholder="Alamat Lengkap">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 mt-4">
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
@@ -329,7 +336,7 @@
                                                 <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
                                                 <path d="M14 4l0 4l-6 0l0 -4" />
                                             </svg>
-                                            Simpan
+                                            Simpan Data
                                         </button>
                                     </div>
                                 </div>
@@ -409,7 +416,7 @@
                         </path>
                         <path d="M12 16h.01"></path>
                     </svg>
-                    <h3>Terjadi Kesalahan</h3>
+                    <h3 id="textHeader">Terjadi Kesalahan</h3>
                     <div class="text-secondary" id="errorMessage"></div>
                 </div>
                 <div class="modal-footer d-flex justify-content-center gap-2" id="modalerrorFooter">
@@ -449,12 +456,13 @@
             e.preventDefault();
 
             // Set teks konfirmasi dalam modal
-            $("#errorMessage").text("Anda yakin mau menghapus data ini? Data akan terhapus permanen.");
+            $('#textHeader').text('Kamu yakin?')
+            $("#errorMessage").text("Data bakal hilang permanen. Tetap mau hapus?");
 
             // Tampilkan tombol konfirmasi dan batal
             $("#modalerrorFooter").html(`
-        <button id="confirmDelete" class="btn btn-danger px-5">Ya, Hapus</button>
-        <button id="cancelDelete" class="btn btn-secondary px-5" data-bs-dismiss="modal">Tidak</button>
+        <button id="confirmDelete" class="btn btn-danger px-5">Iya, Hapus</button>
+        <button id="cancelDelete" class="btn btn-secondary px-5" data-bs-dismiss="modal">Kembali</button>
     `);
 
             // Tampilkan modal
@@ -473,6 +481,32 @@
                 .map(word => word.charAt(0).toUpperCase() + word.slice(1))
                 .join(' ');
         }
+
+        function showErrorModal(message) {
+            $('#textHeader').text('Oops, ada yang salah');
+            $('#errorMessage').text(message);
+            $('#errorModal').modal('show');
+        }
+
+        $("#frmtambah").submit(function() {
+            var nama1 = $("#nama1").val();
+            var no_hp = $("#no_hp").val();
+            var alamat = $("#alamat").val();
+
+            if (nama1 == "") {
+                showErrorModal('Nama Member tidak boleh kosong');
+                $("#nama1").focus();
+                return false;
+            } else if (no_hp == "") {
+                showErrorModal('No. wa / telp tidak boleh kosong');
+                $("#no_hp").focus();
+                return false;
+            } else if (harga_jual == "") {
+                showErrorModal('Harga jual tidak boleh kosong');
+                $("#harga_jual").focus();
+                return false;
+            }
+        });
     </script>
 <?php $__env->stopPush(); ?>
 

@@ -26,7 +26,7 @@
                                         <line x1="12" y1="5" x2="12" y2="19"></line>
                                         <line x1="5" y1="12" x2="19" y2="12"></line>
                                     </svg>
-                                    tambah Baru
+                                    tambah Supplier
                                 </a>
                             </div>
                         </div>
@@ -301,7 +301,7 @@
                                         </svg>
                                     </span>
                                     <input type="text" value="" id="no_hp" class="form-control"
-                                        autocomplete="off" name="no_hp" placeholder="No. WA / HP" minlength="1"
+                                        autocomplete="off" name="no_hp" placeholder="No. Wa / Telp" minlength="1"
                                         maxlength="13" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                 </div>
                             </div>
@@ -426,7 +426,7 @@
                         </path>
                         <path d="M12 16h.01"></path>
                     </svg>
-                    <h3>Terjadi Kesalahan</h3>
+                    <h3 id="textHeader">Terjadi Kesalahan</h3>
                     <div class="text-secondary" id="errorMessage"></div>
                 </div>
                 <div class="modal-footer d-flex justify-content-center gap-2" id="modalerrorFooter">
@@ -466,12 +466,13 @@
             e.preventDefault();
 
             // Set teks konfirmasi dalam modal
-            $("#errorMessage").text("Anda yakin mau menghapus data ini? Data akan terhapus permanen.");
+            $('#textHeader').text('Kamu yakin?')
+            $("#errorMessage").text("Data bakal hilang permanen. Tetap mau hapus?");
 
             // Tampilkan tombol konfirmasi dan batal
             $("#modalerrorFooter").html(`
-        <button id="confirmDelete" class="btn btn-danger px-5">Ya, Hapus</button>
-        <button id="cancelDelete" class="btn btn-secondary px-5" data-bs-dismiss="modal">Tidak</button>
+        <button id="confirmDelete" class="btn btn-danger px-5">Iya, Hapus</button>
+        <button id="cancelDelete" class="btn btn-secondary px-5" data-bs-dismiss="modal">Kembali</button>
     `);
 
             // Tampilkan modal
@@ -507,50 +508,33 @@
             $("#modal-edit").modal("show");
         });
 
+        function showErrorModal(message) {
+            $('#textHeader').text('Oops, ada yang salah');
+            $('#errorMessage').text(message);
+            $('#errorModal').modal('show');
+        }
+
         $("#frmtambah").submit(function() {
-            var nama_produk1 = $("#nama_produk1").val();
-            var harga = $("#harga").val();
-            var stok = $("#stok").val();
-            var kode_splr2 = $("#kode_splr2").val();
-            if (nama_produk1 == "") {
-                Swal.fire({
-                    title: 'Opps!',
-                    text: 'Nama Produk Tidak Boleh Kosong',
-                    icon: 'warning',
-                    confirmButtonText: 'OK'
-                }).then((result) => {
-                    $("#nama_produk1").focus();
-                });
+            var kode_splr1 = $("#kode_splr1").val();
+            var nama_splr1 = $("#nama_splr1").val();
+            var no_hp = $("#no_hp").val();
+            var alamat = $("#alamat").val();
+
+            if (kode_splr1 == "") {
+                showErrorModal('Kode Supplier tidak boleh kosong');
+                $("#kode_splr1").focus();
                 return false;
-            } else if (harga == "") {
-                Swal.fire({
-                    title: 'Opps!',
-                    text: 'Harga Tidak Boleh Kosong',
-                    icon: 'warning',
-                    confirmButtonText: 'OK'
-                }).then((result) => {
-                    $("#harga").focus();
-                });
+            } else if (nama_splr1 == "") {
+                showErrorModal('Nama supplier tidak boleh kosong');
+                $("#nama_splr1").focus();
                 return false;
-            } else if (stok == "") {
-                Swal.fire({
-                    title: 'Opps!',
-                    text: 'Stok Tidak Boleh Kosong',
-                    icon: 'warning',
-                    confirmButtonText: 'OK'
-                }).then((result) => {
-                    $("#stok").focus();
-                });
+            } else if (no_hp == "") {
+                showErrorModal('No. wa / telp tidak boleh kosong');
+                $("#no_hp").focus();
                 return false;
-            } else if (kode_splr2 == "-") {
-                Swal.fire({
-                    title: 'Opps!',
-                    text: 'Supplier Tidak Boleh Kosong',
-                    icon: 'warning',
-                    confirmButtonText: 'OK'
-                }).then((result) => {
-                    $("#kode_splr2").focus();
-                });
+            } else if (alamat == "") {
+                showErrorModal('Alamat tidak boleh kosong');
+                $("#alamat").focus();
                 return false;
             }
         });

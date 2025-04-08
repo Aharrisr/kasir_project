@@ -203,7 +203,7 @@
                                                 <div class="d-flex align-items-center mb-2">
                                                     <label for="" class="me-3 mb-0">Member</label>
                                                     <input class="form-control" list="datalistOptions" id="member"
-                                                        name="member" onchange="fetchDiscount()">
+                                                        name="member" onchange="fetchDiscount()" autocomplete="off">
                                                     <datalist id="datalistOptions">
                                                         @foreach ($member as $d)
                                                             <option

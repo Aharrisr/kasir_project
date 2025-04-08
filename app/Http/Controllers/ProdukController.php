@@ -18,7 +18,7 @@ class ProdukController extends Controller
         $db = Produk::query();
         $db->select('produk.*', 'nama_produk', 'nama_splr', 'stok', 'kode_produk');
         $db->join('supplier', 'produk.kode_splr', '=', 'supplier.kode_splr');
-        $db->orderBy('nama_produk');
+        $db->orderBy('kode_produk');
         if (!empty($request->kode_produk)) {
             $db->where('kode_produk', 'like', '%' . $request->kode_produk . '%');
         }
@@ -56,7 +56,7 @@ class ProdukController extends Controller
         {
             return str_pad($angka, $panjang, '0', STR_PAD_LEFT);
         }
-        $kode_produk = 'P' . tambah_nol_didepan($id_terbaru, 6);
+        $kode_produk = 'B' . tambah_nol_didepan($id_terbaru, 6);
 
         try {
             $data = [
@@ -74,7 +74,7 @@ class ProdukController extends Controller
                 return Redirect::back()->with(['success' => 'Data Berhasil Disimpan']);
             }
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            // dd($e->getMessage());
             return Redirect::back()->with(['warning' => 'Data Gagal Disimpan']);
         }
     }

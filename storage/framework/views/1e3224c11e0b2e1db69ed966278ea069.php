@@ -27,7 +27,7 @@
         }
     </style>
     <div class="page-body">
-        <div class="container-xl">
+        <div class="container-fluid">
             <div class="row mt-3">
                 <div class="col-12">
                     <div class="card shadow-lg p-2 mb-5 rounded">
@@ -503,26 +503,47 @@
 
         document.addEventListener("DOMContentLoaded", function() {
             let jumlahInputs = document.querySelectorAll(".jumlah-input");
+            let diskonInput = document.getElementById("diskon_display"); // Ambil elemen diskon
 
-            jumlahInputs.forEach(input => {
-                input.addEventListener("input", function() {
-                    let harga = parseFloat(this.getAttribute("data-harga"));
-                    let jumlah = parseInt(this.value);
-                    let subtotalElement = this.closest("tr").querySelector(".subtotal-text");
-
-                    if (!isNaN(jumlah) && jumlah > 0) {
-                        let subtotal = harga * jumlah;
-                        subtotalElement.querySelector("input").value = subtotal;
-                        subtotalElement.querySelector("span").textContent = "Rp. " + subtotal
-                            .toLocaleString("id-ID");
-                        hitungTotal();
-                    }
-                });
+            // Event Listener untuk setiap input jumlah barang
+            jumlahInputs.forEach((input) => {
+                input.addEventListener("input", hitungSubtotal);
             });
+
+            // Gunakan observer untuk mendeteksi perubahan diskon meskipun diubah oleh sistem
+            const observer = new MutationObserver(hitungTotal);
+            observer.observe(diskonInput, {
+                attributes: true,
+                childList: true,
+                subtree: true
+            });
+
+            // Jalankan perhitungan ulang secara berkala jika diskon berubah melalui sistem
+            setInterval(() => {
+                hitungTotal();
+            }, 500); // Cek perubahan diskon setiap 0.5 detik
+
+            function hitungSubtotal() {
+                let harga = parseFloat(this.getAttribute("data-harga"));
+                let jumlah = parseInt(this.value);
+                let subtotalElement = this.closest("tr").querySelector(".subtotal-text");
+
+                if (!isNaN(jumlah) && jumlah > 0) {
+                    let subtotal = harga * jumlah;
+                    subtotalElement.querySelector("input").value = subtotal;
+                    subtotalElement.querySelector("span").textContent = "Rp. " + subtotal.toLocaleString("id-ID");
+                } else {
+                    subtotalElement.querySelector("input").value = 0;
+                    subtotalElement.querySelector("span").textContent = "Rp. 0";
+                }
+
+                hitungTotal(); // Panggil hitung total setelah subtotal berubah
+            }
 
             function hitungTotal() {
                 let totalHarga = 0;
                 let totalJumlah = 0;
+                let diskonPersen = parseFloat(diskonInput.value) || 0; // Ambil diskon, default 0
 
                 document.querySelectorAll(".subtotal-text span").forEach(function(element) {
                     let subtotal = parseFloat(element.textContent.replace(/[^\d]/g, "")) || 0;
@@ -534,13 +555,17 @@
                     totalJumlah += jumlah;
                 });
 
-                document.getElementById("total-harga").textContent = "Rp. " + totalHarga.toLocaleString("id-ID");
+                // Hitung total setelah diskon
+                let totalSetelahDiskon = totalHarga - (totalHarga * diskonPersen / 100);
 
-                document.getElementById("total_harga").value = totalHarga;
+                // Update tampilan total harga dan jumlah barang
+                document.getElementById("total-harga").textContent = "Rp. " + totalSetelahDiskon.toLocaleString(
+                    "id-ID");
+                document.getElementById("total_harga").value = totalSetelahDiskon;
                 document.getElementById("total_jumlah").value = totalJumlah;
             }
 
-            hitungTotal();
+            hitungTotal(); // Hitung total saat halaman dimuat
         });
 
         document.addEventListener("DOMContentLoaded", function() {

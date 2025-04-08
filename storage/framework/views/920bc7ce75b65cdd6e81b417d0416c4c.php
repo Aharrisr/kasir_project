@@ -473,7 +473,7 @@
                         </path>
                         <path d="M12 16h.01"></path>
                     </svg>
-                    <h3>Terjadi Kesalahan</h3>
+                    <h3 id="textHeader">Terjadi Kesalahan</h3>
                     <div class="text-secondary" id="errorMessage"></div>
                 </div>
                 <div class="modal-footer d-flex justify-content-center gap-2" id="modalerrorFooter">
@@ -517,12 +517,13 @@
             e.preventDefault();
 
             // Set teks konfirmasi dalam modal
-            $("#errorMessage").text("Anda yakin mau menghapus data ini? Data akan terhapus permanen.");
+            $('#textHeader').text('Kamu yakin?')
+            $("#errorMessage").text("Data bakal hilang permanen. Tetap mau hapus?");
 
             // Tampilkan tombol konfirmasi dan batal
             $("#modalerrorFooter").html(`
-        <button id="confirmDelete" class="btn btn-danger px-5">Ya, Hapus</button>
-        <button id="cancelDelete" class="btn btn-secondary px-5" data-bs-dismiss="modal">Tidak</button>
+        <button id="confirmDelete" class="btn btn-danger px-5">Iya, Hapus</button>
+        <button id="cancelDelete" class="btn btn-secondary px-5" data-bs-dismiss="modal">Kembali</button>
     `);
 
             // Tampilkan modal
@@ -561,61 +562,43 @@
             input.value = value + "%";
         }
 
+        function showErrorModal(message) {
+            $('#textHeader').text('Oops, ada yang salah');
+            $('#errorMessage').text(message);
+            $('#errorModal').modal('show');
+        }
+
         $("#frmtambah").submit(function() {
             var nama_produk1 = $("#nama_produk1").val();
             var harga_beli = $("#harga_beli").val();
             var harga_jual = $("#harga_jual").val();
             var stok = $("#stok").val();
             var kode_splr2 = $("#kode_splr2").val();
+            var diskon = $("#diskon").val();
+
             if (nama_produk1 == "") {
-                Swal.fire({
-                    title: 'Opps!',
-                    text: 'Nama Produk Tidak Boleh Kosong',
-                    icon: 'warning',
-                    confirmButtonText: 'OK'
-                }).then((result) => {
-                    $("#nama_produk1").focus();
-                });
+                showErrorModal('Nama Produk tidak boleh kosong');
+                $("#nama_produk1").focus();
                 return false;
             } else if (harga_beli == "") {
-                Swal.fire({
-                    title: 'Opps!',
-                    text: 'Harga Tidak Boleh Kosong',
-                    icon: 'warning',
-                    confirmButtonText: 'OK'
-                }).then((result) => {
-                    $("#harga_beli").focus();
-                });
+                showErrorModal('Harga beli tidak boleh kosong');
+                $("#harga_beli").focus();
                 return false;
             } else if (harga_jual == "") {
-                Swal.fire({
-                    title: 'Opps!',
-                    text: 'Harga Tidak Boleh Kosong',
-                    icon: 'warning',
-                    confirmButtonText: 'OK'
-                }).then((result) => {
-                    $("#harga_jual").focus();
-                });
+                showErrorModal('Harga jual tidak boleh kosong');
+                $("#harga_jual").focus();
                 return false;
             } else if (stok == "") {
-                Swal.fire({
-                    title: 'Opps!',
-                    text: 'Stok Tidak Boleh Kosong',
-                    icon: 'warning',
-                    confirmButtonText: 'OK'
-                }).then((result) => {
-                    $("#stok").focus();
-                });
+                showErrorModal('Stok tidak boleh kosong');
+                $("#stok").focus();
                 return false;
             } else if (kode_splr2 == "-") {
-                Swal.fire({
-                    title: 'Opps!',
-                    text: 'Supplier Tidak Boleh Kosong',
-                    icon: 'warning',
-                    confirmButtonText: 'OK'
-                }).then((result) => {
-                    $("#kode_splr2").focus();
-                });
+                showErrorModal('Supplier harus dipilih');
+                $("#kode_splr2").focus();
+                return false;
+            } else if (diskon == "") {
+                showErrorModal('Diskon tidak boleh kosong');
+                $("#diskon").focus();
                 return false;
             }
         });

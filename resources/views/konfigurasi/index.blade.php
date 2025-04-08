@@ -21,7 +21,8 @@
                         </div>
                         <div class="card-body">
                             <div class="row mt-3">
-                                <form action="/konfigurasi/simpan">
+                                <form action="/konfigurasi/update" method="POST">
+                                    @csrf
                                     <div class="col-12">
                                         <div class="card">
                                             <div class="table-responsive">
@@ -33,20 +34,22 @@
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($setting as $s)
-
+                                                            <td hidden><input type="text" name="id_setting"
+                                                                    id="id_setting" value="{{ $s->id_setting }}"></td>
+                                                            <td class="text-center"><input class="form-control text-center"
+                                                                    type="text" name="diskon_member" id="diskon_member"
+                                                                    value="{{ $s->diskon_member }}%"
+                                                                    oninput="formatPersen(this)" autocomplete="off">
+                                                            </td>
+                                                            <td class="text-center"><input class="form-control"
+                                                                    type="text" name="nama_toko" id="nama_toko"
+                                                                    value="{{ $s->nama_toko }}" autocomplete="off">
+                                                            </td>
+                                                            <td class="text-center"><input class="form-control"
+                                                                    type="text" name="alamat" id="alamat"
+                                                                    value="{{ $s->alamat }}" autocomplete="off">
+                                                            </td>
                                                         @endforeach
-                                                        <td class="text-center"><input class="form-control text-center" type="text"
-                                                                name="diskon" id="diskon" value="{{ $s->diskon_member }}"
-                                                                oninput="formatPersen(this)" autocomplete="off">
-                                                        </td>
-                                                        <td class="text-center"><input class="form-control" type="text"
-                                                                name="nama_toko" id="nama_toko" value="{{ $s->nama_toko }}"
-                                                                oninput="formatPersen(this)" autocomplete="off">
-                                                        </td>
-                                                        <td class="text-center"><input class="form-control" type="text"
-                                                                name="alamat" id="alamat" value="{{ $s->alamat }}"
-                                                                oninput="formatPersen(this)" autocomplete="off">
-                                                        </td>
                                                     </tbody>
                                                 </table>
                                             </div>

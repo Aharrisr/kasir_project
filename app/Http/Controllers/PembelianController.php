@@ -45,93 +45,6 @@ class PembelianController extends Controller
         return view('pembelian.index', compact('user', 'pembelian', 'supplier', 'supplier1'));
     }
 
-    public function editform($kode_transaksi)
-    {
-        //data pembelian detail
-        $db = pembeliandetail::query();
-        $db->select('pembelian_detail.*', 'id_pembelian_detail', 'jumlah', 'subtotal', 'nama_produk', 'kode_transaksi', 'stok', 'id_produk');
-        $db->join('produk', 'pembelian_detail.kode_produk', '=', 'produk.kode_produk');
-        $db->orderBy('id_pembelian_detail');
-        $pembelian_detail = $db->paginate(10);
-
-        //data produk
-        $db1 = Produk::query();
-        $db1->select('produk.*', 'nama_produk', 'nama_splr', 'stok', 'kode_produk');
-        $db1->join('supplier', 'produk.kode_splr', '=', 'supplier.kode_splr');
-        $db1->orderBy('nama_produk');
-        $produk = $db1->paginate(10);
-
-        //data pembelian
-        $db2 = pembelian::where('kode_transaksi', $kode_transaksi);
-        $db2->select('pembelian.*', 'nama_splr', 'no_hp', 'alamat', 'total_item', 'total_harga', 'diskon', 'bayar', 'tanggal');
-        $db2->join('supplier', 'pembelian.kode_splr', '=', 'supplier.kode_splr');
-        $pembelian = $db2->first();
-
-        $transaksi = pembeliandetail::where('kode_transaksi', $kode_transaksi)->firstOrFail();
-
-        $count = $pembelian_detail->count();
-
-        $id = Auth::guard('user')->user()->id;
-        $user = DB::table('users')->where('id', $id)->first();
-        return view('pembelian.edit', compact('user', 'transaksi', 'pembelian_detail', 'produk', 'pembelian', 'count'));
-    }
-
-    public function edit($kode_transaksi, Request $request)
-    {
-        $total_item = $request->total_jumlah;
-        $total_harga = $request->total_harga;
-        $diskon = $request->diskon;
-        $bayar = $request->bayar;
-        $id_pembelian_detail = $request->id_pembelian_detail;
-        $jumlah = $request->jumlah;
-        $upstok = $request->upstok;
-        $subtotal = $request->subtotal;
-        $stok =  $request->stok;
-        $id_produk = $request->id_produk;
-        $hasil = $request->hasil;
-
-    if($hasil > 0){
-        $hasil2 = $stok + $hasil;
-            try {
-            $data_upproduk = [
-                'stok' => $hasil2
-            ];
-
-            $upproduk = DB::table('produk')
-                ->where('id_produk', $id_produk)
-                ->update($data_upproduk);
-            if ($upproduk) {
-                return Redirect::back()->with(['success_updatedata' => 'Data Berhasil Disimpan']);
-            }
-        } catch (\Exception $e) {
-            // dd($e->getMessage());
-            return Redirect::back()->with(['warning_updatedata' => 'Data Gagal Disimpan']);
-        }
-    }elseif($hasil == 0){
-             //kosong
-    }elseif($hasil < 0){
-            $hasil2 = $stok - abs($request->hasil);
-            try {
-            $data_upproduk = [
-                'stok' => $hasil2
-            ];
-
-            $upproduk = DB::table('produk')
-                ->where('id_produk', $id_produk)
-                ->update($data_upproduk);
-            if ($upproduk) {
-                return Redirect::back()->with(['success_updatedata' => 'Data Berhasil Disimpan']);
-            }
-        } catch (\Exception $e) {
-            // dd($e->getMessage());
-            return Redirect::back()->with(['warning_updatedata' => 'Data Gagal Disimpan']);
-        }
-    }
-
-        //**Update data stok produk**\\
-
-    }
-
     public function detail(Request $request)
     {
         $kode_transaksi = $request->kode_transaksi;
@@ -169,7 +82,7 @@ class PembelianController extends Controller
         {
             return str_pad($angka, $panjang, '0', STR_PAD_LEFT);
         }
-        $kode_transaksi = 'P' . tambah_nol_didepan($id_terbaru, 6);
+        $kode_transaksi = 'TP' . tambah_nol_didepan($id_terbaru, 6);
 
         //data pembelian detail
         $db = pembeliandetail::query();

@@ -172,7 +172,7 @@
                 <div class="col-6">
                     <div class="card shadow-lg p-3 rounded">
                         <div class="card-header">
-                            <h3 class="card-title">Uang Keluar</h3>
+                            <h3 class="card-title">Pembelian Bulan Ini</h3>
                         </div>
                         <div class="card-body">
                             <div id="chart-pengeluaran"></div>
@@ -182,7 +182,7 @@
                 <div class="col-6">
                     <div class="card shadow-lg p-3 rounded">
                         <div class="card-header">
-                            <h3 class="card-title">Barang Terjual</h3>
+                            <h3 class="card-title">Penjualan Bulan Ini</h3>
                         </div>
                         <div class="card-body">
                             <div id="chart-pemasukan"></div>
