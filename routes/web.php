@@ -10,6 +10,7 @@ use App\Http\Controllers\{
     SupplierController,
     PembelianController,
     PenjualandetailController,
+    LaporanController
 };
 use App\Http\Controllers\Konfigurasicontroller;
 use App\Http\Controllers\PembeliandetailController;
@@ -107,8 +108,11 @@ Route::middleware(['auth:user'])->group(function () {
     Route::get('/penjualan-detail', [PenjualandetailController::class, 'index'])->name('penjualan');
     Route::Post('/penjualan/detail', [PenjualandetailController::class, 'detail']);
 
+    // laporan
+    Route::get('/laporan', [LaporanController::class,'index'])->name('laporan');
+    Route::get('/laporan/export-pdf', [LaporanController::class, 'exportPDF'])->name('export.pdf');
 
-
+    // setting
     Route::get('/konfigurasi', [Konfigurasicontroller::class,'index'])->name('konfigurasi');
     Route::post('/konfigurasi/update', [Konfigurasicontroller::class,'update']);
 });

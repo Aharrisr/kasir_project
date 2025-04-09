@@ -132,11 +132,12 @@
                                                                         Rp. {{ number_format($s->harga_jual, 0, ',', '.') }}
                                                                     </td>
                                                                     <td class="text-center">
-                                                                        <input type="number" name="jumlah"
+                                                                        <input type="text" name="jumlah"
                                                                             class="jumlah-input form-control"
                                                                             data-harga="{{ $s->harga_jual }}"
-                                                                            value="{{ $s->jumlah }}" min="1"
-                                                                            max="{{ $s->stok }}">
+                                                                            value="{{ $s->jumlah }}" minlength="1"
+                                                                            maxlength="3"
+                                                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                                                     </td>
                                                                     <td class="text-center">
                                                                         <span class="subtotal-text">

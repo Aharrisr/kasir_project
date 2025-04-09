@@ -40,7 +40,7 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <div class="input-icon mt-3 mb-3">
+            <div class="input-icon mt-3">
                 <span class="input-icon-addon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -58,18 +58,20 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12">
-            <select name="id_level" id="id_level1" class="form-select">
-                <option value="">Pilih Peran</option>
-                @foreach ([1 => 'Admin', 2 => 'Kasir'] as $id => $role)
-                    <option {{ $user->id_level == $id ? 'selected' : '' }} value="{{ $id }}">
-                        {{ $role }}
-                    </option>
-                @endforeach
-            </select>
+    @if ($user->id != $id_user)
+        <div class="row">
+            <div class="col-12 mt-3">
+                <select name="id_level" id="id_level1" class="form-select">
+                    <option value="">Pilih Peran</option>
+                    @foreach ([1 => 'Admin', 2 => 'Kasir'] as $id => $role)
+                        <option {{ $user->id_level == $id ? 'selected' : '' }} value="{{ $id }}">
+                            {{ $role }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
         </div>
-    </div>
+    @endif
     <div class="row mt-3">
         <div class="col-12">
             <div class="row">

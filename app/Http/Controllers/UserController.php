@@ -67,8 +67,9 @@ class UserController extends Controller
     public function edit(Request $request)
     {
         $id = $request->id;
+        $id_user = Auth::guard('user')->user()->id;
         $user = DB::table('users')->where('id', $id)->first();
-        return view('user.edit', compact("user"));
+        return view('user.edit', compact("user", 'id_user'));
     }
 
     public function update($id, Request $request)

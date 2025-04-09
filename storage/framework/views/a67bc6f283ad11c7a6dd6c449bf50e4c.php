@@ -134,11 +134,12 @@
 
                                                                     </td>
                                                                     <td class="text-center">
-                                                                        <input type="number" name="jumlah"
+                                                                        <input type="text" name="jumlah"
                                                                             class="jumlah-input form-control"
                                                                             data-harga="<?php echo e($s->harga_jual); ?>"
-                                                                            value="<?php echo e($s->jumlah); ?>" min="1"
-                                                                            max="<?php echo e($s->stok); ?>">
+                                                                            value="<?php echo e($s->jumlah); ?>" minlength="1"
+                                                                            maxlength="3"
+                                                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                                                     </td>
                                                                     <td class="text-center">
                                                                         <span class="subtotal-text">

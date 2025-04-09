@@ -77,7 +77,7 @@
                                 <div class="col-12">
                                     <form action="/user" method="get">
                                         <div class="row">
-                                            <div class="col-3">
+                                            <div class="col-4">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" placeholder="Nama User"
                                                         id="nama_user" name="nama_user" value="{{ Request('nama_user') }}"
@@ -106,22 +106,17 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-1">
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-search">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-                                                            <path d="M21 21l-6 -6" />
-                                                        </svg>
-                                                        Cari
-                                                    </button>
-                                                </div>
-                                            </div>
+                                            <button hidden type="submit" class="btn btn-primary">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-search">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                                                    <path d="M21 21l-6 -6" />
+                                                </svg>
+                                                Cari
+                                            </button>
                                             <div class="col-1">
                                                 <div class="form-group">
                                                     <button type="reset" id="reset" name="reset"
@@ -489,7 +484,7 @@
                         </path>
                         <path d="M12 16h.01"></path>
                     </svg>
-                    <h3>Terjadi Kesalahan</h3>
+                    <h3 id="textHeader">Terjadi Kesalahan</h3>
                     <div class="text-secondary" id="errorMessage"></div>
                 </div>
                 <div class="modal-footer d-flex justify-content-center gap-2" id="modalerrorFooter">
@@ -529,19 +524,20 @@
             e.preventDefault();
 
             // Set teks konfirmasi dalam modal
-            $("#errorMessage").text("Anda yakin mau menghapus data ini? Data akan terhapus permanen.");
+            $('#textHeader').text('Kamu yakin?')
+            $("#errorMessage").text("Data bakal hilang permanen. Tetap mau hapus?");
 
             // Tampilkan tombol konfirmasi dan batal
             $("#modalerrorFooter").html(`
-        <button id="confirmDelete" class="btn btn-danger px-5">Ya, Hapus</button>
-        <button id="cancelDelete" class="btn btn-secondary px-5" data-bs-dismiss="modal">Tidak</button>
+        <button id="confirmDelete" class="btn btn-danger px-5">Iya, Hapus</button>
+        <button id="cancelDelete" class="btn btn-secondary px-5" data-bs-dismiss="modal">Kembali</button>
     `);
 
             // Tampilkan modal
             $("#errorModal").modal("show");
 
             // Event listener untuk tombol konfirmasi
-            $("#modalFooter").off("click", "#confirmDelete").on("click", "#confirmDelete", function() {
+            $("#modalerrorFooter").off("click", "#confirmDelete").on("click", "#confirmDelete", function() {
                 form.submit();
                 $("#errorModal").modal("hide");
             });

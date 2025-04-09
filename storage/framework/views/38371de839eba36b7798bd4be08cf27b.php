@@ -120,6 +120,42 @@
                         </svg>
                         Transaksi
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle <?php echo e(request()->is(['pembelian', 'penjualan']) ? 'show' : ''); ?>"
+                            href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button"
+                            aria-expanded="<?php echo e(request()->is(['pembelian', 'penjualan']) ? 'true' : ''); ?>">
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart-dollar">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                                    <path d="M13 17h-7v-14h-2" />
+                                    <path d="M6 5l14 1l-.575 4.022m-4.925 2.978h-8.5" />
+                                    <path d="M21 15h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5" />
+                                    <path d="M19 21v1m0 -8v1" />
+                                </svg>
+                            </span>
+                            <span class="nav-link-title">
+                                Aktivitas
+                            </span>
+                        </a>
+                        <div class="dropdown-menu <?php echo e(request()->is(['pembelian', 'penjualan']) ? 'show' : ''); ?> ">
+                            <div class="dropdown-menu-columns">
+                                <div class="dropdown-menu-column">
+                                    <a class="dropdown-item <?php echo e(request()->is(['pembelian']) ? 'active' : ''); ?> "
+                                        href="/pembelian">
+                                        Beli Barang
+                                    </a>
+                                    <a class="dropdown-item <?php echo e(request()->is(['penjualan']) ? 'active' : ''); ?> "
+                                        href="/penjualan">
+                                        Jual Barang
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link <?php echo e(request()->is('pembelian-detail') ? 'active' : ''); ?> "
                             href="/pembelian-detail">
@@ -164,42 +200,6 @@
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle <?php echo e(request()->is(['pembelian', 'penjualan']) ? 'show' : ''); ?>"
-                            href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button"
-                            aria-expanded="<?php echo e(request()->is(['pembelian', 'penjualan']) ? 'true' : ''); ?>">
-                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart-dollar">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-                                    <path d="M13 17h-7v-14h-2" />
-                                    <path d="M6 5l14 1l-.575 4.022m-4.925 2.978h-8.5" />
-                                    <path d="M21 15h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5" />
-                                    <path d="M19 21v1m0 -8v1" />
-                                </svg>
-                            </span>
-                            <span class="nav-link-title">
-                                Aktivitas
-                            </span>
-                        </a>
-                        <div class="dropdown-menu <?php echo e(request()->is(['pembelian', 'penjualan']) ? 'show' : ''); ?> ">
-                            <div class="dropdown-menu-columns">
-                                <div class="dropdown-menu-column">
-                                    <a class="dropdown-item <?php echo e(request()->is(['pembelian']) ? 'active' : ''); ?> "
-                                        href="/pembelian">
-                                        Beli Barang
-                                    </a>
-                                    <a class="dropdown-item <?php echo e(request()->is(['penjualan']) ? 'active' : ''); ?> "
-                                        href="/penjualan">
-                                        Jual Barang
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
                     <li class="nav-item"
                         style="border-bottom: 1px solid rgba(255, 255, 255, 0.2); margin-bottom: 10px;">
                     </li>
@@ -219,7 +219,7 @@
                         Laporan
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo e(request()->is('#') ? 'active' : ''); ?> " href="/">
+                        <a class="nav-link <?php echo e(request()->is('laporan') ? 'active' : ''); ?> " href="/laporan">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -316,6 +316,26 @@
                         Transaksi
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link <?php echo e(request()->is('/penjualan') ? 'active' : ''); ?> " href="/penjualan">
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart-dollar">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                                    <path d="M13 17h-7v-14h-2" />
+                                    <path d="M6 5l14 1l-.575 4.022m-4.925 2.978h-8.5" />
+                                    <path d="M21 15h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5" />
+                                    <path d="M19 21v1m0 -8v1" />
+                                </svg>
+                            </span>
+                            <span class="nav-link-title">
+                                Transaksi
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link <?php echo e(request()->is('penjualan-detail') ? 'active' : ''); ?> "
                             href="/penjualan-detail">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -334,26 +354,6 @@
                             </span>
                             <span class="nav-link-title">
                                 Riwayat Penjualan
-                            </span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo e(request()->is('/penjualan') ? 'active' : ''); ?> " href="/penjualan">
-                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart-dollar">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-                                    <path d="M13 17h-7v-14h-2" />
-                                    <path d="M6 5l14 1l-.575 4.022m-4.925 2.978h-8.5" />
-                                    <path d="M21 15h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5" />
-                                    <path d="M19 21v1m0 -8v1" />
-                                </svg>
-                            </span>
-                            <span class="nav-link-title">
-                                Transaksi
                             </span>
                         </a>
                     </li>

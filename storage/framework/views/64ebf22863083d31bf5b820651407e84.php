@@ -40,7 +40,7 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <div class="input-icon mt-3 mb-3">
+            <div class="input-icon mt-3">
                 <span class="input-icon-addon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -58,19 +58,21 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12">
-            <select name="id_level" id="id_level1" class="form-select">
-                <option value="">Pilih Peran</option>
-                <?php $__currentLoopData = [1 => 'Admin', 2 => 'Kasir']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id => $role): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <option <?php echo e($user->id_level == $id ? 'selected' : ''); ?> value="<?php echo e($id); ?>">
-                        <?php echo e($role); ?>
+    <?php if($user->id != $id_user): ?>
+        <div class="row">
+            <div class="col-12 mt-3">
+                <select name="id_level" id="id_level1" class="form-select">
+                    <option value="">Pilih Peran</option>
+                    <?php $__currentLoopData = [1 => 'Admin', 2 => 'Kasir']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id => $role): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <option <?php echo e($user->id_level == $id ? 'selected' : ''); ?> value="<?php echo e($id); ?>">
+                            <?php echo e($role); ?>
 
-                    </option>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            </select>
+                        </option>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </select>
+            </div>
         </div>
-    </div>
+    <?php endif; ?>
     <div class="row mt-3">
         <div class="col-12">
             <div class="row">
