@@ -140,11 +140,11 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" width="1%">No</th>
-                                                        <th class="text-center" width="5%">
+                                                        <th class="text-center" class="text-center" width="5%">
                                                             Kode Barang
                                                         </th>
-                                                        <th width="15%">Nama Barang</th>
-                                                        <th width="15%">Merek</th>
+                                                        <th class="text-center" width="15%">Nama Barang</th>
+                                                        <th class="text-center" width="15%">Merek</th>
                                                         <th class="text-center" width="10%">
                                                             Harga Beli / Item
                                                         </th>
@@ -170,8 +170,15 @@
                                                             <td class="text-center">
                                                                 <span class="badge bg-success"><?php echo e($s->kode_produk); ?></span>
                                                             </td>
-                                                            <td><?php echo e($s->nama_produk); ?></td>
-                                                            <td><?php echo e($s->nama_splr); ?></td>
+                                                            <td class="text-center"><?php echo e($s->nama_produk); ?></td>
+                                                            <?php if($s->nama_splr == null): ?>
+                                                                <td class="text-center">
+                                                                    <span class="badge bg-danger">Supplier Tidak
+                                                                        Ditemukan</span>
+                                                                </td>
+                                                            <?php else: ?>
+                                                                <td class="text-center"><?php echo e($s->nama_splr); ?></td>
+                                                            <?php endif; ?>
                                                             <td class="text-center">
                                                                 <?php echo e('Rp ' . number_format($s->harga_beli, 0, ',', '.')); ?>
 

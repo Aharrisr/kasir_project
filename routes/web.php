@@ -10,7 +10,8 @@ use App\Http\Controllers\{
     SupplierController,
     PembelianController,
     PenjualandetailController,
-    LaporanController
+    LaporanController,
+    ProfileController
 };
 use App\Http\Controllers\Konfigurasicontroller;
 use App\Http\Controllers\PembeliandetailController;
@@ -107,10 +108,15 @@ Route::middleware(['auth:user'])->group(function () {
     // penjualan detail
     Route::get('/penjualan-detail', [PenjualandetailController::class, 'index'])->name('penjualan');
     Route::Post('/penjualan/detail', [PenjualandetailController::class, 'detail']);
+    Route::delete('/penjualan-detail/{kode_transaksi}/delete', [PenjualandetailController::class, 'deletepenjualan']);
 
     // laporan
     Route::get('/laporan', [LaporanController::class,'index'])->name('laporan');
     Route::get('/laporan/export-pdf', [LaporanController::class, 'exportPDF'])->name('export.pdf');
+
+    // profile
+    Route::get('/profile', [ProfileController::class,'index'])->name('profile');
+    Route::post('/profile/{id}/update', [ProfileController::class,'update']);
 
     // setting
     Route::get('/konfigurasi', [Konfigurasicontroller::class,'index'])->name('konfigurasi');

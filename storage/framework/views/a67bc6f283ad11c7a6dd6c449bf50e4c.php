@@ -136,6 +136,7 @@
                                                                     <td class="text-center">
                                                                         <input type="text" name="jumlah"
                                                                             class="jumlah-input form-control"
+                                                                            autocomplete="off"
                                                                             data-harga="<?php echo e($s->harga_jual); ?>"
                                                                             value="<?php echo e($s->jumlah); ?>" minlength="1"
                                                                             maxlength="3"
@@ -232,10 +233,12 @@
                                                         id="bayar_display" name="bayar_display" autocomplete="off">
                                                     <input type="hidden" id="bayar" name="bayar">
                                                 </div>
-                                                <input hidden type="text" class="form-control" placeholder="Level"
-                                                    id="level_display" name="level_display" autocomplete="off"
-                                                    value="" readonly>
-                                                <div id="error-message" class="text-danger mt-2"></div>
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <label for="bayar_display" class="me-3 mb-0">kembalian</label>
+                                                    <input type="text" class="form-control" name="kembalian"
+                                                        id="kembalian" placeholder="Rp. 0">
+                                                    <p id="error-message" class="text-danger mt-2"></p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -667,6 +670,12 @@
                 errorModal.show();
             <?php endif; ?>
 
+            <?php if(session('warning_stok')): ?>
+                document.getElementById("errorMessage").textContent = 'Jumlah Melebihi dari stok';
+                var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+                errorModal.show();
+            <?php endif; ?>
+
             <?php if(session('success_updatedata')): ?>
                 document.getElementById("successMessage").textContent = 'Data Berhasil Simpan.';
                 var successModal = new bootstrap.Modal(document.getElementById('successModal'));
@@ -736,6 +745,27 @@
                 document.getElementById('diskon_display').value = '0%';
             }
         }
+
+        function formatRupiah(angka) {
+            return 'Rp. ' + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
+
+        function parseRupiah(str) {
+            return parseInt(str.replace(/[^0-9]/g, '')) || 0;
+        }
+
+        function hitungKembalian() {
+            const totalHarga = parseInt(document.getElementById('total_harga').value) || 0;
+            const bayar = parseRupiah(document.getElementById('bayar_display').value);
+
+            const kembalian = bayar - totalHarga;
+
+            document.getElementById('bayar').value = bayar;
+            document.getElementById('kembalian').value = formatRupiah(kembalian > 0 ? kembalian : 0);
+        }
+
+        // Jalankan setiap kali input bayar diubah
+        document.getElementById('bayar_display').addEventListener('input', hitungKembalian);
     </script>
 <?php $__env->stopPush(); ?>
 

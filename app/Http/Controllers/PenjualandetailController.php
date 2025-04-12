@@ -19,6 +19,7 @@ class PenjualandetailController extends Controller
 {
     public function index(Request $request)
     {
+        $hariini= date("Y-m-d");
         $db = Penjualan::query();
         $db->select('penjualan.*', 'id_penjualan', 'kode_transaksi', 'tanggal', 'total_item', 'total_harga', 'diskon', 'bayar', 'petugas', 'kode_member');
         $db->orderBy('kode_transaksi');
@@ -35,7 +36,7 @@ class PenjualandetailController extends Controller
 
         $id = Auth::guard('user')->user()->id;
         $user = DB::table('users')->where('id', $id)->first();
-        return view('penjualan.index', compact('user', 'penjualan', 'supplier'));
+        return view('penjualan.index', compact('user', 'penjualan', 'supplier', 'hariini'));
     }
 
     public function detail(Request $request)
@@ -48,5 +49,21 @@ class PenjualandetailController extends Controller
             ->orderBy('penjualan_detail.id_produk')
             ->paginate(10);
         return view('penjualan.detail', compact("detail"));
+    }
+
+    public function deletepenjualan($kode_transaksi)
+    {
+        $pembelian = Penjualan::where('kode_transaksi',$kode_transaksi)->first();
+        $detail = Penjualandetail::where('kode_transaksi', $kode_transaksi)->get();
+        foreach ($detail as $s) {
+            $produk = produk::find($s->id_produk);
+            if ($produk) {
+                $produk->stok += $s->jumlah;
+                $produk->update();
+            }
+            $s->delete();
+        }
+        $pembelian->delete();
+        return Redirect::back()->with(['success' => 'Data Berhasil Disimpan']);
     }
 }

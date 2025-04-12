@@ -139,11 +139,11 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" width="1%">No</th>
-                                                        <th class="text-center" width="5%">
+                                                        <th class="text-center" class="text-center" width="5%">
                                                             Kode Barang
                                                         </th>
-                                                        <th width="15%">Nama Barang</th>
-                                                        <th width="15%">Merek</th>
+                                                        <th class="text-center" width="15%">Nama Barang</th>
+                                                        <th class="text-center" width="15%">Merek</th>
                                                         <th class="text-center" width="10%">
                                                             Harga Beli / Item
                                                         </th>
@@ -168,8 +168,15 @@
                                                             <td class="text-center">
                                                                 <span class="badge bg-success">{{ $s->kode_produk }}</span>
                                                             </td>
-                                                            <td>{{ $s->nama_produk }}</td>
-                                                            <td>{{ $s->nama_splr }}</td>
+                                                            <td class="text-center">{{ $s->nama_produk }}</td>
+                                                            @if ($s->nama_splr == null)
+                                                                <td class="text-center">
+                                                                    <span class="badge bg-danger">Supplier Tidak
+                                                                        Ditemukan</span>
+                                                                </td>
+                                                            @else
+                                                                <td class="text-center">{{ $s->nama_splr }}</td>
+                                                            @endif
                                                             <td class="text-center">
                                                                 {{ 'Rp ' . number_format($s->harga_beli, 0, ',', '.') }}
                                                             </td>

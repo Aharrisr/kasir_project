@@ -42,12 +42,20 @@
     <script src="<?php echo e(asset('tabler/dist/js/demo-theme.min.js?1674944402')); ?>"></script>
     <div class="page">
         <!-- Sidebar -->
-        <?php if(!Route::is('transaksi-pembelian') && !Route::is('transaksi-penjualan') && !Route::is('selesai')): ?>
+        <?php if(
+            !Route::is('transaksi-pembelian') &&
+                !Route::is('transaksi-penjualan') &&
+                !Route::is('selesai') &&
+                !Route::is('profile')): ?>
             <?php echo $__env->make('layouts.sidebar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
         <?php endif; ?>
 
         <!-- Navbar -->
-        <?php if(!Route::is('transaksi-pembelian') && !Route::is('transaksi-penjualan') && !Route::is('selesai')): ?>
+        <?php if(
+            !Route::is('transaksi-pembelian') &&
+                !Route::is('transaksi-penjualan') &&
+                !Route::is('selesai') &&
+                !Route::is('profile')): ?>
             <?php echo $__env->make('layouts.header', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
         <?php endif; ?>
         <div class="page-wrapper">

@@ -2,8 +2,8 @@
     <div class="container-fluid">
         <h1 class="navbar-brand navbar-brand-autodark">
             <a href=".">
-                <img src="{{ asset('img/logo-white.png') }}" width="110" height="32" alt="Dashboard"
-                    class="navbar-brand-image">
+                <img src="{{ asset('img/logo-white.png') }}" style="max-width: 180px; height: auto;"
+                    alt="Dashboard" class="navbar-brand-image">
             </a>
         </h1>
         <div class="collapse navbar-collapse" id="sidebar-menu">

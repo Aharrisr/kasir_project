@@ -173,7 +173,14 @@
                                                                 <span
                                                                     class="badge bg-success">{{ $s->kode_transaksi }}</span>
                                                             </td>
-                                                            <td class="text-center">{{ $s->nama_splr }}</td>
+                                                            @if ($s->nama_splr == null)
+                                                                <td class="text-center">
+                                                                    <span class="badge bg-danger">Supplier Tidak
+                                                                        Ditemukan</span>
+                                                                </td>
+                                                            @else
+                                                                <td class="text-center">{{ $s->nama_splr }}</td>
+                                                            @endif
                                                             <td class="text-center">{{ $s->total_item }}</td>
                                                             <td class="text-center">
                                                                 {{ number_format($s->total_harga, 0, ',', '.') }}

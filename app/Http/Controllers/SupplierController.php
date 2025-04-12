@@ -30,7 +30,15 @@ class SupplierController extends Controller
 
     public function tambah(Request $request)
     {
-        $kode_splr = $request->kode_splr;
+        $kode_splr = DB::table('supplier')->latest('kode_splr')->first();
+
+        //Kode Produk
+        $id_terbaru = $kode_splr ? $kode_splr->kode_splr + 1 : 1;
+        function tambah_nol_didepan($angka, $panjang)
+        {
+            return str_pad($angka, $panjang, '0', STR_PAD_LEFT);
+        }
+        $kode_splr = 'SP' . tambah_nol_didepan($id_terbaru, 6);
         $nama_splr = $request->nama_splr;
         $no_hp = $request->no_hp;
         $alamat = $request->alamat;
@@ -48,7 +56,7 @@ class SupplierController extends Controller
                 return Redirect::back()->with(['success' => 'Data Berhasil Disimpan']);
             }
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            // dd($e->getMessage());
             return Redirect::back()->with(['warning' => 'Data Gagal Disimpan']);
         }
     }

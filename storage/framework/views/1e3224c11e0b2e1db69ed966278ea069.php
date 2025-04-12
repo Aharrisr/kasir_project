@@ -214,9 +214,9 @@
                                             <div class="col-4 d-flex flex-column align-items-end">
                                                 <div class="d-flex align-items-center mb-2">
                                                     <label for="diskon" class="me-3 mb-0">Diskon</label>
-                                                    <input type="text" class="form-control" placeholder="0%"
+                                                    <input type="text" class="form-control" value="0%"
                                                         id="diskon_display" name="diskon_display" autocomplete="off">
-                                                    <input type="hidden" id="diskon" name="diskon">
+                                                    <input type="hidden" id="diskon" name="diskon" value="0">
                                                 </div>
                                                 <div class="d-flex align-items-center">
                                                     <label for="bayar_display" class="me-3 mb-0">Bayar</label>
@@ -282,10 +282,10 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-center" width="1%">No</th>
-                                                <th class="text-center" width="10%">
+                                                <th class="text-center" width="8%">
                                                     Kode Produk
                                                 </th>
-                                                <th width="10%">Nama Barang</th>
+                                                <th class="text-center" width="8%">Nama Barang</th>
                                                 <th class="text-center" width="8%">
                                                     Harga Satuan
                                                 </th>
@@ -315,7 +315,7 @@
                                                                         hidden name="kode_produk"
                                                                         value="<?php echo e($s->kode_produk); ?>"><?php echo e($s->kode_produk); ?></span>
                                                             </td>
-                                                            <td id="nama_produk"><input type="text" hidden
+                                                            <td class="text-center" id="nama_produk"><input type="text" hidden
                                                                     name="nama_produk"
                                                                     value="<?php echo e($s->nama_produk); ?>"><?php echo e($s->nama_produk); ?>
 

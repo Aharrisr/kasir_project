@@ -56,10 +56,10 @@
                                     <div class="card">
                                         <div class="table-responsive">
                                             <table class="table table-vcenter card-table table-striped">
-                                                <thead>
+                                                <thead class="text-center">
                                                     <tr>
-                                                        <th class="text-center" width="1%">No</th>
-                                                        <th class="text-center" width="3%">
+                                                        <th width="1%">No</th>
+                                                        <th width="8%">
                                                             Kode Supplier
                                                         </th>
                                                         <th width="10%">Nama Supplier</th>
@@ -68,14 +68,14 @@
                                                         <th width="5%"></th>
                                                     </tr>
                                                 </thead>
-                                                <tbody id="hasil-pencarian">
+                                                <tbody class="text-center">
                                                     <?php $__currentLoopData = $supplier; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $d): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <tr>
-                                                            <td class="text-center">
+                                                            <td>
                                                                 <?php echo e($loop->iteration + $supplier->firstItem() - 1); ?>
 
                                                             </td>
-                                                            <td class="text-center">
+                                                            <td>
                                                                 <span class="badge bg-success"><?php echo e($d->kode_splr); ?></span>
                                                             </td>
                                                             <td><?php echo e($d->nama_splr); ?></td>

@@ -17,7 +17,7 @@ class ProdukController extends Controller
     {
         $db = Produk::query();
         $db->select('produk.*', 'nama_produk', 'nama_splr', 'stok', 'kode_produk');
-        $db->join('supplier', 'produk.kode_splr', '=', 'supplier.kode_splr');
+        $db->leftJoin('supplier', 'produk.kode_splr', '=', 'supplier.kode_splr');
         $db->orderBy('kode_produk');
         if (!empty($request->kode_produk)) {
             $db->where('kode_produk', 'like', '%' . $request->kode_produk . '%');

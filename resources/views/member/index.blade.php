@@ -129,32 +129,32 @@
                                     <div class="card">
                                         <div class="table-responsive">
                                             <table class="table table-vcenter card-table table-striped">
-                                                <thead>
+                                                <thead class="text-center">
                                                     <tr>
-                                                        <th class="text-center" width="3%">No</th>
-                                                        <th width="5%" class="text-center">Kode Member</th>
-                                                        <th width="20%">Nama Member</th>
-                                                        <th width="15%">No wa / telp</th>
+                                                        <th width="3%">No</th>
+                                                        <th width="5%">Kode Member</th>
+                                                        <th width="15%">Nama Member</th>
+                                                        <th width="10%">No wa / telp</th>
                                                         <th width="20%">Alamat</th>
-                                                        <th class="text-center" width="8%"></th>
+                                                        <th width="8%"></th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody class="text-center">
                                                     @foreach ($member as $s)
                                                         <tr>
                                                             <td hidden><input type="text" name="id_member"
                                                                     id="id_member" value="{{ $s->id_member }}"></td>
-                                                            <td class="text-center">
+                                                            <td>
                                                                 {{ $loop->iteration + $member->firstItem() - 1 }}
                                                             </td>
-                                                            <td class="text-center">
+                                                            <td>
                                                                 <span class="badge bg-success">{{ $s->kode_member }}</span>
                                                             </td>
                                                             <td>{{ $s->nama }}</td>
                                                             <td>{{ $s->no_hp }}</td>
                                                             <td>{{ $s->alamat }}</td>
                                                             <td>
-                                                                <div class="text-center">
+                                                                <div>
                                                                     <div class="btn-group">
                                                                         <a href="#" class="edit btn btn-info btn-sm"
                                                                             id_member="{{ $s->id_member }}">

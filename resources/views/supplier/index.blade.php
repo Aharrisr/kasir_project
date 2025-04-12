@@ -129,32 +129,32 @@
                                     <div class="card">
                                         <div class="table-responsive">
                                             <table class="table table-vcenter card-table table-striped">
-                                                <thead>
+                                                <thead class="text-center">
                                                     <tr>
-                                                        <th class="text-center" width="1%">No</th>
-                                                        <th class="text-center" width="3%">
+                                                        <th width="1%">No</th>
+                                                        <th width="8%">
                                                             Kode Supplier
                                                         </th>
                                                         <th width="10%">Nama Supplier</th>
                                                         <th width="10%">No. WA / Telp</th>
-                                                        <th width="30%">Alamat</th>
+                                                        <th width="20%">Alamat</th>
                                                         <th width="5%"></th>
                                                     </tr>
                                                 </thead>
-                                                <tbody id="hasil-pencarian">
+                                                <tbody class="text-center">
                                                     @foreach ($supplier as $s)
                                                         <tr>
-                                                            <td class="text-center">
+                                                            <td>
                                                                 {{ $loop->iteration + $supplier->firstItem() - 1 }}
                                                             </td>
-                                                            <td class="text-center">
+                                                            <td>
                                                                 <span class="badge bg-success">{{ $s->kode_splr }}</span>
                                                             </td>
                                                             <td>{{ $s->nama_splr }}</td>
                                                             <td>{{ $s->no_hp }}</td>
                                                             <td>{{ $s->alamat }}</td>
                                                             <td>
-                                                                <div class="text-center">
+                                                                <div>
                                                                     <div class="btn-group">
                                                                         <a href="#" class="edit btn btn-info btn-sm"
                                                                             kode_splr="{{ $s->kode_splr }}">
@@ -226,31 +226,6 @@
                 <div class="modal-body">
                     <form action="/supplier/tambah" method="POST" id="frmtambah" enctype="multipart/form-data">
                         @csrf
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="input-icon mb-3">
-                                    <span class="input-icon-addon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="icon icon-tabler icons-tabler-outline icon-tabler-barcode">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M4 7v-1a2 2 0 0 1 2 -2h2" />
-                                            <path d="M4 17v1a2 2 0 0 0 2 2h2" />
-                                            <path d="M16 4h2a2 2 0 0 1 2 2v1" />
-                                            <path d="M16 20h2a2 2 0 0 0 2 -2v-1" />
-                                            <path d="M5 11h1v2h-1z" />
-                                            <path d="M10 11l0 2" />
-                                            <path d="M14 11h1v2h-1z" />
-                                            <path d="M19 11l0 2" />
-                                        </svg>
-                                    </span>
-                                    <input type="text" value="" id="kode_splr1" class="form-control"
-                                        minlength="1" maxlength="4" autocomplete="off" name="kode_splr"
-                                        placeholder="Kode Supplier" oninput="KodesplrInput(this)">
-                                </div>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-12">
                                 <div class="input-icon mb-3">
@@ -423,18 +398,6 @@
 @endsection
 @push('myscript')
     <script>
-        function KodesplrInput(input) {
-            let words = input.value.split(' ');
-
-            input.value = words.map(word => {
-                if (word.length <= 4) {
-                    return word.toUpperCase(); // Jika <= 3 huruf, buat huruf besar semua
-                } else {
-                    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(); // Huruf pertama besar
-                }
-            }).join(' ');
-        }
-
         function capitalizeFirstLetter(input) {
             let words = input.value.split(' ');
             input.value = words

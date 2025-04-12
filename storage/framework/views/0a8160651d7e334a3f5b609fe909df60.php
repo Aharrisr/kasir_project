@@ -176,7 +176,14 @@
                                                                 <span
                                                                     class="badge bg-success"><?php echo e($s->kode_transaksi); ?></span>
                                                             </td>
-                                                            <td class="text-center"><?php echo e($s->nama_splr); ?></td>
+                                                            <?php if($s->nama_splr == null): ?>
+                                                                <td class="text-center">
+                                                                    <span class="badge bg-danger">Supplier Tidak
+                                                                        Ditemukan</span>
+                                                                </td>
+                                                            <?php else: ?>
+                                                                <td class="text-center"><?php echo e($s->nama_splr); ?></td>
+                                                            <?php endif; ?>
                                                             <td class="text-center"><?php echo e($s->total_item); ?></td>
                                                             <td class="text-center">
                                                                 <?php echo e(number_format($s->total_harga, 0, ',', '.')); ?>

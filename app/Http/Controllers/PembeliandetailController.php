@@ -22,7 +22,7 @@ class PembeliandetailController extends Controller
         $hariini= date("Y-m-d");
         $db = Pembelian::query();
         $db->select('pembelian.*', 'id_pembelian', 'nama_splr', 'tanggal', 'total_item', 'total_harga', 'diskon', 'bayar');
-        $db->join('supplier', 'pembelian.kode_splr', '=', 'supplier.kode_splr');
+        $db->leftjoin('supplier', 'pembelian.kode_splr', '=', 'supplier.kode_splr');
         $db->orderBy('kode_transaksi');
         if (!empty($request->kode_transaksi)) {
             $db->where('kode_transaksi', 'like', '%' . $request->kode_transaksi . '%');

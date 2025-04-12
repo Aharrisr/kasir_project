@@ -100,8 +100,7 @@
                                             <div class="col-1">
                                                 <div class="form-group">
                                                     <button type="reset" id="reset" name="reset"
-                                                        class="btn btn-danger"
-                                                        onclick="window.location.href='/laporan'">
+                                                        class="btn btn-danger" onclick="window.location.href='/laporan'">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                             height="24" viewBox="0 0 24 24" fill="none"
                                                             stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -124,17 +123,19 @@
                                 <div class="col-12">
                                     <div class="card">
                                         <div class="table-responsive">
-                                            <table class="table table-vcenter card-table table-striped">
+                                            <table class="table table-vcenter card-table table-striped" id="tabellaporan">
                                                 <thead>
                                                     <tr>
+                                                        <th class="text-center" width="1%">No</th>
                                                         <th class="text-center" width="8%">Tanggal</th>
                                                         <th class="text-center" width="8%">Transaksi</th>
                                                         <th class="text-center" width="8%">bayar</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody id="hasil-pencarian">
+                                                <tbody class="text-center" id="hasil-pencarian">
                                                     @foreach ($data_transaksi as $item)
                                                         <tr>
+                                                            <td></td>
                                                             <td>{{ $item->tanggal }}</td>
                                                             <td>{{ $item->jenis }}</td>
                                                             <td>{{ number_format($item->bayar, 0, ',', '.') }}</td>
@@ -175,5 +176,26 @@
     </div>
 @endsection
 @push('myscript')
-    <script></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let tabellaporan = document.querySelector("#tabellaporan tbody");
+
+            updateRowNumbers();
+
+            let observer = new MutationObserver(updateRowNumbers);
+            observer.observe(tabellaporan, {
+                childList: true
+            });
+        });
+
+        function updateRowNumbers() {
+            let tableRows = document.querySelectorAll("#tabellaporan tbody tr");
+            tableRows.forEach((row, index) => {
+                let firstCell = row.querySelector("td:first-child");
+                if (firstCell) {
+                    firstCell.textContent = index + 1;
+                }
+            });
+        }
+    </script>
 @endpush

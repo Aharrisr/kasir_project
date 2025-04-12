@@ -102,12 +102,30 @@ class PenjualanController extends Controller
 
     public function getDiscount(Request $request)
     {
-        $dataDiskon = Setting::where('id_setting', 1)->first();
-        $nilaiDiskon = $dataDiskon ? $dataDiskon->diskon_member : 0;
+        $kode = $request->query('kode_member');
 
+    if (!$kode) {
         return response()->json([
-            'diskon' => $nilaiDiskon,
-        ]);
+            'error' => 'Kode member tidak boleh kosong'
+        ], 400);
+    }
+
+    $member = Member::where('kode_member', $kode)->first();
+
+    if (!$member) {
+        return response()->json([
+            'error' => 'Kode member tidak ditemukan'
+        ], 404);
+    }
+
+    // Ambil diskon dari Setting
+    $dataDiskon = Setting::where('id_setting', 1)->first();
+    $nilaiDiskon = $dataDiskon ? $dataDiskon->diskon_member : 0;
+
+    return response()->json([
+        'diskon' => $nilaiDiskon,
+        'nama' => $member->nama,
+    ]);
     }
 
     public function updatedata($kode_transaksi, Request $request)
@@ -124,6 +142,12 @@ class PenjualanController extends Controller
         $jumlah = $request->jumlah;
         $subtotal = $request->subtotal;
         $stok = $request->stok - $jumlah;
+        $vstok = $request->stok;
+
+        if ($jumlah > $vstok)
+        {
+            return Redirect::back()->with(['warning_stok' => 'Data Gagal Disimpan']);
+        }
 
         //**Add Data Penjualan**\\
         try {

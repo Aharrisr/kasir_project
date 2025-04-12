@@ -130,33 +130,33 @@
                                     <div class="card">
                                         <div class="table-responsive">
                                             <table class="table table-vcenter card-table table-striped">
-                                                <thead>
+                                                <thead class="text-center">
                                                     <tr>
-                                                        <th class="text-center" width="3%">No</th>
-                                                        <th width="5%" class="text-center">Kode Member</th>
-                                                        <th width="20%">Nama Member</th>
-                                                        <th width="15%">No wa / telp</th>
+                                                        <th width="3%">No</th>
+                                                        <th width="5%">Kode Member</th>
+                                                        <th width="15%">Nama Member</th>
+                                                        <th width="10%">No wa / telp</th>
                                                         <th width="20%">Alamat</th>
-                                                        <th class="text-center" width="8%"></th>
+                                                        <th width="8%"></th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody class="text-center">
                                                     <?php $__currentLoopData = $member; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <tr>
                                                             <td hidden><input type="text" name="id_member"
                                                                     id="id_member" value="<?php echo e($s->id_member); ?>"></td>
-                                                            <td class="text-center">
+                                                            <td>
                                                                 <?php echo e($loop->iteration + $member->firstItem() - 1); ?>
 
                                                             </td>
-                                                            <td class="text-center">
+                                                            <td>
                                                                 <span class="badge bg-success"><?php echo e($s->kode_member); ?></span>
                                                             </td>
                                                             <td><?php echo e($s->nama); ?></td>
                                                             <td><?php echo e($s->no_hp); ?></td>
                                                             <td><?php echo e($s->alamat); ?></td>
                                                             <td>
-                                                                <div class="text-center">
+                                                                <div>
                                                                     <div class="btn-group">
                                                                         <a href="#" class="edit btn btn-info btn-sm"
                                                                             id_member="<?php echo e($s->id_member); ?>">

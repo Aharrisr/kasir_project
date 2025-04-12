@@ -7,7 +7,7 @@
                         <tr>
                             <th class="text-center" width="1%">No</th>
                             <th class="text-center" width="8%">Kode Produk</th>
-                            <th width="15%">Nama Produk</th>
+                            <th class="text-center" width="8%">Nama Produk</th>
                             <th class="text-center" width="10%">Harga Satuan</th>
                             <th class="text-center" width="5%">Total Item</th>
                             <th class="text-center" width="10%">Total Harga</th>
@@ -21,7 +21,7 @@
                                     <td class="text-center">
                                         <span class="badge bg-success"><?php echo e($s->kode_produk); ?></span>
                                     </td>
-                                    <td><?php echo e($s->nama_produk); ?></td>
+                                    <td class="text-center"><?php echo e($s->nama_produk); ?></td>
                                     <td class="text-center"><?php echo e(number_format($s->harga_jual, 0, ',', '.')); ?></td>
                                     <td class="text-center"><?php echo e($s->jumlah); ?></td>
                                     <td class="text-center"><?php echo e(number_format($s->subtotal, 0, ',', '.')); ?></td>
