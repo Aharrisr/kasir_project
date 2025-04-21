@@ -1,66 +1,186 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<!--
+*** Thanks for checking out the Best-README-Template. If you have a suggestion
+*** that would make this better, please fork the repo and create a pull request
+*** or simply open an issue with the tag "enhancement".
+*** Thanks again! Now go create something AMAZING! :D
+-->
 
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
+
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
+<!-- PROJECT LOGO -->
+<br />
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <a href="https://github.com/Aharrisr/project_kasir_ujikom_2025.git">
+    <img src="public/github-assets/logo.png" alt="Logo" width="80" height="80">
+  </a>
+
+  <h3 align="center">Judul Versi PreAlpha 1.21.03.05</h3>
+
+  <p align="center">
+    Keterangan Sistem yang dibuat
+    <br />
+    <a href="https://github.com/godgodwinter/README-TEMPLATE-laravel"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://inetwork.baemon.web.id">View Demo https://inetwork.baemon.web.id</a>
+    ·
+    <a href="https://twitter.com/kakadlz">Report Bug</a>
+    ·
+    <a href="https://twitter.com/kakadlz">Request Feature</a>
+  </p>
 </p>
 
-## About Laravel
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+  </ol>
+</details>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<!-- ABOUT THE PROJECT -->
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## About The Project
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+[![Product Name Screen Shot][product-screenshot-dashboardluar]](https://github.com/godgodwinter/README-TEMPLATE-laravel)
 
-## Learning Laravel
+Sistem .
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Built With
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+Tools and Framework
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-   [Laravel 8](https://laravel.com)
+-   [PHP 7.4+](https://php.net)
+-   [Nodejs](https://node.js)
+-   [gitbash](https://git-scm.com/downloads)
+-   [composer](https://getcomposer.org/)
 
-## Laravel Sponsors
+Library/Plugin
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+-   [Auth:Fortify](#)
+-   [Auth:Jetstream](#)
+-   [Bootstrap 4](https://getbootstrap.com/docs/4.0/getting-started/introduction/)
+-   [Stisla](https://github.com/stisla/stisla)
 
-### Premium Partners
+<!-- GETTING STARTED -->
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Getting Started
 
-## Contributing
+Siapkan terlebih dahulu peralatan perangnya.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+<!-- ### Prerequisites
 
-## Code of Conduct
+This is an example of how to list things you need to use the software and how to install them.
+* npm
+  ```sh
+  npm install npm@latest -g
+  ``` -->
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Installation
 
-## Security Vulnerabilities
+<!-- 1. Get a free API Key at [https://example.com](https://example.com) -->
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. Clone the repo
+    ```sh
+    git clone https://github.com/godgodwinter/README-TEMPLATE-laravel.git
+    ```
+2. Install menggunakan composer
+    ```sh
+    composer install
+    ```
+3. Buat file .env atau copy dan edit file .env_copy kemudian sesuaikan dengan database anda
+
+    ```sh
+    cp .env_example .env
+    ```
+
+    Gunakan editor kesukaan anda. Jika mengedit menggunakan nano lakukan langkah berikut:
+
+    ```sh
+    nano .env //ubah database user dan password database di perangkat anda
+    ```
+
+4. jalankan server Laravel
+    ```sh
+    php artisan serve
+    ```
+5. lakukan migrasi database
+    ```sh
+    php artisan migrate
+    ```
+    atau migrate:fresh jika ingin dari data kosong
+    ```sh
+    php artisan migrate:fresh
+    ```
+6. Jika ingin menggunakan data palsu untuk testing lanjutkan langkah 6 ini
+    ```sh
+    php artisan db:seed --class=oneseeder  //untuk meload data user admin@gmail.com pass 12345678
+    ```
+
+Buka browser dan tulis alamat berikut
+
+```sh
+http://127.0.0.1:8000/
+```
+
+<!-- LICENSE -->
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Distributed under the MIT License. See `LICENSE` for more information.
+
+<!-- CONTACT -->
+
+## Contact
+
+Kukuh Setya Nugraha - [@kakadlz](https://twitter.com/kakadlz)
+Kukuh Setya Nugraha - [@kukuh.sn](https://www.instagram.com/kukuh.sn/)
+
+Project Link: [https://github.com/godgodwinter/inetwork](https://github.com/godgodwinter/inetwork)
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[contributors-shield]: https://img.shields.io/github/contributors/godgodwinter/inetwork.svg?style=for-the-badge
+[contributors-url]: https://github.com/godgodwinter/inetwork/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/godgodwinter/inetwork.svg?style=for-the-badge
+[forks-url]: https://github.com/godgodwinter/inetwork/network/members
+[stars-shield]: https://img.shields.io/github/stars/godgodwinter/inetwork.svg?style=for-the-badge
+[stars-url]: https://github.com/godgodwinter/inetwork/stargazers
+[issues-shield]: https://img.shields.io/github/issues/godgodwinter/inetwork.svg?style=for-the-badge
+[issues-url]: https://github.com/godgodwinter/inetwork/issues
+[license-shield]: https://img.shields.io/github/license/godgodwinter/inetwork.svg?style=for-the-badge
+[license-url]: https://github.com/godgodwinter/inetwork/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://www.instagram.com/kukuh.sn/
+[product-screenshot-dashboardluar]: images/dashboardluar.png
+[product-screenshot-dashboardlm]: images/dashboardlm.png
+[product-screenshot-tagihan]: images/tagihan.png
