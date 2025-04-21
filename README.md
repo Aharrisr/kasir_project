@@ -85,8 +85,6 @@ Library/Plugin
 
 ## Getting Started
 
-Siapkan terlebih dahulu peralatan perangnya.
-
 <!-- ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
@@ -111,6 +109,7 @@ This is an example of how to list things you need to use the software and how to
     ```sh
     cp .env_example .env
     ```
+
     Ubah di dalam file .env
 
     ```sh
@@ -135,10 +134,10 @@ This is an example of how to list things you need to use the software and how to
     ```
 
 Buka browser dan tulis alamat berikut
-
 ```sh
 http://127.0.0.1:8000/
 ```
+
 <!-- CONTACT -->
 
 ## Contact
