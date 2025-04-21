@@ -119,7 +119,6 @@ This is an example of how to list things you need to use the software and how to
     cp .env_example .env
     ```
     Ubah di dalam file .env
-
     ```sh
     B_CONNECTION=mysql
     DB_HOST=127.0.0.1
@@ -128,18 +127,17 @@ This is an example of how to list things you need to use the software and how to
     DB_USERNAME=root
     DB_PASSWORD=
     ```
-
-4.  jalankan server Laravel
-    ```sh
-    php artisan serve
-    ```
-5.  lakukan migrasi database
+4.  lakukan migrasi database
     ```sh
     php artisan migrate --seed
     ```
     atau migrate:fresh jika ingin dari data kosong
     ```sh
     php artisan migrate:fresh --seed
+    ```
+5.  jalankan server Laravel
+    ```sh
+    php artisan serve
     ```
 
 Buka browser dan tulis alamat berikut
@@ -158,7 +156,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Kukuh Setya Nugraha - [@aharris\_\_\_](https://www.instagram.com/aharris___)
+Alvitho Harris - [@aharris___](https://www.instagram.com/aharris___)
 
 Project Link: [https://github.com/Aharrisr/project_kasir_ujikom_2025.git](https://github.com/Aharrisr/project_kasir_ujikom_2025.git)
 
