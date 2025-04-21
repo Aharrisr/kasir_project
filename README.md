@@ -66,7 +66,8 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot-dashboardluar]](https://github.com/godgodwinter/README-TEMPLATE-laravel)
+1. Login
+   [![Product Name Screen Shot](public/github-assets/login.png)](https://github.com/Aharrisr/project_kasir_ujikom_2025.git)
 
 Sistem .
 
