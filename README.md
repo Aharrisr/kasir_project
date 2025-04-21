@@ -164,7 +164,7 @@ Project Link: [https://github.com/Aharrisr/project_kasir_ujikom_2025.git](https:
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 [contributors-shield]: https://img.shields.io/github/contributors/godgodwinter/inetwork.svg?style=for-the-badge
-[contributors-url]: https://github.com/Aharrisr/project_kasir_ujikom_2025/stargazers/graphs/contributors
+[contributors-url]: https://github.com/Aharrisr/project_kasir_ujikom_2025/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/godgodwinter/inetwork.svg?style=for-the-badge
 [forks-url]: https://github.com/Aharrisr/project_kasir_ujikom_2025/members
 [stars-shield]: https://img.shields.io/github/stars/godgodwinter/inetwork.svg?style=for-the-badge
