@@ -106,21 +106,41 @@ http://127.0.0.1:8000/
 
 [![Product Name Screen Shot](public/github-assets/dashboard.png)](https://github.com/Aharrisr/project_kasir_ujikom_2025.git)
 
-### Halaman Supplier
+### Supplier
 
 [![Product Name Screen Shot](public/github-assets/supplier.png)](https://github.com/Aharrisr/project_kasir_ujikom_2025.git)
 
-### Halaman Barang
+### Barang
 
 [![Product Name Screen Shot](public/github-assets/produk.png)](https://github.com/Aharrisr/project_kasir_ujikom_2025.git)
 
-### Halaman Member/Pelanggan
+### Member/Pelanggan
 
 [![Product Name Screen Shot](public/github-assets/member.png)](https://github.com/Aharrisr/project_kasir_ujikom_2025.git)
 
 ### Transaksi
 
 [![Product Name Screen Shot](public/github-assets/transaksi.png)](https://github.com/Aharrisr/project_kasir_ujikom_2025.git)
+
+### Riwayat Pembalian
+
+[![Product Name Screen Shot](public/github-assets/riwayat_pembelian.png)](https://github.com/Aharrisr/project_kasir_ujikom_2025.git)
+
+### Riwayat Penjualan
+
+[![Product Name Screen Shot](public/github-assets/riwayat_penjualan.png)](https://github.com/Aharrisr/project_kasir_ujikom_2025.git)
+
+### Laporan
+
+[![Product Name Screen Shot](public/github-assets/laporan.png)](https://github.com/Aharrisr/project_kasir_ujikom_2025.git)
+
+### Karyawan/User
+
+[![Product Name Screen Shot](public/github-assets/user.png)](https://github.com/Aharrisr/project_kasir_ujikom_2025.git)
+
+### Konfigurasi
+
+[![Product Name Screen Shot](public/github-assets/setting.png)](https://github.com/Aharrisr/project_kasir_ujikom_2025.git)
 
 ## 📬 Kontak
 
