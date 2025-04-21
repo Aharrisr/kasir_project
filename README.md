@@ -130,9 +130,14 @@ http://127.0.0.1:8000/
 
 [![Product Name Screen Shot](public/github-assets/member.png)](https://github.com/Aharrisr/project_kasir_ujikom_2025.git)
 
+### Transaksi
+
+[![Product Name Screen Shot](public/github-assets/transaksi.png)](https://github.com/Aharrisr/project_kasir_ujikom_2025.git)
+
 ## 📬 Kontak
 
 ### Alvitho Harris
 
 📷 Instagram: @aharris\_\_\_<br>
 🔗 Project GitHub: https://github.com/Aharrisr/project_kasir_ujikom_2025
+
