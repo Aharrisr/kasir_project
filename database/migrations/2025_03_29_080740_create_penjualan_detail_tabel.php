@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_penjualan_detail');
             $table->string('kode_transaksi');
             $table->string('id_produk');
-            $table->decimal('harga_beli',10,2);
+            $table->decimal('harga_jual',10,2);
             $table->string('jumlah');
             $table->decimal('subtotal',10,2);
             $table->dateTime('tanggal');

@@ -60,7 +60,13 @@
         <?php endif; ?>
         <div class="page-wrapper">
             <?php echo $__env->yieldContent('content'); ?>
-            <?php echo $__env->make('layouts.footer', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+            <?php if(
+                !Route::is('transaksi-pembelian') &&
+                    !Route::is('transaksi-penjualan') &&
+                    !Route::is('selesai') &&
+                    !Route::is('profile')): ?>
+                <?php echo $__env->make('layouts.footer', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+            <?php endif; ?>
         </div>
     </div>
     <!-- Libs JS -->

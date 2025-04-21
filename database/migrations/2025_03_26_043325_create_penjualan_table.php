@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('penjualan', function (Blueprint $table) {
             $table->id('id_penjualan');
             $table->string('kode_transaksi');
-            $table->string('kode_splr');
+            $table->string('kode_member');
+            $table->string('petugas');
             $table->integer('total_item');
             $table->integer('diskon')->default(0);
             $table->decimal('bayar',10,2);

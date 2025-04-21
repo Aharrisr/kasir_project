@@ -60,7 +60,13 @@
         @endif
         <div class="page-wrapper">
             @yield('content')
-            @include('layouts.footer')
+            @if (
+                !Route::is('transaksi-pembelian') &&
+                    !Route::is('transaksi-penjualan') &&
+                    !Route::is('selesai') &&
+                    !Route::is('profile'))
+                @include('layouts.footer')
+            @endif
         </div>
     </div>
     <!-- Libs JS -->
