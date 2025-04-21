@@ -18,19 +18,6 @@
   <a href="https://github.com/Aharrisr/project_kasir_ujikom_2025/issues">Ajukan Fitur</a>
 </p>
 
----
-
-## 🧾 Daftar Isi
-
-- [📝 Tentang Proyek](#📝-tentang-proyek)
-- [⚒️ Built With](#⚒️-built-with)
-- [🚀 Persiapan & Instalasi](#🚀-persiapan--instalasi)
-- [📸 Tampilan Aplikasi](#📸-tampilan-aplikasi)
-- [📬 Kontak](#📬-kontak)
-
-
----
-
 ## 📝 Tentang Proyek
 
 Aplikasi **Kasir Ujikom 2025** merupakan sistem kasir sederhana berbasis web yang dibangun menggunakan Laravel 11. Aplikasi ini mencakup fitur login, dashboard, manajemen barang, transaksi, laporan penjualan, dll.
