@@ -115,21 +115,19 @@ This is an example of how to list things you need to use the software and how to
     composer install
     ```
 3.  Buat file .env atau copy dan edit file .env_copy kemudian sesuaikan dengan database anda
+    ```sh
+    cp .env_example .env
+    ```
+    Ubah di dalam file .env
 
-        ```sh
-        cp .env_example .env
-        ```
-
-        Ubah di dalam file .env
-
-        ```sh
-        B_CONNECTION=mysql
-        DB_HOST=127.0.0.1
-        DB_PORT=3306
-        DB_DATABASE=db_kasir //sesuikan dengan database kalian
-        DB_USERNAME=root
-        DB_PASSWORD=
-        ```
+    ```sh
+    B_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=db_kasir //sesuikan dengan database kalian
+    DB_USERNAME=root
+    DB_PASSWORD=
+    ```
 
 4.  jalankan server Laravel
     ```sh
