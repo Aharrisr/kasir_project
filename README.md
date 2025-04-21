@@ -112,6 +112,7 @@ This is an example of how to list things you need to use the software and how to
     cp .env_example .env
     ```
     Ubah di dalam file .env
+
     ```sh
     B_CONNECTION=mysql
     DB_HOST=127.0.0.1
@@ -138,13 +139,6 @@ Buka browser dan tulis alamat berikut
 ```sh
 http://127.0.0.1:8000/
 ```
-
-<!-- LICENSE -->
-
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
 <!-- CONTACT -->
 
 ## Contact
