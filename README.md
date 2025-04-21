@@ -18,7 +18,6 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 <!-- PROJECT LOGO -->
@@ -67,27 +66,27 @@
 ## About The Project
 
 1. Login
-   [![Product Name Screen Shot](public/github-assets/login.png)](https://github.com/Aharrisr/project_kasir_ujikom_2025.git)
 
-Sistem .
+    [![Product Name Screen Shot](public/github-assets/login.png)](https://github.com/Aharrisr/project_kasir_ujikom_2025.git)
+
+2. Dashboard
+
+    [![Product Name Screen Shot](public/github-assets/dashboard.png)](https://github.com/Aharrisr/project_kasir_ujikom_2025.git)
 
 ### Built With
 
 This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 Tools and Framework
 
--   [Laravel 8](https://laravel.com)
--   [PHP 7.4+](https://php.net)
+-   [Laravel 11](https://laravel.com)
+-   [PHP 8.0+](https://php.net)
 -   [Nodejs](https://node.js)
 -   [gitbash](https://git-scm.com/downloads)
 -   [composer](https://getcomposer.org/)
 
 Library/Plugin
 
--   [Auth:Fortify](#)
--   [Auth:Jetstream](#)
--   [Bootstrap 4](https://getbootstrap.com/docs/4.0/getting-started/introduction/)
--   [Stisla](https://github.com/stisla/stisla)
+-   [Tabler 1.0.0 Beta-16](https://github.com/tabler/tabler/releases/tag/v1.0.0-beta16)
 
 <!-- GETTING STARTED -->
 
@@ -107,41 +106,41 @@ This is an example of how to list things you need to use the software and how to
 
 <!-- 1. Get a free API Key at [https://example.com](https://example.com) -->
 
-1. Clone the repo
+1.  Clone the repo
     ```sh
-    git clone https://github.com/godgodwinter/README-TEMPLATE-laravel.git
+    git clone https://github.com/Aharrisr/project_kasir_ujikom_2025.git
     ```
-2. Install menggunakan composer
+2.  Install menggunakan composer
     ```sh
     composer install
     ```
-3. Buat file .env atau copy dan edit file .env_copy kemudian sesuaikan dengan database anda
+3.  Buat file .env atau copy dan edit file .env_copy kemudian sesuaikan dengan database anda
 
-    ```sh
-    cp .env_example .env
-    ```
+        ```sh
+        cp .env_example .env
+        ```
+        Ubah di dalam file .env
 
-    Gunakan editor kesukaan anda. Jika mengedit menggunakan nano lakukan langkah berikut:
+        ```sh
+        B_CONNECTION=mysql
+        DB_HOST=127.0.0.1
+        DB_PORT=3306
+        DB_DATABASE=db_kasir //sesuikan dengan database kalian
+        DB_USERNAME=root
+        DB_PASSWORD=
+        ```
 
-    ```sh
-    nano .env //ubah database user dan password database di perangkat anda
-    ```
-
-4. jalankan server Laravel
+4.  jalankan server Laravel
     ```sh
     php artisan serve
     ```
-5. lakukan migrasi database
+5.  lakukan migrasi database
     ```sh
-    php artisan migrate
+    php artisan migrate --seed
     ```
     atau migrate:fresh jika ingin dari data kosong
     ```sh
-    php artisan migrate:fresh
-    ```
-6. Jika ingin menggunakan data palsu untuk testing lanjutkan langkah 6 ini
-    ```sh
-    php artisan db:seed --class=oneseeder  //untuk meload data user admin@gmail.com pass 12345678
+    php artisan migrate:fresh --seed
     ```
 
 Buka browser dan tulis alamat berikut
@@ -160,26 +159,20 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Kukuh Setya Nugraha - [@kakadlz](https://twitter.com/kakadlz)
-Kukuh Setya Nugraha - [@kukuh.sn](https://www.instagram.com/kukuh.sn/)
+Kukuh Setya Nugraha - [@aharris___](https://www.instagram.com/aharris___)
 
-Project Link: [https://github.com/godgodwinter/inetwork](https://github.com/godgodwinter/inetwork)
+Project Link: [https://github.com/Aharrisr/project_kasir_ujikom_2025.git](https://github.com/Aharrisr/project_kasir_ujikom_2025.git)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 [contributors-shield]: https://img.shields.io/github/contributors/godgodwinter/inetwork.svg?style=for-the-badge
-[contributors-url]: https://github.com/godgodwinter/inetwork/graphs/contributors
+[contributors-url]: https://github.com/Aharrisr/project_kasir_ujikom_2025/stargazers/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/godgodwinter/inetwork.svg?style=for-the-badge
-[forks-url]: https://github.com/godgodwinter/inetwork/network/members
+[forks-url]: https://github.com/Aharrisr/project_kasir_ujikom_2025/members
 [stars-shield]: https://img.shields.io/github/stars/godgodwinter/inetwork.svg?style=for-the-badge
-[stars-url]: https://github.com/godgodwinter/inetwork/stargazers
+[stars-url]: https://github.com/Aharrisr/project_kasir_ujikom_2025/stargazers
 [issues-shield]: https://img.shields.io/github/issues/godgodwinter/inetwork.svg?style=for-the-badge
-[issues-url]: https://github.com/godgodwinter/inetwork/issues
-[license-shield]: https://img.shields.io/github/license/godgodwinter/inetwork.svg?style=for-the-badge
-[license-url]: https://github.com/godgodwinter/inetwork/blob/master/LICENSE.txt
+[issues-url]: https://github.com/Aharrisr/project_kasir_ujikom_2025/issues
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://www.instagram.com/kukuh.sn/
-[product-screenshot-dashboardluar]: images/dashboardluar.png
-[product-screenshot-dashboardlm]: images/dashboardlm.png
-[product-screenshot-tagihan]: images/tagihan.png
+[linkedin-url]: https://www.instagram.com/aharris___
