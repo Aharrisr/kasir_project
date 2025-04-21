@@ -119,6 +119,7 @@ This is an example of how to list things you need to use the software and how to
         ```sh
         cp .env_example .env
         ```
+
         Ubah di dalam file .env
 
         ```sh
@@ -159,7 +160,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Kukuh Setya Nugraha - [@aharris___](https://www.instagram.com/aharris___)
+Kukuh Setya Nugraha - [@aharris\_\_\_](https://www.instagram.com/aharris___)
 
 Project Link: [https://github.com/Aharrisr/project_kasir_ujikom_2025.git](https://github.com/Aharrisr/project_kasir_ujikom_2025.git)
 
