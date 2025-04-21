@@ -22,11 +22,12 @@
 
 ## 🧾 Daftar Isi
 
--   [Tentang Proyek](#tentang-proyek)
--   [Built With](#built-with)
--   [Persiapan & Instalasi](#persiapan--instalasi)
--   [Tampilan Aplikasi](#tampilan-aplikasi)
--   [Kontak](#kontak)
+- [📝 Tentang Proyek](#📝-tentang-proyek)
+- [⚒️ Built With](#⚒️-built-with)
+- [🚀 Persiapan & Instalasi](#🚀-persiapan--instalasi)
+- [📸 Tampilan Aplikasi](#📸-tampilan-aplikasi)
+- [📬 Kontak](#📬-kontak)
+
 
 ---
 
