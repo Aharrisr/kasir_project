@@ -138,7 +138,7 @@ http://127.0.0.1:8000/
 
 ### Alvitho Harris
 
-**Instagram:** [@aharris__](https://www.instagram.com/aharris__)  
+**Instagram:** [@aharris___](https://www.instagram.com/aharris___)  
 **Project GitHub:** [https://github.com/Aharrisr/project_kasir_ujikom_2025](https://github.com/Aharrisr/project_kasir_ujikom_2025)
 
 
