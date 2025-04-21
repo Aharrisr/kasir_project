@@ -64,6 +64,6 @@ class PenjualandetailController extends Controller
             $s->delete();
         }
         $pembelian->delete();
-        return Redirect::back()->with(['success' => 'Data Berhasil Disimpan']);
+        return Redirect::back()->with(['success' => 'Data Berhasil Dihapus']);
     }
 }

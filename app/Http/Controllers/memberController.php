@@ -90,4 +90,14 @@ class memberController extends Controller
             return Redirect::back()->with(['warning' => 'Data Gagal Diupdate']);
         }
     }
+
+    public function deletemember($id_member)
+    {
+        $delete = DB::table('member')->where('id_member', $id_member)->delete();
+        if ($delete) {
+            return Redirect::back()->with(['success' => 'Data Berhasil Dihapus']);
+        } else {
+            return Redirect::back()->with(['warning' => 'Data Gagal Dihapus']);
+        }
+    }
 }

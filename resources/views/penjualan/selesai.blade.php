@@ -55,6 +55,7 @@
                                     Ulang
                                     Nota</button>
                                 <a href="/penjualan" class="btn btn-primary btn-flat">Transaksi Baru</a>
+                                <a class="btn btn-danger btn-flat" href="/dashboard">Kembali Ke Dashboard</a>
                             </div>
                         </div>
                     </div>

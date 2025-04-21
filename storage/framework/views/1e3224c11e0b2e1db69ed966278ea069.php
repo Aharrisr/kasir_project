@@ -32,7 +32,7 @@
                 <div class="col-12">
                     <div class="card shadow-lg p-2 mb-5 rounded">
                         <div class="card-header">
-                            <h3 class="card-title">Data Produk</h3>
+                            <h3 class="card-title">Transaksi Pembelian</h3>
                             <div class="card-actions">
                                 <a href="#" class="btn btn-primary" id="btn-tambah">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -137,7 +137,8 @@
 
                                                                     </td>
                                                                     <td class="text-center">
-                                                                        <input type="text" name="jumlah" autocomplete="off"
+                                                                        <input type="text" name="jumlah"
+                                                                            autocomplete="off"
                                                                             class="jumlah-input form-control"
                                                                             data-harga="<?php echo e($s->harga_beli); ?>"
                                                                             value="<?php echo e($s->jumlah); ?>" min="1"
@@ -315,8 +316,8 @@
                                                                         hidden name="kode_produk"
                                                                         value="<?php echo e($s->kode_produk); ?>"><?php echo e($s->kode_produk); ?></span>
                                                             </td>
-                                                            <td class="text-center" id="nama_produk"><input type="text" hidden
-                                                                    name="nama_produk"
+                                                            <td class="text-center" id="nama_produk"><input
+                                                                    type="text" hidden name="nama_produk"
                                                                     value="<?php echo e($s->nama_produk); ?>"><?php echo e($s->nama_produk); ?>
 
                                                             </td>
@@ -631,7 +632,7 @@
                 var successModal = new bootstrap.Modal(document.getElementById('successModal'));
                 successModal.show();
                 document.getElementById("btnRedirect").addEventListener("click", function() {
-                    window.location.href = "/pembelian";
+                    window.location.href = "/pembelian-detail";
                 });
             <?php endif; ?>
 

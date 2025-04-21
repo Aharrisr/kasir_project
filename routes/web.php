@@ -74,6 +74,7 @@ Route::middleware(['auth:user'])->group(function () {
     Route::post('/member/tambahmember', [MemberController::class, 'tambah']);
     Route::Post('/member/edit', [MemberController::class, 'edit']);
     Route::post('/member/{id_member}/update', [MemberController::class,'update']);
+    Route::post('member/{id_member}/delete', [MemberController::class, 'deletemember']);
 
     // Data Supplier
     Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier');

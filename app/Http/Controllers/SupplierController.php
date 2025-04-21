@@ -30,10 +30,10 @@ class SupplierController extends Controller
 
     public function tambah(Request $request)
     {
-        $kode_splr = DB::table('supplier')->latest('kode_splr')->first();
+        $supplier = DB::table('supplier')->latest('id_splr')->first();
 
         //Kode Produk
-        $id_terbaru = $kode_splr ? $kode_splr->kode_splr + 1 : 1;
+        $id_terbaru = $supplier ? $supplier->id_splr + 1 : 1;
         function tambah_nol_didepan($angka, $panjang)
         {
             return str_pad($angka, $panjang, '0', STR_PAD_LEFT);

@@ -59,7 +59,7 @@ class UserController extends Controller
                 return Redirect::back()->with(['success' => 'Data Berhasil Disimpan']);
             }
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            // dd($e->getMessage());
             return Redirect::back()->with(['warning' => 'Data Gagal Disimpan']);
         }
     }

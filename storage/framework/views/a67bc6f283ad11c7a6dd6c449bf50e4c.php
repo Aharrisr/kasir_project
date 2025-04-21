@@ -32,7 +32,7 @@
                 <div class="col-12">
                     <div class="card shadow-lg p-2 mb-5 rounded">
                         <div class="card-header">
-                            <h3 class="card-title">Data Produk</h3>
+                            <h3 class="card-title">Transaksi Penjualan</h3>
                             <div class="card-actions">
                                 <a href="#" class="btn btn-primary" id="btn-tambah">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -235,7 +235,7 @@
                                                 </div>
                                                 <div class="d-flex align-items-center mb-2">
                                                     <label for="bayar_display" class="me-3 mb-0">kembalian</label>
-                                                    <input type="text" class="form-control" name="kembalian"
+                                                    <input readonly type="text" class="form-control" name="kembalian"
                                                         id="kembalian" placeholder="Rp. 0">
                                                     <p id="error-message" class="text-danger mt-2"></p>
                                                 </div>
@@ -304,6 +304,9 @@
                                                 <th class="text-center" width="8%">
                                                     Harga Satuan
                                                 </th>
+                                                <th width="5%" class="text-center">
+                                                    Stok
+                                                </th>
                                                 <th width="5%"></th>
                                             </tr>
                                         </thead>
@@ -337,6 +340,10 @@
                                                                 name="harga_jual"
                                                                 value="<?php echo e($s->harga_jual - ($s->harga_jual * $s->diskon) / 100); ?>">
                                                             <?php echo e('Rp ' . number_format($s->harga_jual - ($s->harga_jual * $s->diskon) / 100, 0, ',', '.')); ?>
+
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <?php echo e($s->stok); ?>
 
                                                         </td>
                                                         <td hidden id="stok"><input type="text" hidden

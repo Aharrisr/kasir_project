@@ -19,13 +19,13 @@ class AuthControler extends Controller
             return redirect('/dashboard')->with(['success' => 'Selamat datang ' . Auth::guard('user')->user()->nama_user]);
         } else {
             if (empty($request->email) && empty($request->password)) {
-                return redirect('/')->with(['warning' => 'email dan Password Harus Diisi']);
+                return redirect('/')->with(['warning' => 'Email dan Password Harus Diisi']);
             } elseif (empty($request->email)) {
-                return redirect('/')->with(['warning' => 'Username Harus Diisi']);
+                return redirect('/')->with(['warning' => 'Email Harus Diisi']);
             } elseif (empty($request->password)) {
                 return redirect('/')->with(['warning' => 'Password Harus Diisi']);
             } else {
-                return redirect('/')->with(['warning' => 'Username atau Password Salah']);
+                return redirect('/')->with(['warning' => 'Email atau Password Salah']);
             }
         }
     }
