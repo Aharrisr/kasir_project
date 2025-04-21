@@ -28,19 +28,17 @@
     <img src="public/github-assets/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Judul Versi PreAlpha 1.21.03.05</h3>
+  <h3 align="center">Project Kasir Ujikom 2025</h3>
 
   <p align="center">
     Keterangan Sistem yang dibuat
     <br />
-    <a href="https://github.com/godgodwinter/README-TEMPLATE-laravel"><strong>Explore the docs »</strong></a>
+    <a href=""><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://inetwork.baemon.web.id">View Demo https://inetwork.baemon.web.id</a>
+    <a href="">Report Bug</a>
     ·
-    <a href="https://twitter.com/kakadlz">Report Bug</a>
-    ·
-    <a href="https://twitter.com/kakadlz">Request Feature</a>
+    <a href="">Request Feature</a>
   </p>
 </p>
 
